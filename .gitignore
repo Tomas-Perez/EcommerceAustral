@@ -104,3 +104,5 @@ tmp
 .project
 .classpath
 .cproject
+/Debug/
+/Release/
