@@ -97,3 +97,10 @@ Mkfile.old
 dkms.conf
 .idea/
 cmake-build-debug/
+bin
+tmp
+.DS_Store
+.settings
+.project
+.classpath
+.cproject
