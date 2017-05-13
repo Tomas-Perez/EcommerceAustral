@@ -33,7 +33,7 @@ ProductBook* createProductBook(char* title, int stock){
 }
 
 /*
-    Function: equals
+    Function: productBookIsEqual
     Description: determines whether the 2 ProductBook are equal or not. Used the
     strcmp function to compare the title strings of each of the books.
 
@@ -44,7 +44,7 @@ ProductBook* createProductBook(char* title, int stock){
     Returns: 1 if TRUE, 0 if FALSE.
 */
 
-int equals(ProductBook* productBook1, ProductBook* productBook2){
+int productBookIsEqual(ProductBook* productBook1, ProductBook* productBook2){
     if(strcmp(productBook1->title, productBook2->title) == 0) return 1;
     return 0;
 }

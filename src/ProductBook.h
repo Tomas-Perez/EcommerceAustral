@@ -17,6 +17,6 @@ struct productBook{
 
 ProductBook* createProductBook(char* title, int stock);
 void destroyProductBook(ProductBook* book);
-int equals(ProductBook* book1, ProductBook* book2);
+int productBookIsEqual(ProductBook* book1, ProductBook* book2);
 
 #endif
