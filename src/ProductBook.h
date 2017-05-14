@@ -12,10 +12,11 @@ struct productBook{
 
     char* title; // book title
     int stock; // books in stock
+    int price; // book price
 };
 
 
-ProductBook* createProductBook(char* title, int stock);
+ProductBook* createProductBook(char* title, int stock, int price);
 void destroyProductBook(ProductBook* book);
 int productBookIsEqual(ProductBook* book1, ProductBook* book2);
 

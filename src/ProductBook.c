@@ -12,7 +12,7 @@
     Returns: ProductBook pointer
 */
 
-ProductBook* createProductBook(char* title, int stock){
+ProductBook* createProductBook(char* title, int stock, int price){
 
 	ProductBook* result = malloc(sizeof(ProductBook)); // allocate memory for the book
 
@@ -27,6 +27,7 @@ ProductBook* createProductBook(char* title, int stock){
      * */
     strcpy(result->title, title);
     result->stock = stock;
+    result->price = price;
 
     return result;
 
