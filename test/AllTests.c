@@ -5,6 +5,8 @@
  * Test setup
  */
 
+CuSuite* CreateProductGetSuite();
+
 void RunAllTests(void) {
     CuString *output = CuStringNew();
     CuSuite* suite = CuSuiteNew();
@@ -20,3 +22,5 @@ void RunAllTests(void) {
 int main(void) {
     RunAllTests();
 }
+
+
