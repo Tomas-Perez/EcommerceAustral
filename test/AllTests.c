@@ -6,13 +6,14 @@
  */
 
 CuSuite* CreateProductGetSuite();
+CuSuite* GetCartTestSuite();
 
 void RunAllTests(void) {
     CuString *output = CuStringNew();
     CuSuite* suite = CuSuiteNew();
 
-    // CuSuiteAddSuite(suite, );
     CuSuiteAddSuite(suite, CreateProductGetSuite());
+    CuSuiteAddSuite(suite, GetCartTestSuite());
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);
     CuSuiteDetails(suite, output);

@@ -18,6 +18,7 @@ Cart* createCart(int initialCapacity){
     result->pBooks = malloc(sizeof(ProductBook*)*initialCapacity);
     result->spacesTaken = malloc(sizeof(int)*initialCapacity);
     memset(result->spacesTaken, 0, sizeof(int)*initialCapacity);
+    return result;
 }
 
 /*
@@ -50,9 +51,9 @@ void cartAddBook(Cart *cart, ProductBook *pBook, int amount){
     if(bookIndex == -1){
         if(cart->amountOfBooks == cart->maxCapacity){
             cartGrow(cart);
-            cart->pBooks[cart->maxCapacity] = createProductBook(pBook->title, amount, pBook->price);
+            cart->pBooks[cart->amountOfBooks] = createProductBook(pBook->title, amount, pBook->price);
             cart->value += pBook->price * amount;
-            cart->spacesTaken[cart->maxCapacity] = 1;
+            cart->spacesTaken[cart->amountOfBooks] = 1;
         } else {
             for(int i = 0; i < cart->maxCapacity; i++){
                 if(!cart->spacesTaken[i]){
@@ -63,11 +64,11 @@ void cartAddBook(Cart *cart, ProductBook *pBook, int amount){
                 }
             }
         }
+        cart->amountOfBooks++;
     } else {
         cart->pBooks[bookIndex]->stock += amount;
         cart->value += pBook->price * amount;
     }
-    cart->amountOfBooks++;
 }
 
 /*
@@ -100,13 +101,13 @@ void cartRemoveBook(Cart *cart, ProductBook *pBook, int amount){
  * Returns: -
  */
 void cartGrow(Cart* cart){
-    int cartCapacity = cart->maxCapacity;
-    cart->maxCapacity = cartCapacity*2;
-    cart->pBooks = realloc(cart->pBooks, sizeof(ProductBook*)*(cart->maxCapacity));
-    cart->spacesTaken = realloc(cart->spacesTaken, sizeof(int)*(cart->maxCapacity));
-    for(int i = cartCapacity; i < cart->maxCapacity; i++){
+    int maxCapacity = cart->maxCapacity;
+    cart->pBooks = realloc(cart->pBooks, sizeof(ProductBook*) * (maxCapacity*2));
+    cart->spacesTaken = realloc(cart->spacesTaken, sizeof(int) * (maxCapacity*2));
+    for(int i = maxCapacity; i < maxCapacity*2; i++){
         cart->spacesTaken[i] = 0;
     }
+    cart->maxCapacity = maxCapacity*2;
 }
 
 /*
