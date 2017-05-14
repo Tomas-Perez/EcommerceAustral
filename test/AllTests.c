@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "CUTest/CuTest.h"
+#include "../test/CUTest/CuTest.h"
 
 /**
  * Test setup
@@ -10,7 +10,7 @@ void RunAllTests(void) {
     CuSuite* suite = CuSuiteNew();
 
     // CuSuiteAddSuite(suite, );
-
+    CuSuiteAddSuite(suite, CreateProductGetSuite());
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);
     CuSuiteDetails(suite, output);
