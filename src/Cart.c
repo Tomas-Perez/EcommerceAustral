@@ -124,3 +124,18 @@ int cartContainsBook(Cart *cart, ProductBook *pBook){
     }
     return -1;
 }
+
+/*
+ * Function: cartRemoveAllBooks
+ * Description: removes all books from the cart.
+ * Returns: -
+ */
+
+void cartRemoveAllBooks(Cart *cart){
+    for(int i = 0; i < cart->maxCapacity; i++){
+        if(cart->spacesTaken[i]) destroyProductBook(cart->pBooks[i]);
+    }
+    memset(cart->spacesTaken, 0, sizeof(ProductBook*)*cart->maxCapacity);
+    cart->amountOfBooks = 0;
+    cart->value = 0;
+}

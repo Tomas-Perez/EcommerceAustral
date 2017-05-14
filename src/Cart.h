@@ -20,6 +20,7 @@ Cart* createCart(int initialCapacity);
 void destroyCart(Cart* cart);
 void cartAddBook(Cart *cart, ProductBook *pBook, int amount);
 void cartRemoveBook(Cart *cart, ProductBook *pBook, int amount);
+void cartRemoveAllBooks(Cart *cart);
 void cartGrow(Cart* cart);
 int cartContainsBook(Cart *cart, ProductBook *pBook);
 
