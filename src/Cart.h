@@ -5,12 +5,15 @@
 #include <mem.h>
 #include "ProductBook.h"
 
+/*
+ * Description: Header file that describes the Cart ADT
+ */
 typedef struct Cart{
-    int value;
-    ProductBook** pBooks;
-    int maxCapacity;
-    int* spacesTaken;
-    int amountOfBooks;
+    int value; // value of all books in the cart
+    ProductBook** pBooks; // array of books
+    int maxCapacity; // maximum amount of books
+    int* spacesTaken; // boolean array that mirrors the pBooks array, 0 means the pBooks index is empty, 1 means its full
+    int amountOfBooks; // amount of books in the cart
 }Cart;
 
 Cart* createCart(int initialCapacity);

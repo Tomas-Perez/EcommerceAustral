@@ -3,6 +3,16 @@
 #include <time.h>
 #include "Invoice.h"
 
+/*
+ * Description: C file containing the functions related to the Invoice ADT
+ */
+
+/*
+ * Function: createInvoice
+ * Description: allocates memory for an Invoice and all its components.
+ * Returns: Invoice pointer
+ */
+
 Invoice* createInvoice(Cart* cart, Student* student){
     Invoice* result = malloc(sizeof(Invoice));
     result->totalAmount = cart->value;
@@ -25,9 +35,17 @@ Invoice* createInvoice(Cart* cart, Student* student){
     char* time = asctime(tm);
     result->date = malloc(sizeof(char)*strlen(time));
     strcpy(result->date, time);
+    free(tm);
+    free(time);
 
     return result;
 }
+
+/*
+ * Function: destroyInvoice
+ * Description: frees all allocated memory related to Invoice
+ * Returns: -
+ */
 
 void destroyInvoice(Invoice* invoice){
     for(int i = 0; i < invoice->amountOfBooks; i++){

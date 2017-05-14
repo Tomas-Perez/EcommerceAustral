@@ -10,6 +10,8 @@ int main() {
     char* time = asctime(tm);
     char* savedTime = malloc(sizeof(char)*strlen(time));
     strcpy(savedTime, asctime(tm));
+    free(time);
+    free(tm);
     printf("%s\n", savedTime);
     return 0;
 }

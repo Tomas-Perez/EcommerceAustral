@@ -1,5 +1,15 @@
 #include "Cart.h"
 
+/*
+ * Description: C file that contains the functions related to the Cart ADT
+ */
+
+/*
+ * Function: createCart
+ * Description: allocates memory for a cart and all it's components
+ * Returns: Cart pointer
+ */
+
 Cart* createCart(int initialCapacity){
     Cart* result = malloc(sizeof(Cart));
     result->value = 0;
@@ -10,6 +20,12 @@ Cart* createCart(int initialCapacity){
     memset(result->spacesTaken, 0, sizeof(int)*initialCapacity);
 }
 
+/*
+ *  Function: destroyCart
+ *  Description: frees all allocated memory related to Cart.
+ *  Returns: -
+*/
+
 void destroyCart(Cart* cart){
     for(int i = 0; i < cart->maxCapacity; i++){
         if(cart->spacesTaken[i]) destroyProductBook(cart->pBooks[i]);
@@ -18,6 +34,16 @@ void destroyCart(Cart* cart){
     free(cart->spacesTaken);
     free(cart);
 }
+
+/*
+ *  Function: cartAddBook
+ *  Description: adds a specified amount of a given ProductBook to the cart.
+ *      A ProductBook will never be duplicated, instead if a ProductBook already exists in the cart,
+ *      the function will add the specified amount to its stock in the cart.
+ *      If the array is full, it resizes it, if not it inserts it in the first available
+ *  spot signaled by the "spacesTaken" array.
+ *  Returns: -
+*/
 
 void cartAddBook(Cart *cart, ProductBook *pBook, int amount){
     int bookIndex = cartContainsBook(cart, pBook);
@@ -44,6 +70,13 @@ void cartAddBook(Cart *cart, ProductBook *pBook, int amount){
     cart->amountOfBooks++;
 }
 
+/*
+ *  Function: cartRemoveBook
+ *  Description: removes a specified amount of a given ProductBook from the cart.
+ *      It will only completely remove a book if its stock in the cart reaches 0 or lower.
+ *  Returns: -
+ */
+
 void cartRemoveBook(Cart *cart, ProductBook *pBook, int amount){
     int bookIndex = cartContainsBook(cart, pBook);
     if(bookIndex != -1){
@@ -61,6 +94,11 @@ void cartRemoveBook(Cart *cart, ProductBook *pBook, int amount){
     }
 }
 
+/*
+ * Function: cartGrow
+ * Description: doubles the size of the book and spacesTaken arrays in the cart.
+ * Returns: -
+ */
 void cartGrow(Cart* cart){
     int cartCapacity = cart->maxCapacity;
     cart->maxCapacity = cartCapacity*2;
@@ -71,6 +109,11 @@ void cartGrow(Cart* cart){
     }
 }
 
+/*
+ * Function: cartContainsBook
+ * Description: searches for a given book in the cart and returns its position.
+ * Returns: index of the given book, -1 if the book it's not present in the cart.
+ */
 int cartContainsBook(Cart *cart, ProductBook *pBook){
     for(int i = 0; i < cart->maxCapacity; i++){
         if(cart->spacesTaken[i]){

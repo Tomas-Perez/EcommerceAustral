@@ -5,12 +5,16 @@
 #include "ProductBook.h"
 #include "Cart.h"
 
+/*
+ * Description: Header file that describes the Invoice ADT
+ */
+
 typedef struct Invoice{
-    int totalAmount;
-    char* date;
-    Student* student;
-    ProductBook** pBooks;
-    int amountOfBooks;
+    int totalAmount; // Final price
+    char* date;  // String containing the date the invoice was created
+    Student* student; // Student making the purchase
+    ProductBook** pBooks; // List of books in the invoice
+    int amountOfBooks; // amount of books
 }Invoice;
 
 Invoice* createInvoice(Cart* cart, Student* student);
