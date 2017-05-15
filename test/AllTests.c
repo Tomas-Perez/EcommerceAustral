@@ -15,7 +15,12 @@ void RunAllTests(void) {
 
     CuSuiteAddSuite(suite, CreateProductGetSuite());
     CuSuiteAddSuite(suite, GetCartTestSuite());
+
+
+
+    //Leave this one last
     CuSuiteAddSuite(suite, GetInvoiceTestSuite());
+
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);
     CuSuiteDetails(suite, output);

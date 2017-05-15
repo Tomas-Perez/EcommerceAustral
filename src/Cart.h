@@ -1,8 +1,8 @@
 #ifndef ECOMMERCEAUSTRAL_CART_H
 #define ECOMMERCEAUSTRAL_CART_H
 
-#include <malloc.h>
-#include <mem.h>
+#include <stdlib.h>
+#include <string.h>
 #include "ProductBook.h"
 
 /*
