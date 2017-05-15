@@ -15,6 +15,7 @@
 
 Invoice* createInvoice(Cart* cart, Student* student){
     Invoice* result = malloc(sizeof(Invoice));
+    result->id = cart->id;
     result->totalAmount = cart->value;
     result->pBooks = malloc(sizeof(ProductBook*)*cart->amountOfBooks);
     result->amountOfBooks = cart->amountOfBooks;
@@ -30,14 +31,13 @@ Invoice* createInvoice(Cart* cart, Student* student){
     result->student = student;
 
     // get current date and time
-    time_t t = time(NULL);
-    struct tm *tm = localtime(&t);
-    char* time = asctime(tm);
-    result->date = malloc(sizeof(char)*strlen(time));
-    strcpy(result->date, time);
-    free(tm);
-    free(time);
 
+    time_t t = time(NULL);
+    result->tm = t;
+    struct tm* tm1 = localtime(&t);
+    char* tempDate = asctime(tm1);
+    result->date = malloc(sizeof(char*)*strlen(tempDate));
+    strcpy(result->date, tempDate);
     return result;
 }
 
@@ -53,4 +53,22 @@ void destroyInvoice(Invoice* invoice){
     }
     free(invoice->student);
     free(invoice);
+}
+
+/*
+ * Function: compareInvoiceDate
+ * Description: compares two invoices by date.
+ * Returns: 1 if Invoice1 > Invoice2
+ *          -1 if Invoice1 < Invoice2
+ *          0 if Invoice1 == Invoice2
+ */
+int compareInvoiceDate(Invoice *invoice1, Invoice *invoice2){
+    double difference = difftime(invoice1->tm, invoice2->tm);
+    if(difference > 0){
+        return 1;
+    }
+    if(difference < 0){
+        return -1;
+    }
+    return 0;
 }

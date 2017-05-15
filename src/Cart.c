@@ -10,8 +10,9 @@
  * Returns: Cart pointer
  */
 
-Cart* createCart(int initialCapacity){
+Cart* createCart(int initialCapacity, int id){
     Cart* result = malloc(sizeof(Cart));
+    result->id = 0;
     result->value = 0;
     result->amountOfBooks = 0;
     result->maxCapacity = initialCapacity;
