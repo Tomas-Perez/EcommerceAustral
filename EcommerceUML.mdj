@@ -493,7 +493,7 @@
 											"height": 16,
 											"autoResize": false,
 											"underline": false,
-											"text": "+books: Book",
+											"text": "+books: ProductBook",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -927,7 +927,7 @@
 											"height": 16,
 											"autoResize": false,
 											"underline": false,
-											"text": "+addBook(book)",
+											"text": "+addBook(book, quantity)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -956,7 +956,7 @@
 											"height": 16,
 											"autoResize": false,
 											"underline": false,
-											"text": "+removeBook(book)",
+											"text": "+removeBook(book, quantity)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14069,7 +14069,9 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "Book",
+							"type": {
+								"$ref": "AAAAAAFb76iQF1d+i5I="
+							},
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -14381,6 +14383,21 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFcDpfdB2yIAK4=",
+									"_parent": {
+										"$ref": "AAAAAAFb768bIlfudKo="
+									},
+									"name": "quantity",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
 									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
@@ -14410,6 +14427,21 @@
 										"$ref": "AAAAAAFb769saVf5VEA="
 									},
 									"name": "book",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFcDpftlG2ZC6I=",
+									"_parent": {
+										"$ref": "AAAAAAFb769saVf5VEA="
+									},
+									"name": "quantity",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
