@@ -4,28 +4,25 @@
 
 #include "ProductBook.h"
 #include <stdlib.h>
-#include <string.h>
-
 /*
     Function: createProductBook
     Description: allocates memory for a book and all it's components.
     Returns: ProductBook pointer
 */
 
-ProductBook* createProductBook(char* title, int stock, int price){
+ProductBook* createProductBook(BookInformation* bookInfo, int stock, int price){
 
 	ProductBook* result = malloc(sizeof(ProductBook)); // allocate memory for the book
 
     /*
         memory is allocated for each of the variables in ProductBook.
     */
-    result->title = malloc(sizeof(char)*strlen(title));
-   // result->stock = malloc(sizeof(int));
+    result->bookInfo = malloc(sizeof(BookInformation*));
+    result->bookInfo = bookInfo;
 
     /*
      parameters are then stored
      * */
-    strcpy(result->title, title);
     result->stock = stock;
     result->price = price;
 
@@ -35,18 +32,12 @@ ProductBook* createProductBook(char* title, int stock, int price){
 
 /*
     Function: productBookIsEqual
-    Description: determines whether the 2 ProductBook are equal or not. Used the
-    strcmp function to compare the title strings of each of the books.
-
-        The strcmp function is located in string.h and return 0 if the 2 strings
-    are equal, -1 if the first is smaller than the second and 1 if the first is
-    bigger than the second.
-
+    Description: determines whether the 2 ProductBook are equal or not, by comparing their BookInformation.
     Returns: 1 if TRUE, 0 if FALSE.
 */
 
 int productBookIsEqual(ProductBook* productBook1, ProductBook* productBook2){
-    if(strcmp(productBook1->title, productBook2->title) == 0) return 1;
+    if(bookInformationIsEqual(productBook1->bookInfo, productBook2->bookInfo)) return 1;
     return 0;
 }
 
@@ -57,6 +48,7 @@ int productBookIsEqual(ProductBook* productBook1, ProductBook* productBook2){
 */
 
 void destroyProductBook(ProductBook* book){
-    free(book->title);
+    destroyBookInformation(book->bookInfo);
+    free(book->bookInfo);
     free(book);
 }

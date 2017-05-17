@@ -6,11 +6,11 @@ typedef struct bookInformation BookInformation;
 struct bookInformation{
 
     char* title;
-    char* ISBN;
+    int ISBN;
     char* author;
 };
 
-BookInformation* createBookInformation(char* title, char* ISBN, char* author);
+BookInformation* createBookInformation(char* title, int ISBN, char* author);
 void destroyBookInformation(BookInformation* bookInformation);
 int bookInformationIsEqual(BookInformation* bookInformation1, BookInformation* bookInformation2);
 

@@ -6,17 +6,18 @@
 #ifndef PRODUCTBOOK_H
 #define PRODUCTBOOK_H
 
+#include "BookInformation.h"
+
 typedef struct productBook ProductBook;
 
 struct productBook{
-
-    char* title; // book title
+    BookInformation* bookInfo; // book information
     int stock; // books in stock
     int price; // book price
 };
 
 
-ProductBook* createProductBook(char* title, int stock, int price);
+ProductBook* createProductBook(BookInformation* bookInfo, int stock, int price);
 void destroyProductBook(ProductBook* book);
 int productBookIsEqual(ProductBook* book1, ProductBook* book2);
 

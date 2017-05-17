@@ -12,7 +12,7 @@
 
 Cart* createCart(int initialCapacity, int id){
     Cart* result = malloc(sizeof(Cart));
-    result->id = 0;
+    result->id = id;
     result->value = 0;
     result->amountOfBooks = 0;
     result->maxCapacity = initialCapacity;
@@ -52,13 +52,13 @@ void cartAddBook(Cart *cart, ProductBook *pBook, int amount){
     if(bookIndex == -1){
         if(cart->amountOfBooks == cart->maxCapacity){
             cartGrow(cart);
-            cart->pBooks[cart->amountOfBooks] = createProductBook(pBook->title, amount, pBook->price);
+            cart->pBooks[cart->amountOfBooks] = createProductBook(pBook->bookInfo, amount, pBook->price);
             cart->value += pBook->price * amount;
             cart->spacesTaken[cart->amountOfBooks] = 1;
         } else {
             for(int i = 0; i < cart->maxCapacity; i++){
                 if(!cart->spacesTaken[i]){
-                    cart->pBooks[i] = createProductBook(pBook->title, amount, pBook->price);
+                    cart->pBooks[i] = createProductBook(pBook->bookInfo, amount, pBook->price);
                     cart->spacesTaken[i] = 1;
                     cart->value += pBook->price * amount;
                     break;

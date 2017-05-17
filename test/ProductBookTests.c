@@ -3,8 +3,9 @@
 
 
 void TestCreateProductBook(CuTest *tc) {
-    ProductBook* book = createProductBook("Math", 10, 0);
-    char* actual = book->title;
+    BookInformation* bookInfo = createBookInformation("Math", 546, "Euler");
+    ProductBook* book = createProductBook(bookInfo, 10, 0);
+    char* actual = book->bookInfo->title;
     char* expected = "Math";
     CuAssertStrEquals(tc, expected, actual);
 }

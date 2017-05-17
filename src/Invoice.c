@@ -23,7 +23,7 @@ Invoice* createInvoice(Cart* cart, Student* student){
     for(int i = 0; i < cart->maxCapacity, addedBooks < cart->amountOfBooks; i++){
         if(cart->spacesTaken[i]){
             ProductBook* cartBook = cart->pBooks[i];
-            result->pBooks[addedBooks] = createProductBook(cartBook->title, cartBook->stock, cartBook->stock);
+            result->pBooks[addedBooks] = createProductBook(cartBook->bookInfo, cartBook->stock, cartBook->stock);
             addedBooks++;
         }
     }
