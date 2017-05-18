@@ -33,7 +33,7 @@ Invoice* createInvoice(Cart* cart, Student* student){
     // get current date and time
 
     time_t t = time(NULL);
-    result->tm = t;
+    result->unixTime = t;
     struct tm* tm1 = localtime(&t);
     char* tempDate = asctime(tm1);
     result->date = malloc(sizeof(char*)*strlen(tempDate));
@@ -63,7 +63,7 @@ void destroyInvoice(Invoice* invoice){
  *          0 if Invoice1 == Invoice2
  */
 int compareInvoiceDate(Invoice *invoice1, Invoice *invoice2){
-    double difference = difftime(invoice1->tm, invoice2->tm);
+    int difference = invoice1->unixTime - invoice2->unixTime;
     if(difference > 0){
         return 1;
     }
