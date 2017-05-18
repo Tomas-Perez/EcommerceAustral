@@ -12,7 +12,7 @@
 
 typedef struct Invoice{
     int totalAmount; // Final price
-    long unixTime; //Struct containing the unixTime the invoice was created, used for comparing invoices
+    long timestamp; //unixTime the invoice was created, used for comparing invoices
     char* date;  // String containing the date the invoice was created
     Student* student; // Student making the purchase
     ProductBook** pBooks; // List of books in the invoice

@@ -32,12 +32,12 @@ Invoice* createInvoice(Cart* cart, Student* student){
 
     // get current date and time
 
-    time_t t = time(NULL);
-    result->unixTime = t;
-    struct tm* tm1 = localtime(&t);
-    char* tempDate = asctime(tm1);
-    result->date = malloc(sizeof(char*)*strlen(tempDate));
-    strcpy(result->date, tempDate);
+    time_t t = time(NULL); //returns long with unixTime
+    result->timestamp = t; //stores the unixTime
+    struct tm* tm1 = localtime(&t); //parse unixTime to a struct with day, hour, etc
+    char* tempDate = asctime(tm1); //parse struct tm to a string
+    result->date = malloc(sizeof(char*)*strlen(tempDate)); //allocate memory for the string
+    strcpy(result->date, tempDate); //store the date string
     return result;
 }
 
@@ -63,7 +63,7 @@ void destroyInvoice(Invoice* invoice){
  *          0 if Invoice1 == Invoice2
  */
 int compareInvoiceDate(Invoice *invoice1, Invoice *invoice2){
-    int difference = invoice1->unixTime - invoice2->unixTime;
+    int difference = invoice1->timestamp - invoice2->timestamp;
     if(difference > 0){
         return 1;
     }
