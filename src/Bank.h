@@ -1,9 +1,7 @@
-//
-// Created by José Rojas on 18/5/17.
-//
 
-#ifndef UNTITLED4_BANK_H
-#define UNTITLED4_BANK_H
+
+#ifndef SRC_BANK_H
+#define SRC_BANK_H
 
 #include "BankAccount.h"
 #include "Transaction.h"
@@ -29,4 +27,4 @@ char getName();
 int getId();
 void freeBank(Bank* bank1);
 
-#endif //UNTITLED4_BANK_H
+#endif //SRC_BANK_H
