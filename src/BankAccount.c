@@ -13,9 +13,10 @@ BankAccount* createBankAccount(int accountID,double balance, double maintenance,
     result->maintenance = maintenance;
     result->userID = userID;
     result->openedDate;
-    result->timesStamp;
+    result->timestamp;
     return result;
 }
+/*
 OperationCerticate* withdrawMoney(BankAccount* bankAccount, double amount){
     OperationCerticate* result = malloc(sizeof(OperationCerticate));
 
@@ -31,4 +32,4 @@ OperationCerticate* depositMoney(BankAccount* bankAccount, double amount){
 void freeBankAccount(BankAccount* bankAccount){
     bankAccount-
 }
-
+*/

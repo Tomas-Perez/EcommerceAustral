@@ -3,6 +3,9 @@
 
 typedef struct Student{
     int userID;
+    int password;
 }Student;
+
+void destroyStudent(Student* student);
 
 #endif //ECOMMERCEAUSTRAL_STUDENT_H
