@@ -2,33 +2,32 @@
 
 #include "BankAccount.h"
 #include <stdlib.h>
-#include <string.h>
 
-BankAccount* createBankAccount(int accountID,double balance, double maintenance,int userID){
+BankAccount* createBankAccount(int bankAccountID,double balance, double maintenance,int userID){
 
     BankAccount* result = malloc(sizeof(BankAccount));
 
-    result->bankAccountID = accountID;
+    result->bankAccountID = bankAccountID;
     result->balance = balance;
     result->maintenance = maintenance;
     result->userID = userID;
     result->openedDate;
-    result->timesStamp;
+    result->timeStamp;
     return result;
 }
-OperationCerticate* withdrawMoney(BankAccount* bankAccount, double amount){
-    OperationCerticate* result = malloc(sizeof(OperationCerticate));
+OperationCertificate* withdrawMoney(BankAccount* bankAccount, double amount){
+    OperationCertificate* result = malloc(sizeof(OperationCertificate));
 
     return result;
 }
 
-OperationCerticate* depositMoney(BankAccount* bankAccount, double amount){
-    OperationCerticate* result = malloc(sizeof(OperationCerticate));
+OperationCertificate * depositMoney(BankAccount* bankAccount, double amount){
+    OperationCertificate* result = malloc(sizeof(OperationCertificate));
 
     return result;
 }
 
 void freeBankAccount(BankAccount* bankAccount){
-    bankAccount-
+    free(bankAccount);
 }
 
