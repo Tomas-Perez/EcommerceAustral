@@ -16,15 +16,10 @@ struct bank{
     BankAccount* bankAccounts[];
 };
 
-Bank* newBank(int id, char name[], char office[], Transaction* transactions[], BankAccount* bankAccounts[]);
-Transaction* withdrawMoney(int accountId, double amount);
-Transaction* depositMoney(int accountId, double amount);
-Transaction* transferMoney(int senderAccountId, int receiverAccountId, double amount);
-BankAccount* getAccounts();
-Transaction* getTransactions();
-char getOffice();
-char getName();
-int getId();
-void freeBank(Bank* bank1);
+Bank* createBank(int id, char name[], char office[], Transaction* transactions[], BankAccount* bankAccounts[]);
+Transaction* withdrawMoney(Bank* bank, int accountId, double amount);
+Transaction* depositMoney(Bank* bank, int accountId, double amount);
+Transaction* transferMoney(Bank* bank, int senderAccountId, int receiverAccountId, double amount);
+void freeBank(Bank* bank);
 
 #endif //SRC_BANK_H
