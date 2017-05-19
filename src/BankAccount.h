@@ -14,7 +14,7 @@ typedef struct BankAccount{
     double maintenance;
     int userID;
     char* openedDate;
-    long timestamp;
+    long timestamp; //Hay una explicacion del timestamp en el README
 }BankAccount;
 
 //No pusheen cosas en rojo por favor, si no el resto no puede correr nada hasta comentar
