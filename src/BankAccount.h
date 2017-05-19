@@ -11,6 +11,7 @@ typedef struct BankAccount{
     double maintenance;
     int userID;
 
+struct bankAccount{
 
 };
 
