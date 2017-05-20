@@ -8,7 +8,6 @@
 
 typedef struct bank Bank;
 
-
 struct bank{
     int id;
     char* name; // Un pointer de funciona como un array en C, pueden ver el ejemplo del campus
