@@ -1,4 +1,6 @@
-#include <afxres.h>
+//#include <afxres.h>
+#include <stdlib.h>
+#include <string.h>
 #include "UserDatabase.h"
 
 /*
