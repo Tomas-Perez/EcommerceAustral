@@ -2,6 +2,9 @@
 #define ECOMMERCEAUSTRAL_SUPPORTDATABASE_H
 #include "SupportMessage.h"
 
+/*
+ * Description: Header file that describes a SupportDatabase that stores messages sent to SupportStaff.
+ */
 typedef struct SupportDatabase{
     SupportMessage** messages;
     int messageAmount;

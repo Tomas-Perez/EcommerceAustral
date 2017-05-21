@@ -1,7 +1,9 @@
 #ifndef ECOMMERCEAUSTRAL_SUPPORTSTAFF_H
 #define ECOMMERCEAUSTRAL_SUPPORTSTAFF_H
 #include "SupportDatabase.h"
-
+/*
+ * Description: Header file for a SupportStaff
+ */
 typedef struct SupportStaff{
     int userID;
     int password;

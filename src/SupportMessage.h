@@ -1,6 +1,9 @@
 #ifndef ECOMMERCEAUSTRAL_SUPPORTMESSAGE_H
 #define ECOMMERCEAUSTRAL_SUPPORTMESSAGE_H
 
+/*
+ * Description: Header file that represents a SupportMessage sent by a user to a SupportStaff.
+ */
 typedef struct SupportMessage{
     long timeStamp;
     char* date;
