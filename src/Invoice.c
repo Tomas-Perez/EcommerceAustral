@@ -13,22 +13,21 @@
  * Returns: Invoice pointer
  */
 
-Invoice* createInvoice(Cart* cart, Student* student){
+Invoice* createInvoice(Cart* cart, int studentID){
     Invoice* result = malloc(sizeof(Invoice));
     result->id = cart->id;
     result->totalAmount = cart->value;
-    result->pBooks = malloc(sizeof(ProductBook*)*cart->amountOfBooks);
+    result->bookTitles = malloc(sizeof(ProductBook*)*cart->amountOfBooks);
     result->amountOfBooks = cart->amountOfBooks;
     int addedBooks = 0;
     for(int i = 0; i < cart->maxCapacity, addedBooks < cart->amountOfBooks; i++){
         if(cart->spacesTaken[i]){
             ProductBook* cartBook = cart->pBooks[i];
-            result->pBooks[addedBooks] = createProductBook(cartBook->bookInfo, cartBook->stock, cartBook->stock);
+            result->bookTitles[addedBooks] = cartBook->bookInfo->title;
             addedBooks++;
         }
     }
-    result->student = malloc(sizeof(Student));
-    result->student = student;
+    result->studentID = studentID;
 
     // get current date and time
 
@@ -49,9 +48,9 @@ Invoice* createInvoice(Cart* cart, Student* student){
 
 void destroyInvoice(Invoice* invoice){
     for(int i = 0; i < invoice->amountOfBooks; i++){
-        destroyProductBook(invoice->pBooks[i]);
+        free(invoice->bookTitles[i]);
     }
-    free(invoice->student);
+    free(invoice->bookTitles);
     free(invoice);
 }
 

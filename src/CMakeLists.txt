@@ -1,5 +1,5 @@
-set(core_SRCS BookInformation.c ProductBook.c Cart.c Cart.h Invoice.c Invoice.h Student.c Student.h Bank.c Bank.h BankAccount.c BankAccount.h Transaction.c Transaction.h)
-set(core_SRCS BookInformation.c ProductBook.c Cart.c Invoice.c Student.c Bank.c BankAccount.c Transaction.c Provider.c Provider.h Admin.c Admin.h SupportStaff.c SupportStaff.h)
+set(core_SRCS BookInformation.c ProductBook.c Cart.c Invoice.c Student.c Bank.c BankAccount.c Transaction.c Provider.c Admin.c SupportStaff.c UserDatabase.c UserLog.c UserLog.h)
+set(core_SRCS BookInformation.c ProductBook.c Cart.c Invoice.c Student.c Bank.c BankAccount.c Transaction.c Provider.c Provider.h Admin.c Admin.h SupportStaff.c SupportStaff.h OperationCertificate.h OperationCertificate.c)
 add_library(core ${core_SRCS})
 add_executable(exe main.c)
 target_link_libraries(exe core)
