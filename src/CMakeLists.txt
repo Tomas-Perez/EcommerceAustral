@@ -1,3 +1,4 @@
+set(core_SRCS BookInformation.c ProductBook.c Cart.c Cart.h Invoice.c Invoice.h Student.c Student.h Bank.c Bank.h BankAccount.c BankAccount.h Transaction.c Transaction.h)
 set(core_SRCS BookInformation.c ProductBook.c Cart.c Invoice.c Student.c Bank.c BankAccount.c Transaction.c Provider.c Provider.h Admin.c Admin.h SupportStaff.c SupportStaff.h)
 add_library(core ${core_SRCS})
 add_executable(exe main.c)

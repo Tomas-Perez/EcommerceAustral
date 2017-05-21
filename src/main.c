@@ -6,6 +6,7 @@
 #include "Cart.h"
 #include "Student.h"
 #include "Invoice.h"
+#include "Bank.c"
 
 int main() {
     /*
@@ -36,6 +37,8 @@ int main() {
     printf("%s\n", timeVar2);
     printf("%f", difftime(t1, t2));
      */
+
+
 
     return 0;
 }

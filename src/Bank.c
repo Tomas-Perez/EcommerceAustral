@@ -1,4 +1,7 @@
 
+
+#include <stdlib.h>
+#include <printf.h>
 #include "Bank.h"
 
 Bank* createBank(int id, char name[], char office[], Transaction* transactions[], BankAccount* bankAccounts[]){
@@ -16,16 +19,27 @@ Bank* createBank(int id, char name[], char office[], Transaction* transactions[]
     return result;
 }
 
-Transaction* withdrawMoney(Bank* bank, int accountId, double amount){
-    for(int i=0; (bank->bankAccounts).size; i++){
+Transaction withdrawMoney(Bank* bank, int accountId, double amount){
+
+    for(int i=0; sizeof(bank->bankAccounts); i++){
+        if(bank->bankAccounts[i].bankAccountID == accountId){
+            printf("%i", accountId);
+        }
     }
 }
 
 
-Transaction* depositMoney(Bank* bank, int accountId, double amount);
+Transaction depositMoney(Bank* bank, int accountId, double amount);
 
 
-Transaction* transferMoney(Bank* bank, int senderAccountId, int receiverAccountId, double amount);
+Transaction transferMoney(Bank* bank, int senderAccountId, int receiverAccountId, double amount);
 
 
-void freeBank(Bank* bank);
+void freeBank(Bank* bank){
+    free(bank->id);
+    free(bank->name);
+    free(bank->office);
+    free(bank->transactions);
+    free(bank->bankAccounts);
+    free(bank);
+}
