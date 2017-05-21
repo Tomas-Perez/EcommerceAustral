@@ -1,6 +1,3 @@
-//
-// Created by José Rojas on 18/5/17.
-//
 
 #ifndef ECOMMERCEAUSTRAL_BANKACCOUNT_H
 #define ECOMMERCEAUSTRAL_BANKACCOUNT_H

@@ -3,7 +3,7 @@
 #include "BankAccount.h"
 #include <stdlib.h>
 #include <time.h>
-#include <mem.h>
+#include <string.h>
 
 BankAccount* createBankAccount(int bankAccountID,double balance, double maintenance,int userID){
 

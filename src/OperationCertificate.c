@@ -1,6 +1,4 @@
-//
-// Created by Lucas on 19/5/2017.
-//
+
 
 #include "OperationCertificate.h"
 #include <stdlib.h>
