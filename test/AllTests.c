@@ -7,7 +7,7 @@
 
 CuSuite* CreateProductGetSuite();
 CuSuite* GetCartTestSuite();
-CuSuite* GetInvoiceTestSuite();
+CuSuite* GetUDatabaseTestSuite();
 
 void RunAllTests(void) {
     CuString *output = CuStringNew();
@@ -15,11 +15,12 @@ void RunAllTests(void) {
 
     CuSuiteAddSuite(suite, CreateProductGetSuite());
     CuSuiteAddSuite(suite, GetCartTestSuite());
+    CuSuiteAddSuite(suite, GetUDatabaseTestSuite());
 
 
 
     //Leave this one last
-    CuSuiteAddSuite(suite, GetInvoiceTestSuite());
+    //CuSuiteAddSuite(suite, GetInvoiceTestSuite());
 
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);

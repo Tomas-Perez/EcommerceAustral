@@ -12,7 +12,7 @@ UserLog* createUserLog(UserType userType, int userID, char* username){
     result->userType = userType;
     result->userID = userID;
 
-    result->username = malloc(sizeof(char)*strlen(username));
+    result->username = malloc(sizeof(char)*strlen(username)+1);
     strcpy(result->username, username);
 
     return result;

@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.3)
-set(test_SRCS CUTest/CuTest.c AllTests.c ProductBookTests.c CartTests.c InvoiceTests.c)
+set(test_SRCS CUTest/CuTest.c AllTests.c ProductBookTests.c CartTests.c UserDatabaseTests.c)
+set(testInvoice_SRCS CUTest/CuTest.c InvoiceTests.c)
 add_executable(runUnitTests ${test_SRCS})
+add_executable(runInvoiceTest ${testInvoice_SRCS})
 target_link_libraries(runUnitTests core)
+target_link_libraries(runInvoiceTest core)

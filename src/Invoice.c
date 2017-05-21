@@ -35,7 +35,7 @@ Invoice* createInvoice(Cart* cart, int studentID){
     result->timestamp = t; //stores the unixTime
     struct tm* tm1 = localtime(&t); //parse unixTime to a struct with day, hour, etc
     char* tempDate = asctime(tm1); //parse struct tm to a string
-    result->date = malloc(sizeof(char*)*strlen(tempDate)); //allocate memory for the string
+    result->date = malloc(sizeof(char*)*strlen(tempDate)+1); //allocate memory for the string
     strcpy(result->date, tempDate); //store the date string
     return result;
 }

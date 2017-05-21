@@ -6,6 +6,7 @@ typedef struct Provider{
     int password;
 }Provider;
 
+Provider* createProvider(int password); //Testing database
 void destroyProvider(Provider* provider);
 
 

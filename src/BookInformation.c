@@ -9,8 +9,8 @@ BookInformation* createBookInformation(char* title, int ISBN, char* author){
 	BookInformation* result = malloc(sizeof(BookInformation));
 
 
-    result->title = malloc(sizeof(char)*strlen(title));
-    result->author = malloc(sizeof(char)*strlen(author));
+    result->title = malloc(sizeof(char)*strlen(title)+1);
+    result->author = malloc(sizeof(char)*strlen(author)+1);
 
 
     strcpy(result->title, title);

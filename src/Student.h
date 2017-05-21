@@ -6,6 +6,7 @@ typedef struct Student{
     int password;
 }Student;
 
+Student* createStudent(int password); //Testing database
 void destroyStudent(Student* student);
 
 #endif //ECOMMERCEAUSTRAL_STUDENT_H
