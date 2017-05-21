@@ -5,22 +5,22 @@
  * Description: Contains functions related to the UserDatabase ADT
  */
 
-static void growUserLog(UserDatabase* database){
+static void growUserLog(UserDatabase *database) {
     int maxCapacity = database->userLogCapacity;
-    database->userLogs = realloc(database->userLogs, sizeof(UserLog*)*maxCapacity*2);
-    database->userLogCapacity = maxCapacity*2;
+    database->userLogs = realloc(database->userLogs, sizeof(UserLog *) * maxCapacity * 2);
+    database->userLogCapacity = maxCapacity * 2;
 }
 
-static int containsUsername(UserDatabase* database, char* username){
-    for(int i = 0; i < database->userLogAmount; i++){
-        if(strcmp(database->userLogs[i]->username, username) == 0) return 1;
+static int containsUsername(UserDatabase *database, char *username) {
+    for (int i = 0; i < database->userLogAmount; i++) {
+        if (strcmp(database->userLogs[i]->username, username) == 0) return 1;
     }
     return 0;
 }
 
-static int addUserLog(UserDatabase* database, UserLog* userLog){
-    if(containsUsername(database, userLog->username)) return 0;
-    if(database->userLogAmount == database->userLogCapacity){
+static int addUserLog(UserDatabase *database, UserLog *userLog) {
+    if (containsUsername(database, userLog->username)) return 0;
+    if (database->userLogAmount == database->userLogCapacity) {
         growUserLog(database);
     }
     database->userLogs[database->userLogAmount] = userLog;
@@ -28,18 +28,43 @@ static int addUserLog(UserDatabase* database, UserLog* userLog){
     return 1;
 }
 
-static void removeUserLog(UserDatabase* database, int userID){
-    for(int i = 0; i < database->userLogAmount; i++){
-        if(database->userLogs[i]->userID == userID){
+static void removeUserLog(UserDatabase *database, int userID) {
+    for (int i = 0; i < database->userLogAmount; i++) {
+        if (database->userLogs[i]->userID == userID) {
             destroyUserLog(database->userLogs[i]);
-            for(; i < database->userLogAmount-1; i++){
-                database->userLogs[i] = database->userLogs[i+1];
+            for (; i < database->userLogAmount - 1; i++) {
+                database->userLogs[i] = database->userLogs[i + 1];
             }
             database->userLogAmount--;
             break;
-        }
-        else if(database->userLogs[i]->userID < userID) break;
+        } else if (database->userLogs[i]->userID > userID) break;
     }
+}
+
+static UserLog *getUserLog(UserDatabase *database, char *username) {
+    for (int i = 0; i < database->userLogAmount; i++) {
+        int compare = strcmp(database->userLogs[i]->username, username);
+        if (compare == 0) return database->userLogs[i];
+    }
+    return createUserLog(UNKNOWN, -1, "unknown");
+}
+
+static void growStudent(UserDatabase *database) {
+    int maxCapacity = database->studentCapacity;
+    database->students = realloc(database->students, sizeof(Student *) * maxCapacity * 2);
+    database->studentCapacity = maxCapacity * 2;
+}
+
+static void growProvider(UserDatabase *database) {
+    int maxCapacity = database->providerCapacity;
+    database->providers = realloc(database->providers, sizeof(Provider *) * maxCapacity * 2);
+    database->providerCapacity = maxCapacity * 2;
+}
+
+static void growSupportStaff(UserDatabase *database) {
+    int maxCapacity = database->supportStaffCapacity;
+    database->supportStaff = realloc(database->supportStaff, sizeof(SupportStaff *) * maxCapacity * 2);
+    database->supportStaffCapacity = maxCapacity * 2;
 }
 
 /*
@@ -75,23 +100,6 @@ UserDatabase* createUserDatabase(int initialCapacity, Admin *admin){
     addUserLog(result, adminLog);
 
     return result;
-}
-
-static void growStudent(UserDatabase *database){
-    int maxCapacity = database->studentCapacity;
-    database->students = realloc(database->students, sizeof(Student*)*maxCapacity*2);
-    database->studentCapacity = maxCapacity*2;
-}
-
-static void growProvider(UserDatabase *database){
-    int maxCapacity = database->providerCapacity;
-    database->providers = realloc(database->providers, sizeof(Provider*)*maxCapacity*2);
-    database->providerCapacity = maxCapacity*2;
-}
-static void growSupportStaff(UserDatabase *database){
-    int maxCapacity = database->supportStaffCapacity;
-    database->supportStaff = realloc(database->supportStaff, sizeof(SupportStaff*)*maxCapacity*2);
-    database->supportStaffCapacity = maxCapacity*2;
 }
 
 /*
@@ -169,7 +177,7 @@ int uDatabaseAddSupportStaff(UserDatabase* userDatabase, SupportStaff* supportSt
 Student* uDatabaseGetStudent(UserDatabase* userDatabase, int userID){
     for(int i = 0; i < userDatabase->studentAmount; i++){
         if(userDatabase->students[i]->userID == userID) return userDatabase->students[i];
-        else if(userDatabase->students[i]->userID < userID) break;
+        else if(userDatabase->students[i]->userID > userID) break;
     }
     return NULL;
 }
@@ -183,7 +191,7 @@ Student* uDatabaseGetStudent(UserDatabase* userDatabase, int userID){
 Provider* uDatabaseGetProvider(UserDatabase* userDatabase, int userID){
     for(int i = 0; i < userDatabase->providerAmount; i++){
         if(userDatabase->providers[i]->userID == userID) return userDatabase->providers[i];
-        else if(userDatabase->providers[i]->userID < userID) break;
+        else if(userDatabase->providers[i]->userID > userID) break;
     }
     return NULL;
 }
@@ -197,7 +205,7 @@ Provider* uDatabaseGetProvider(UserDatabase* userDatabase, int userID){
 SupportStaff* uDatabaseGetSupportStaff(UserDatabase* userDatabase, int userID){
     for(int i = 0; i < userDatabase->supportStaffAmount; i++){
         if(userDatabase->supportStaff[i]->userID == userID) return userDatabase->supportStaff[i];
-        else if(userDatabase->supportStaff[i]->userID < userID) break;
+        else if(userDatabase->supportStaff[i]->userID > userID) break;
     }
     return NULL;
 }
@@ -219,7 +227,7 @@ void uDatabaseRemoveStudent(UserDatabase* userDatabase, int userID){
             removeUserLog(userDatabase, userID);
             break;
         }
-        else if(userDatabase->students[i]->userID < userID) break;
+        else if(userDatabase->students[i]->userID > userID) break;
     }
 }
 
@@ -240,7 +248,7 @@ void uDatabaseRemoveProvider(UserDatabase* userDatabase, int userID){
             removeUserLog(userDatabase, userID);
             break;
         }
-        else if(userDatabase->providers[i]->userID < userID) break;
+        else if(userDatabase->providers[i]->userID > userID) break;
     }
 }
 
@@ -261,18 +269,11 @@ void uDatabaseRemoveSupportStaff(UserDatabase* userDatabase, int userID){
             removeUserLog(userDatabase, userID);
             break;
         }
-        else if(userDatabase->supportStaff[i]->userID < userID) break;
+        else if(userDatabase->supportStaff[i]->userID > userID) break;
     }
 }
 
-static UserLog* getUserLog(UserDatabase* database, char* username){
-    for(int i = 0; i < database->providerAmount; i++){
-        int compare = strcmp(database->userLogs[i]->username, username);
-        if(compare == 0) return database->userLogs[i];
-        else if(compare < 0) break;
-    }
-    return createUserLog(UNKNOWN, -1, "unknown");
-}
+
 
 /*
  * Function: login

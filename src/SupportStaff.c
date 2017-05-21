@@ -9,5 +9,5 @@ SupportStaff* createSupportStaff(int password){
 }
 
 void destroySupportStaff(SupportStaff* supportStaff){
-
+    free(supportStaff);
 }

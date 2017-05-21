@@ -7,5 +7,5 @@ Student* createStudent(int password){
 }
 
 void destroyStudent(Student* student){
-
+    free(student);
 }

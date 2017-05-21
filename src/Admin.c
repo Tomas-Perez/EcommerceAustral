@@ -4,7 +4,7 @@
 
 Admin* createAdmin(char* name, int password, int phoneNumber){
     Admin* result = malloc(sizeof(Admin));
-    result->name = malloc(sizeof(char)*strlen(name));
+    result->name = malloc(sizeof(char)*strlen(name)+1);
     strcpy(result->name, name);
     result->password = password;
     result->phoneNumber = phoneNumber;

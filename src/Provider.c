@@ -7,5 +7,5 @@ Provider* createProvider(int password){
 }
 
 void destroyProvider(Provider* provider){
-
+    free(provider);
 }
