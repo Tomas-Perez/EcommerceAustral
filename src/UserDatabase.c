@@ -11,12 +11,21 @@ static void growUserLog(UserDatabase* database){
     database->userLogCapacity = maxCapacity*2;
 }
 
-static void addUserLog(UserDatabase* database, UserLog* userLog){
+static int containsUsername(UserDatabase* database, char* username){
+    for(int i = 0; i < database->userLogAmount; i++){
+        if(strcmp(database->userLogs[i]->username, username) == 0) return 1;
+    }
+    return 0;
+}
+
+static int addUserLog(UserDatabase* database, UserLog* userLog){
+    if(containsUsername(database, userLog->username)) return 0;
     if(database->userLogAmount == database->userLogCapacity){
         growUserLog(database);
     }
     database->userLogs[database->userLogAmount] = userLog;
     database->userLogAmount++;
+    return 1;
 }
 
 static void removeUserLog(UserDatabase* database, int userID){
@@ -87,53 +96,68 @@ static void growSupportStaff(UserDatabase *database){
 
 /*
  * Function: uDatabaseAddStudent
- * Description: adds a student to the database, also generates a userLog with the given username for future log ins.
- * Returns: -
+ * Description: adds a student to the database, also generates a userLog with the given username for future logins.
+ * If the username already exists in the database, the student will not be added.
+ * Returns: 1 if the student was added, 0 if it wasn't
  */
 
-void uDatabaseAddStudent(UserDatabase* userDatabase, Student* student, char* username){
-    student->userID = userDatabase->idGenerator++;
-    if(userDatabase->studentAmount == userDatabase->studentCapacity){
-        growStudent(userDatabase);
+int uDatabaseAddStudent(UserDatabase* userDatabase, Student* student, char* username){
+    UserLog* userLog = createUserLog(STUDENT, userDatabase->idGenerator, username);
+    if(addUserLog(userDatabase, userLog)) {
+        student->userID = userDatabase->idGenerator++;
+        if (userDatabase->studentAmount == userDatabase->studentCapacity) {
+            growStudent(userDatabase);
+        }
+        userDatabase->students[userDatabase->studentAmount] = student;
+        userDatabase->studentAmount++;
+        return 1;
     }
-    userDatabase->students[userDatabase->studentAmount] = student;
-    userDatabase->studentAmount++;
-    UserLog* userLog = createUserLog(STUDENT, student->userID, username);
-    addUserLog(userDatabase, userLog);
+    destroyUserLog(userLog);
+    return 0;
 }
 
 /*
  * Function: uDatabaseAddProvider
- * Description: adds a provider to the database, also generates a userLog with the given username for future log ins.
- * Returns: -
+ * Description: adds a provider to the database, also generates a userLog with the given username for future logins.
+ * If the username already exists in the database, the provider will not be added.
+ * Returns: 1 if the provider was added, 0 if it wasn't
  */
 
-void uDatabaseAddProvider(UserDatabase* userDatabase, Provider* provider, char* username){
-    provider->userID = userDatabase->idGenerator++;
-    if(userDatabase->providerAmount == userDatabase->providerCapacity){
-        growProvider(userDatabase);
+int uDatabaseAddProvider(UserDatabase* userDatabase, Provider* provider, char* username){
+    UserLog* userLog = createUserLog(PROVIDER, userDatabase->idGenerator, username);
+    if(addUserLog(userDatabase, userLog)) {
+        provider->userID = userDatabase->idGenerator++;
+        if (userDatabase->providerAmount == userDatabase->providerCapacity) {
+            growProvider(userDatabase);
+        }
+        userDatabase->providers[userDatabase->providerAmount] = provider;
+        userDatabase->providerAmount++;
+        return 1;
     }
-    userDatabase->providers[userDatabase->providerAmount] = provider;
-    userDatabase->providerAmount++;
-    UserLog* userLog = createUserLog(PROVIDER, provider->userID, username);
-    addUserLog(userDatabase, userLog);
+    destroyUserLog(userLog);
+    return 0;
 }
 
 /*
  * Function: uDatabaseAddSupportStaff
- * Description: adds a supportStaff to the database, also generates a userLog with the given username for future log ins.
- * Returns: -
+ * Description: adds a supportStaff to the database, also generates a userLog with the given username for future logins.
+ * If the username already exists in the database, the supportStaff will not be added.
+ * Returns: 1 if the supportStaff was added, 0 if it wasn't
  */
 
-void uDatabaseAddSupportStaff(UserDatabase* userDatabase, SupportStaff* supportStaff, char* username){
-    supportStaff->userID = userDatabase->idGenerator++;
-    if(userDatabase->supportStaffAmount == userDatabase->supportStaffCapacity){
-        growSupportStaff(userDatabase);
+int uDatabaseAddSupportStaff(UserDatabase* userDatabase, SupportStaff* supportStaff, char* username){
+    UserLog* userLog = createUserLog(SUPPORT_STAFF, userDatabase->idGenerator, username);
+    if(addUserLog(userDatabase, userLog)) {
+        supportStaff->userID = userDatabase->idGenerator++;
+        if (userDatabase->supportStaffAmount == userDatabase->supportStaffCapacity) {
+            growSupportStaff(userDatabase);
+        }
+        userDatabase->supportStaff[userDatabase->supportStaffAmount] = supportStaff;
+        userDatabase->supportStaffAmount++;
+        return 1;
     }
-    userDatabase->supportStaff[userDatabase->supportStaffAmount] = supportStaff;
-    userDatabase->supportStaffAmount++;
-    UserLog* userLog = createUserLog(SUPPORT_STAFF, supportStaff->userID, username);
-    addUserLog(userDatabase, userLog);
+    destroyUserLog(userLog);
+    return 0;
 }
 
 /*

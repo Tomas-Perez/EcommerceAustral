@@ -6,6 +6,7 @@ typedef struct SupportStaff{
     int password;
 }SupportStaff;
 
+SupportStaff* createSupportStaff(int password); //Testing database
 void destroySupportStaff(SupportStaff* supportStaff);
 
 

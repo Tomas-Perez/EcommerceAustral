@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <time.h>
 #include "CUTest/CuTest.h"
 #include "../src/Invoice.h"
 
@@ -20,5 +19,22 @@ CuSuite* GetInvoiceTestSuite() {
 
     return suite;
 }
+
+void RunInvoiceTest(void) {
+    CuString *output = CuStringNew();
+    CuSuite* suite = CuSuiteNew();
+
+    CuSuiteAddSuite(suite, GetInvoiceTestSuite());
+
+    CuSuiteRun(suite);
+    CuSuiteSummary(suite, output);
+    CuSuiteDetails(suite, output);
+    printf("%s\n", output->buffer);
+}
+
+int main(void) {
+    RunInvoiceTest();
+}
+
 
 

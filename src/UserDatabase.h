@@ -36,9 +36,9 @@ typedef struct UserDatabase{
 
 UserDatabase* createUserDatabase(int initialCapacity, Admin *admin);
 
-void uDatabaseAddStudent(UserDatabase* userDatabase, Student* student, char* username);
-void uDatabaseAddProvider(UserDatabase* userDatabase, Provider* provider, char* username);
-void uDatabaseAddSupportStaff(UserDatabase* userDatabase, SupportStaff* supportStaff, char* username);
+int uDatabaseAddStudent(UserDatabase* userDatabase, Student* student, char* username);
+int uDatabaseAddProvider(UserDatabase* userDatabase, Provider* provider, char* username);
+int uDatabaseAddSupportStaff(UserDatabase* userDatabase, SupportStaff* supportStaff, char* username);
 
 Student* uDatabaseGetStudent(UserDatabase* userDatabase, int userID);
 Provider* uDatabaseGetProvider(UserDatabase* userDatabase, int userID);
