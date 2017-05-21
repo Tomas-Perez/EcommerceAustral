@@ -34,7 +34,7 @@ void addMessage(SupportDatabase* database, SupportMessage* message){
 */
 void growSupportDatabase(SupportDatabase* database){
     int maxCapacity = database->messageCapacity;
-    database->messages = realloc(database->messages, sizeof(SupportMessage*)*maxCapacity*2);
+    database->messages = realloc(database->messages, sizeof(SupportMessage)*maxCapacity*2);
     database->messageCapacity = maxCapacity*2;
 }
 
