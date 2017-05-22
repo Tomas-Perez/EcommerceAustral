@@ -17,9 +17,9 @@ struct bank{
 };
 
 Bank* newBank(int id, char name[], char office[], Transaction* transactions[], BankAccount* bankAccounts[]);
-Transaction* withdrawMoneyy(Bank* bank, int accountId, double amount);
-Transaction* depositMoneyy(Bank* bank, int accountId, double amount);
-Transaction* transferMoney(Bank* bank, int senderAccountId, int receiverAccountId, double amount);
+OperationCertificate* withdrawMoneyy(Bank* bank, int accountId, double amount);
+OperationCertificate* depositMoneyy(Bank* bank, int accountId, double amount);
+Transaction* transferMoney(Bank* bank, int senderAccountId, int receiverAccountId, double amount, int operationType);
 void freeBank(Bank* bank1);
 
 #endif //SRC_BANK_H

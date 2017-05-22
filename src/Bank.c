@@ -1,7 +1,8 @@
 
 
 #include <stdlib.h>
-#include <printf.h>
+#include "Transaction.c"
+#include "BankAccount.c"
 #include "Bank.h"
 
 Bank* newBank(int id, char name[], char office[], Transaction* transactions[], BankAccount* bankAccounts[]){
@@ -21,32 +22,41 @@ Bank* newBank(int id, char name[], char office[], Transaction* transactions[], B
     return result;
 }
 
-Transaction* withdrawMoneyy(Bank* bank, int accountId, double amount){
-    //Faltar crear transaction y terminar implementacion
+OperationCertificate* withdrawMoneyy(Bank* bank, int accountId, double amount){
+    OperationCertificate* result;
 
     for(int i=0; sizeof(bank->bankAccounts); i++){
         if(bank->bankAccounts[i]->bankAccountID == accountId){
-            printf("%i", accountId);
+            result = withdrawMoney(bank->bankAccounts[i], amount);
+            break;
         }
     }
+
+    return result;
 }
 
 
-Transaction* depositMoneyy(Bank* bank, int accountId, double amount){
-    //Faltar crear transaction y terminar implementacion
+OperationCertificate* depositMoneyy(Bank* bank, int accountId, double amount){
+    OperationCertificate* result;
 
     for(int i=0; sizeof(bank->bankAccounts); i++){
         if(bank->bankAccounts[i]->bankAccountID == accountId){
-            printf("%i", accountId);
+            result = depositMoney(bank->bankAccounts[i], amount);
+            break;
         }
     }
+
+    return result;
 }
 
 
-Transaction* transferMoney(Bank* bank, int senderAccountId, int receiverAccountId, double amount){
-    //Faltar crear transaction y terminar implementacion
+Transaction* transferMoney(Bank* bank, int senderAccountId, int receiverAccountId, double amount, int operationType){
+    Transaction* result = createTransaction(senderAccountId, receiverAccountId, 0, amount, sizeof(bank->transactions));
+
     freeTransaction(withdrawMoneyy(bank, senderAccountId, amount));
     freeTransaction(depositMoneyy(bank, receiverAccountId, amount));
+
+    return result;
 }
 
 
