@@ -11,11 +11,10 @@ typedef struct SupportMessage{
     char* answer;
     int supportStaffID;
     int studentID;
-    int id;
+    int id; //set by SupportDatabase when it is added (used to remove a message from the database).
+    int isAnswered;
 }SupportMessage;
 
-SupportMessage* newSupportMessage(long timeStamp, char* date, char* question, char* answer, int supportStaffID, int studentID);
-
-void setID(SupportMessage* message, int id);
+SupportMessage* newSupportMessage(char* question, int studentID);
 
 #endif //ECOMMERCEAUSTRAL_SUPPORTMESSAGE_H

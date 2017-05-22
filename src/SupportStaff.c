@@ -1,27 +1,34 @@
 #include "SupportStaff.h"
 #include <stdlib.h>
+#include <string.h>
 
 /*
  *  Function: newSupportStaff
  *  Description: creates a new SupportStaff with the provided data.
  *  Returns: SupportStaff*
 */
-SupportStaff* newSupportStaff(SupportDatabase* database, int supportID, int password){
+SupportStaff* newSupportStaff(char* name, int supportID, int password, int phoneNumber){
     SupportStaff* staff = malloc(sizeof(SupportStaff));
-    staff->database = malloc(sizeof(SupportDatabase));
-    staff->database = newSupportDatabase(20); //initial capacity, what should be the default value?
     staff->userID = supportID;
     staff->password = password;
+    staff->phoneNumber = phoneNumber;
+    staff->name = malloc(sizeof(char)*(strlen(name)+1));
+    strcpy(staff->name, name);
     return staff;
 }
 
 /*
  *  Function: answerQuestion
- *  Description: removes a question from SupportDatabase, as the question has already been answered.
+ *  Description: answers the provided message. The question is answered by the support staff with the specified
+ *  id.
  *  Returns: -
 */
-void answerQuestion(SupportStaff* staff, SupportMessage* message){
-    removeMessage(staff->database, message->id);
+void answerQuestion(int supportStaffId, SupportMessage* message, char* answer){
+    if (message->isAnswered) return; //the question is already answered.
+    message->supportStaffID = supportStaffId;
+    message->answer = malloc(sizeof(char)*(strlen(answer)+1));
+    strcpy(message->answer, answer);
+    message->isAnswered = 1;
 }
 
 /*
@@ -29,24 +36,9 @@ void answerQuestion(SupportStaff* staff, SupportMessage* message){
  *  Description: changes the id of the SupportStaff.
  *  Returns: SupportStaff*
 */
-SupportStaff* changePerson(SupportStaff* staff, int supportID){ //how will this method be used?
+SupportStaff* changePerson(SupportStaff* staff, int supportID){ //still don't understand the purpose of this function
     staff->userID = supportID;
     return staff;
-}
-
-/*
- *  Function: searchQuestion
- *  Description: searches for a question in the staff's SupportDatabase, if found it returns its position, it
- *  returns -1 otherwise.
- *  Returns: SupportStaff*
-*/
-int searchQuestion(SupportStaff* staff, int studentId){
-    for (int i=0; i<staff->database->messageAmount; i++){
-        if (staff->database->messages[i]->studentID == studentId){
-            return i;
-        }
-    }
-    return -1;
 }
 
 /*

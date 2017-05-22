@@ -11,6 +11,7 @@ SupportDatabase* newSupportDatabase(int initialCapacity){
     database->messages = malloc(sizeof(SupportMessage)*initialCapacity);
     database->messageCapacity = initialCapacity;
     database->messageAmount = 0;
+    database->codeGenerator = 1;
     return database;
 }
 
@@ -23,6 +24,8 @@ void addMessage(SupportDatabase* database, SupportMessage* message){
     if (database->messageAmount == database->messageCapacity){
         growSupportDatabase(database);
     }
+    message->id = database->codeGenerator;
+    database->codeGenerator++;
     database->messages[database->messageAmount] = message;
     database->messageAmount++;
 }
@@ -39,17 +42,36 @@ void growSupportDatabase(SupportDatabase* database){
 }
 
 /*
- *  Function: getMessages
+ *  Function: getMessagesByUser
  *  Description: returns all the messages sent to support by the student with the specified id.
  *  Returns: SupportMessage**
 */
-SupportMessage** getMessages(SupportDatabase* database, int id){
+SupportMessage** getMessagesByUser(SupportDatabase* database, int id){
     SupportMessage** messages = malloc(sizeof(SupportMessage)*database->messageAmount); //how do I know the size?
     int count = 0;
     for (int i=0; i<database->messageAmount; i++){
         if (database->messages[i]->studentID == id){
             messages[count] = database->messages[i];
             count++;
+        }
+    }
+    return messages;
+}
+
+/*
+ *  Function: getMessagesBySupportStaff
+ *  Description: returns all the messages sent to support that where answered by the staff member with the provided id.
+ *  Returns: SupportMessage**
+*/
+SupportMessage** getMessagesBySupportStaff(SupportDatabase* database, int id){
+    SupportMessage** messages = malloc(sizeof(SupportMessage)*database->messageAmount);
+    int count = 0;
+    for (int i=0; i<database->messageAmount; i++){
+        if (database->messages[i]->isAnswered){ //the question must be answered to have a SupportStaffId
+            if (database->messages[i]->supportStaffID == id){
+                messages[count] = database->messages[i];
+                count++;
+            }
         }
     }
     return messages;
