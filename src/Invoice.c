@@ -19,13 +19,9 @@ Invoice* createInvoice(Cart* cart, int studentID){
     result->totalAmount = cart->value;
     result->bookTitles = malloc(sizeof(ProductBook*)*cart->amountOfBooks);
     result->amountOfBooks = cart->amountOfBooks;
-    int addedBooks = 0;
-    for(int i = 0; i < cart->maxCapacity, addedBooks < cart->amountOfBooks; i++){
-        if(cart->spacesTaken[i]){
-            ProductBook* cartBook = cart->pBooks[i];
-            result->bookTitles[addedBooks] = cartBook->bookInfo->title;
-            addedBooks++;
-        }
+    for(int i = 0; i < cart->amountOfBooks; i++){
+        ProductBook* cartBook = cart->pBooks[i];
+        result->bookTitles[i] = cartBook->bookInfo->title;
     }
     result->studentID = studentID;
 
