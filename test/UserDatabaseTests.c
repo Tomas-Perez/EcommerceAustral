@@ -20,7 +20,7 @@ void TestAdd(CuTest* tc){
     CuAssertIntEquals(tc, 1234, resultOne->password);
     CuAssertIntEquals(tc, 1, addResult);
 
-    SupportStaff* two = createSupportStaff(153);
+    SupportStaff* two = createSupportStaff("two", 153, 45456);
     addResult = uDatabaseAddSupportStaff(database, two, "two");
     SupportStaff* resultTwo = uDatabaseGetSupportStaff(database, 2);
     resultOne = uDatabaseGetStudent(database, 1);
@@ -50,7 +50,7 @@ void TestAdd(CuTest* tc){
 
     CuAssertIntEquals(tc, 0, addResult);
 
-    SupportStaff* three4 = createSupportStaff(265);
+    SupportStaff* three4 = createSupportStaff("three4", 265, 45126);
     addResult = uDatabaseAddSupportStaff(database, three4, "three");
     Provider* resultThree4 = uDatabaseGetProvider(database, 4);
 
@@ -83,10 +83,10 @@ void TestRemove(CuTest* tc){
     Provider* provider7 = createProvider(2665);
     Provider* provider8 = createProvider(2665);
 
-    SupportStaff* supportStaff9 = createSupportStaff(659);
-    SupportStaff* supportStaff10 = createSupportStaff(659);
-    SupportStaff* supportStaff11 = createSupportStaff(659);
-    SupportStaff* supportStaff12 = createSupportStaff(659);
+    SupportStaff* supportStaff9 = createSupportStaff("supportStaff9", 659, 2202163);
+    SupportStaff* supportStaff10 = createSupportStaff("supportStaff10", 659, 69950);
+    SupportStaff* supportStaff11 = createSupportStaff("supportStaff00", 659, 65926);
+    SupportStaff* supportStaff12 = createSupportStaff("supportStaff10", 659, 3266);
 
     uDatabaseAddStudent(database, student1, "student1");
     uDatabaseAddStudent(database, student2, "student2");
@@ -177,8 +177,8 @@ void TestAddRemove(CuTest* tc){
     Provider* provider3 = createProvider(2665);
     Provider* provider4 = createProvider(2665);
 
-    SupportStaff* supportStaff5 = createSupportStaff(659);
-    SupportStaff* supportStaff6 = createSupportStaff(659);
+    SupportStaff* supportStaff5 = createSupportStaff("supportStaff5", 659, 56956);
+    SupportStaff* supportStaff6 = createSupportStaff("supportStaff6", 659, 956526);
 
 
     uDatabaseAddStudent(database, student1, "student1");
@@ -221,8 +221,8 @@ void TestAddRemove(CuTest* tc){
     uDatabaseAddProvider(database, provider10, "provider10");
     CuAssertIntEquals(tc, 2, database->providerAmount);
 
-    SupportStaff* supportStaff11 = createSupportStaff(659);
-    SupportStaff* supportStaff12 = createSupportStaff(659);
+    SupportStaff* supportStaff11 = createSupportStaff("supportStaff11", 659, 126599);
+    SupportStaff* supportStaff12 = createSupportStaff("supportStaff12", 659, 26599);
     uDatabaseAddSupportStaff(database, supportStaff11, "supportStaff11");
     uDatabaseAddSupportStaff(database, supportStaff12, "supportStaff12");
     CuAssertIntEquals(tc, 2, database->supportStaffAmount);
@@ -241,8 +241,8 @@ void TestLogin(CuTest* tc){
     Provider* provider3 = createProvider(2665);
     Provider* provider4 = createProvider(2665);
 
-    SupportStaff* supportStaff5 = createSupportStaff(659);
-    SupportStaff* supportStaff6 = createSupportStaff(659);
+    SupportStaff* supportStaff5 = createSupportStaff("supportStaff5", 659, 6596);
+    SupportStaff* supportStaff6 = createSupportStaff("supportStaff6", 659, 6599);
 
     uDatabaseAddStudent(database, student1, "student1");
     uDatabaseAddStudent(database, student2, "student2");
@@ -310,6 +310,8 @@ void TestLogin(CuTest* tc){
     CuAssertIntEquals(tc, UNKNOWN, provider4RMVLog->userType);
     CuAssertIntEquals(tc, -1, provider4RMVLog->userID);
     CuAssertStrEquals(tc, "unknown", provider4RMVLog->username);
+
+    destroyUserDatabase(database);
 }
 
 CuSuite* GetUDatabaseTestSuite() {

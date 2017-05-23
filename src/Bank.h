@@ -1,5 +1,3 @@
-
-
 #ifndef SRC_BANK_H
 #define SRC_BANK_H
 
@@ -10,10 +8,10 @@ typedef struct bank Bank;
 
 struct bank{
     int id;
-    char name[]; // Un pointer de funciona como un array en C, pueden ver el ejemplo del campus
-    char office[];
-    Transaction* transactions[];
-    BankAccount* bankAccounts[];
+    char* name; // Un pointer de funciona como un array en C, pueden ver el ejemplo del campus
+    char* office;
+    Transaction** transactions;
+    BankAccount** bankAccounts;
 };
 
 Bank* newBank(int id, char name[], char office[], Transaction* transactions[], BankAccount* bankAccounts[]);

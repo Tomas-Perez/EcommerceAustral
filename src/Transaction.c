@@ -1,6 +1,5 @@
 
 #include <stdlib.h>
-#include <ntsid.h>
 #include <time.h>
 #include <string.h>
 #include "Transaction.h"

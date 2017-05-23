@@ -9,10 +9,9 @@ typedef struct SupportStaff{
     int password;
     int phoneNumber;
     char* name;
-    SupportDatabase* database;
 }SupportStaff;
 
-SupportStaff* newSupportStaff(char* name, int supportID, int password, int phoneNumber);
+SupportStaff* createSupportStaff(char *name, int password, int phoneNumber);
 
 void answerQuestion(int supportStaffId, SupportMessage* message, char* answer);
 

@@ -7,6 +7,7 @@
 
 Bank* newBank(int id, char name[], char office[], Transaction* transactions[], BankAccount* bankAccounts[]){
     Bank* result= malloc(sizeof(Bank));
+    /*
     result->id = (int) malloc(sizeof(int));
     result->name = malloc(sizeof(char[]));
     result->office = malloc(sizeof(char[]));
@@ -18,6 +19,7 @@ Bank* newBank(int id, char name[], char office[], Transaction* transactions[], B
     result->office = office;
     result->transactions = transactions;
     result->bankAccounts = bankAccounts;
+     */
 
     return result;
 }
@@ -52,19 +54,21 @@ OperationCertificate* depositMoneyy(Bank* bank, int accountId, double amount){
 
 Transaction* transferMoney(Bank* bank, int senderAccountId, int receiverAccountId, double amount, int operationType){
     Transaction* result = createTransaction(senderAccountId, receiverAccountId, 0, amount, sizeof(bank->transactions));
-
+    /*
     freeTransaction(withdrawMoneyy(bank, senderAccountId, amount));
     freeTransaction(depositMoneyy(bank, receiverAccountId, amount));
-
+    */
     return result;
 }
 
 
 void freeBank(Bank* bank){
+    /*
     free(bank->id);
     free(bank->name);
     free(bank->office);
     free(bank->transactions);
     free(bank->bankAccounts);
     free(bank);
+     */
 }

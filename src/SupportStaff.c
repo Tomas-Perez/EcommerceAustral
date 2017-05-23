@@ -3,13 +3,12 @@
 #include <string.h>
 
 /*
- *  Function: newSupportStaff
+ *  Function: createSupportStaff
  *  Description: creates a new SupportStaff with the provided data.
  *  Returns: SupportStaff*
 */
-SupportStaff* newSupportStaff(char* name, int supportID, int password, int phoneNumber){
+SupportStaff* createSupportStaff(char *name, int password, int phoneNumber){
     SupportStaff* staff = malloc(sizeof(SupportStaff));
-    staff->userID = supportID;
     staff->password = password;
     staff->phoneNumber = phoneNumber;
     staff->name = malloc(sizeof(char)*(strlen(name)+1));
@@ -47,7 +46,6 @@ SupportStaff* changePerson(SupportStaff* staff, int supportID){ //still don't un
  *  Returns: -
 */
 void destroySupportStaff(SupportStaff* supportStaff){
-    free(supportStaff->database->messages);
-    free(supportStaff->database);
+    free(supportStaff->name);
     free(supportStaff);
 }
