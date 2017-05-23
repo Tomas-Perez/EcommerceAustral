@@ -10,15 +10,19 @@ typedef struct college{
     int amountOfSubjects;
     int maxCapacityOfSubjects;
 
+
 }College;
 
 College* createCollege(char* name, int initialCapacity);
 void destroyCollege(College* college);
 
 void addNewSubject(College* college, Subject* newSubject);
+int removeSubject(College* college, int subjectID);
 
-void enrollStudentInSubject(College* college, int subjectID, int studentID);
-Subject* getSubjectsOfStudent(College* college, int studentID);
-BookInformation* getBooksOfStudent(College* college, int studentID);
+int enrollStudentInSubject(College* college, int subjectID, int studentID);
+int withdrawStudentFromSubject(College* college, int subjectID, int studentID);
+
+ArrayOfSubjects* getSubjectsOfStudent(College* college, int studentID);
+ArrayOfBooks* getBooksOfStudent(College* college, int studentID);
 
 #endif //ECOMMERCEAUSTRAL_COLLEGE_H

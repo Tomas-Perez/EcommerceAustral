@@ -10,6 +10,11 @@ struct bookInformation{
     char* author;
 };
 
+typedef struct arrayOfBooks{
+    BookInformation** books;
+    int amountOfBooks;
+}ArrayOfBooks;
+
 BookInformation* createBookInformation(char* title, int ISBN, char* author);
 void destroyBookInformation(BookInformation* bookInformation);
 int bookInformationIsEqual(BookInformation* bookInformation1, BookInformation* bookInformation2);
