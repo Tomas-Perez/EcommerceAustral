@@ -31,16 +31,6 @@ void answerQuestion(int supportStaffId, SupportMessage* message, char* answer){
 }
 
 /*
- *  Function: changePerson
- *  Description: changes the id of the SupportStaff.
- *  Returns: SupportStaff*
-*/
-SupportStaff* changePerson(SupportStaff* staff, int supportID){ //still don't understand the purpose of this function
-    staff->userID = supportID;
-    return staff;
-}
-
-/*
  *  Function: destroySupportStaff
  *  Description: frees memory space that was used by the SupportStaff.
  *  Returns: -

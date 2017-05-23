@@ -15,8 +15,6 @@ SupportStaff* createSupportStaff(char *name, int password, int phoneNumber);
 
 void answerQuestion(int supportStaffId, SupportMessage* message, char* answer);
 
-SupportStaff* changePerson(SupportStaff* staff, int supportID); //what is the purpose of this method
-
 void destroySupportStaff(SupportStaff* supportStaff);
 
 
