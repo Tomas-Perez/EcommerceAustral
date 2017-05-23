@@ -30898,7 +30898,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFb77AlqVgGYm4="
 							},
-							"name": "addStudent",
+							"name": "addStudentToSubject",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,

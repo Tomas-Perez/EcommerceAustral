@@ -1,7 +1,3 @@
-//
-// Created by Agustin Bettati  on 21/5/17.
-//
-
 #ifndef ECOMMERCEAUSTRAL_SUBJECT_H
 #define ECOMMERCEAUSTRAL_SUBJECT_H
 
@@ -9,6 +5,7 @@
 
 typedef struct subject{
     char* name;
+    int subjectID;
 
     int* studentIDs;
     int amountOfStudents;
@@ -20,12 +17,12 @@ typedef struct subject{
 
 }Subject;
 
-Subject* createSubject(char* name, int maxCapacityOfStudents);
+Subject* createSubject(char* name,int subjectID,int maxCapacityOfStudents);
 void destroySubject(Subject* subject);
 
 int studentIsEnrolled(Subject* subject, int studentID);
 
 void addNewBook(Subject* subject, BookInformation* bookInformation);
-void addStudent(Subject* subject, int studentID);
+void addStudentToSubject(Subject *subject, int studentID);
 
 #endif //ECOMMERCEAUSTRAL_SUBJECT_H

@@ -1,7 +1,3 @@
-//
-// Created by Agustin Bettati  on 21/5/17.
-//
-
 #include <stdlib.h>
 #include <memory.h>
 #include <stdio.h>
@@ -12,11 +8,13 @@
  * Description: allocates memory for a Subject and all its components.
  * Returns: Subject pointer
  */
-Subject* createSubject(char* name, int maxCapacityOfStudents){
+Subject* createSubject(char* name,int subjectID, int maxCapacityOfStudents){
     Subject* newSubject = malloc(sizeof(Subject));
 
     newSubject->name = malloc(sizeof(char)*(strlen(name)+1));
     strcpy(newSubject->name, name);
+
+    newSubject->subjectID = subjectID;
 
     newSubject->amountOfStudents = 0;
     newSubject->amountOfBooks = 0;
@@ -71,11 +69,11 @@ void addNewBook(Subject* subject, BookInformation* bookInformation){
 }
 
 /*
- * Function: addNewBook
+ * Function: addStudentToSubject
  * Description: adds a student to the subject if there is free space.
  * Returns: --
  */
-void enrollStudent(Subject* subject, int studentID){
+void addStudentToSubject(Subject *subject, int studentID){
     if(subject->amountOfStudents == subject->maxCapacityOfStudents){
         printf("The subject %s has reached its maximum amount of students. \n", subject->name);
     }
