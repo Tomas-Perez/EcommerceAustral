@@ -9,9 +9,10 @@ typedef struct PaymentMethod{
     long timestamp;
     int paymentID;
     paymentType type;
-    int paymentData; //data set to the paymentType when defined
+    int paymentData; //data to be set to the paymentType when defined
 }PaymentMethod;
 
 PaymentMethod* createPaymentMethod(long timestamp, int paymentID, paymentType type, int paymentData);
+void destroyPaymentMethod(PaymentMethod* paymentMethod);
 
 #endif //ECOMMERCEAUSTRAL_PAYMENTMETHOD_H

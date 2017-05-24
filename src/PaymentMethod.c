@@ -16,4 +16,14 @@ PaymentMethod* createPaymentMethod(long timestamp, int paymentID, paymentType ty
     result->paymentID = paymentID;
     result->type = type;
     result->paymentData = paymentData;
+    return result;
+}
+
+/*
+    Function: destroyPaymentMethod
+    Description: frees the memory allocated to the PaymentMethod
+    Returns: void
+*/
+void destroyPaymentMethod(PaymentMethod* paymentMethod){
+    free(paymentMethod);
 }

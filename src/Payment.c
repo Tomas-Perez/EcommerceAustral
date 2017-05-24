@@ -14,4 +14,15 @@ Payment* createPayment(PaymentMethod* paymentMethod, Invoice* invoice){
 
     result->paymentMethod = paymentMethod;
     result->invoice = invoice;
+    return result;
+}
+
+/*
+    Function: destroyPayment
+    Description: frees the memory allocated to the Payment
+    Returns: void
+*/
+void destroyPayment(Payment* payment){
+    destroyPaymentMethod(payment->paymentMethod);
+    destroyInvoice(payment->invoice);
 }
