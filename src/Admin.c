@@ -14,5 +14,8 @@ Admin* createAdmin(char* name, int password, int phoneNumber){
 
 void destroyAdmin(Admin* admin){
     free(admin->name);
+    free(admin->userID);
+    free(admin->password);
+    free(admin->phoneNumber);
     free(admin);
 }
