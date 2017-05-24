@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <memory.h>
-#include <stdio.h>
 #include "Subject.h"
 
 /*
@@ -71,15 +70,35 @@ void addNewBook(Subject* subject, BookInformation* bookInformation){
 /*
  * Function: addStudentToSubject
  * Description: adds a student to the subject if there is free space.
- * Returns: --
+ * Returns: 1 if student was added, 0 if it was not posible to add student.
  */
-void addStudentToSubject(Subject *subject, int studentID){
+int addStudentToSubject(Subject *subject, int studentID){
     if(subject->amountOfStudents == subject->maxCapacityOfStudents){
-        printf("The subject %s has reached its maximum amount of students. \n", subject->name);
+        return 0;
     }
     else{
         subject->studentIDs[subject->amountOfStudents] = studentID;
         subject->amountOfStudents++;
+        return 1;
     }
 }
+
+/*
+ * Function: removeStudentFromSubject
+ * Description: removes a student from a subject.
+ * Returns: 1 if student was removed, 0 if student was not found.
+ */
+int removeStudentFromSubject(Subject* subject, int studentID){
+    for (int i = 0; i < subject->amountOfStudents; ++i) {
+        if(subject->studentIDs[i] == studentID){
+            for (; i < subject->amountOfStudents - 1; i++) {
+                subject->studentIDs[i] = subject->studentIDs[i + 1];
+            }
+            subject->amountOfStudents--;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 

@@ -14,8 +14,12 @@ typedef struct subject{
     BookInformation** books;
     int amountOfBooks;
     int maxCapacityOfBooks;
-
 }Subject;
+
+typedef struct arrayOfSubjects{
+    Subject** subjects;
+    int amountOfSubjects;
+}ArrayOfSubjects;
 
 Subject* createSubject(char* name,int subjectID,int maxCapacityOfStudents);
 void destroySubject(Subject* subject);
@@ -23,6 +27,7 @@ void destroySubject(Subject* subject);
 int studentIsEnrolled(Subject* subject, int studentID);
 
 void addNewBook(Subject* subject, BookInformation* bookInformation);
-void addStudentToSubject(Subject *subject, int studentID);
+int addStudentToSubject(Subject* subject, int studentID);
+int removeStudentFromSubject(Subject* subject, int studentID);
 
 #endif //ECOMMERCEAUSTRAL_SUBJECT_H

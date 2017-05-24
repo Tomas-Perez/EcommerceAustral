@@ -4,17 +4,21 @@
 #include "../src/Cart.h"
 
 void TestCartAddBook(CuTest *tc){
-    ProductBook* book = createProductBook("Math", 10, 0);
+    BookInformation* information = createBookInformation("Math", 51566, "Euler");
+    ProductBook* book = createProductBook(information, 10, 0);
     Cart* cart = createCart(1, 1);
+
     cartAddBook(cart, book, 5);
     CuAssertIntEquals(tc, 1, cart->amountOfBooks);
 
     cartAddBook(cart, book, 2);
     CuAssertIntEquals(tc, 1, cart->amountOfBooks);
+
 }
 
 void TestCartRemoveBook(CuTest *tc){
-    ProductBook* book = createProductBook("Math", 10, 0);
+    BookInformation* information = createBookInformation("Math", 51566, "Euler");
+    ProductBook* book = createProductBook(information, 10, 0);
     Cart* cart = createCart(1, 1);
     cartAddBook(cart, book, 5);
     CuAssertIntEquals(tc, 1, cart->amountOfBooks);
@@ -30,9 +34,12 @@ void TestCartRemoveBook(CuTest *tc){
 }
 
 void TestCartRemoveAllBooks(CuTest *tc){
-    ProductBook* book1 = createProductBook("Math", 3, 0);
-    ProductBook* book2 = createProductBook("Chemistry", 6, 0);
-    ProductBook* book3 = createProductBook("Statistics", 8, 0);
+    BookInformation* information1 = createBookInformation("Math", 1245, "Euler");
+    ProductBook* book1 = createProductBook(information1, 10, 0);
+    BookInformation* information2 = createBookInformation("Chemistry", 3453, "Someone Else");
+    ProductBook* book2 = createProductBook(information2, 6, 0);
+    BookInformation* information3 = createBookInformation("Statistics", 12345, "Flash");
+    ProductBook* book3 = createProductBook(information3, 8, 0);
 
     Cart* cart = createCart(1, 1);
     cartAddBook(cart, book1, 5);
@@ -62,20 +69,9 @@ void TestCartRemoveAllBooks(CuTest *tc){
     CuAssertIntEquals(tc, -1, actual3);
 }
 
-void TestCartGrow(CuTest *tc){
-    Cart* cart = createCart(1, 1);
-    cartGrow(cart);
-    CuAssertIntEquals(tc, 0, cart->spacesTaken[0]);
-    CuAssertIntEquals(tc, 0, cart->spacesTaken[1]);
-    cartGrow(cart);
-    CuAssertIntEquals(tc, 0, cart->spacesTaken[0]);
-    CuAssertIntEquals(tc, 0, cart->spacesTaken[1]);
-    CuAssertIntEquals(tc, 0, cart->spacesTaken[2]);
-    CuAssertIntEquals(tc, 0, cart->spacesTaken[3]);
-}
-
 void TestCartContainsBook(CuTest *tc) {
-    ProductBook* book = createProductBook("Math", 10, 0);
+    BookInformation* information = createBookInformation("Math", 43541, "Euler");
+    ProductBook* book = createProductBook(information, 10, 0);
     Cart* cart = createCart(1, 1);
     int actual = cartContainsBook(cart, book);
     CuAssertIntEquals(tc, -1, actual);
@@ -89,7 +85,6 @@ CuSuite* GetCartTestSuite() {
     CuSuite* suite = CuSuiteNew();
     SUITE_ADD_TEST(suite, TestCartContainsBook);
     SUITE_ADD_TEST(suite, TestCartAddBook);
-    SUITE_ADD_TEST(suite, TestCartGrow);
     SUITE_ADD_TEST(suite, TestCartRemoveBook);
     SUITE_ADD_TEST(suite, TestCartRemoveAllBooks);
 
