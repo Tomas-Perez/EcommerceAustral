@@ -4,6 +4,7 @@
 #include <string.h>
 #include "Transaction.h"
 
+//OperationType: 1 deposito, 2 retiro, 3 transferencia.
 
 Transaction* createTransaction(int toAccountID, int fromAccountID, int operationType, double amount, int transactionNumber){
     Transaction* result = malloc(sizeof(Transaction));
