@@ -5,6 +5,16 @@
  */
 
 /*
+ * Function: cartGrow
+ * Description: doubles the size of the book and spacesTaken arrays in the cart.
+ * Returns: -
+ */
+static void cartGrow(Cart* cart){
+    cart->pBooks = realloc(cart->pBooks, sizeof(ProductBook*) * (cart->maxCapacity*2));
+    cart->maxCapacity *= 2;
+}
+
+/*
  * Function: createCart
  * Description: allocates memory for a cart and all it's components
  * Returns: Cart pointer
@@ -17,8 +27,6 @@ Cart* createCart(int initialCapacity, int id){
     result->amountOfBooks = 0;
     result->maxCapacity = initialCapacity;
     result->pBooks = malloc(sizeof(ProductBook*)*initialCapacity);
-    result->spacesTaken = malloc(sizeof(int)*initialCapacity);
-    memset(result->spacesTaken, 0, sizeof(int)*initialCapacity);
     return result;
 }
 
@@ -29,11 +37,10 @@ Cart* createCart(int initialCapacity, int id){
 */
 
 void destroyCart(Cart* cart){
-    for(int i = 0; i < cart->maxCapacity; i++){
-        if(cart->spacesTaken[i]) destroyProductBook(cart->pBooks[i]);
+    for(int i = 0; i < cart->amountOfBooks; i++){
+        destroyProductBook(cart->pBooks[i]);
     }
     free(cart->pBooks);
-    free(cart->spacesTaken);
     free(cart);
 }
 
@@ -52,19 +59,9 @@ void cartAddBook(Cart *cart, ProductBook *pBook, int amount){
     if(bookIndex == -1){
         if(cart->amountOfBooks == cart->maxCapacity){
             cartGrow(cart);
-            cart->pBooks[cart->amountOfBooks] = createProductBook(pBook->bookInfo, amount, pBook->price);
-            cart->value += pBook->price * amount;
-            cart->spacesTaken[cart->amountOfBooks] = 1;
-        } else {
-            for(int i = 0; i < cart->maxCapacity; i++){
-                if(!cart->spacesTaken[i]){
-                    cart->pBooks[i] = createProductBook(pBook->bookInfo, amount, pBook->price);
-                    cart->spacesTaken[i] = 1;
-                    cart->value += pBook->price * amount;
-                    break;
-                }
-            }
         }
+        cart->pBooks[cart->amountOfBooks] = createProductBook(pBook->bookInfo, amount, pBook->price);
+        cart->value += pBook->price * amount;
         cart->amountOfBooks++;
     } else {
         cart->pBooks[bookIndex]->stock += amount;
@@ -86,8 +83,10 @@ void cartRemoveBook(Cart *cart, ProductBook *pBook, int amount){
         int previousStock = cartBook->stock;
         cartBook->stock -= amount;
         if(cartBook->stock <= 0){
-            cart->spacesTaken[bookIndex] = 0;
             destroyProductBook(cartBook);
+            for(int i = bookIndex; i < cart->amountOfBooks - 1; i++){
+                cart->pBooks[i] = cart->pBooks[i+1];
+            }
             cart->value -= pBook->price * previousStock;
             cart->amountOfBooks--;
         } else {
@@ -96,20 +95,7 @@ void cartRemoveBook(Cart *cart, ProductBook *pBook, int amount){
     }
 }
 
-/*
- * Function: cartGrow
- * Description: doubles the size of the book and spacesTaken arrays in the cart.
- * Returns: -
- */
-void cartGrow(Cart* cart){
-    int maxCapacity = cart->maxCapacity;
-    cart->pBooks = realloc(cart->pBooks, sizeof(ProductBook*) * (maxCapacity*2));
-    cart->spacesTaken = realloc(cart->spacesTaken, sizeof(int) * (maxCapacity*2));
-    for(int i = maxCapacity; i < maxCapacity*2; i++){
-        cart->spacesTaken[i] = 0;
-    }
-    cart->maxCapacity = maxCapacity*2;
-}
+
 
 /*
  * Function: cartContainsBook
@@ -117,11 +103,9 @@ void cartGrow(Cart* cart){
  * Returns: index of the given book, -1 if the book it's not present in the cart.
  */
 int cartContainsBook(Cart *cart, ProductBook *pBook){
-    for(int i = 0; i < cart->maxCapacity; i++){
-        if(cart->spacesTaken[i]){
-            if(productBookIsEqual(cart->pBooks[i], pBook)){
-                return i;
-            }
+    for(int i = 0; i < cart->amountOfBooks; i++){
+        if(productBookIsEqual(cart->pBooks[i], pBook)){
+            return i;
         }
     }
     return -1;
@@ -134,10 +118,9 @@ int cartContainsBook(Cart *cart, ProductBook *pBook){
  */
 
 void cartRemoveAllBooks(Cart *cart){
-    for(int i = 0; i < cart->maxCapacity; i++){
-        if(cart->spacesTaken[i]) destroyProductBook(cart->pBooks[i]);
+    for(int i = 0; i < cart->amountOfBooks; i++){
+        destroyProductBook(cart->pBooks[i]);
     }
-    memset(cart->spacesTaken, 0, sizeof(ProductBook*)*cart->maxCapacity);
     cart->amountOfBooks = 0;
     cart->value = 0;
 }
