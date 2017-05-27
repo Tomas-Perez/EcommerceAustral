@@ -1,5 +1,5 @@
 #include "../test/CUTest/CuTest.h"
-#include "../src/ProductBook.h"
+#include "../src/Ecommerce/ProductBook.h"
 
 
 void TestCreateProductBook(CuTest *tc) {

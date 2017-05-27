@@ -1,4 +1,4 @@
-set(core_SRCS BookInformation.c ProductBook.c Cart.c Invoice.c Student.c Bank.c BankAccount.c Transaction.c Provider.c Admin.c SupportStaff.c UserDatabase.c UserLog.c OperationCertificate.c Subject.c Subject.h College.c College.h SupportDatabase.c SupportMessage.c PaymentMethod.c PaymentMethod.h Payment.c Payment.h)
+set(core_SRCS College/BookInformation.c Ecommerce/ProductBook.c Ecommerce/Cart.c Ecommerce/Invoice.c College/Student.c Bank/Bank.c Bank/BankAccount.c Bank/Transaction.c Ecommerce/Provider.c Ecommerce/Admin.c Ecommerce/SupportStaff.c Ecommerce/UserDatabase.c Ecommerce/UserLog.c Bank/OperationCertificate.c College/Subject.c College/Subject.h College/College.c College/College.h Ecommerce/SupportDatabase.c Ecommerce/SupportMessage.c Ecommerce/PaymentMethod.c Ecommerce/PaymentMethod.h Ecommerce/Payment.c Ecommerce/Payment.h structs/StaticList.c Menu/LoginMenu.c Menu/StudentMenu.c Menu/AdminMenu.c Menu/SupportStaffMenu.c Menu/ProviderMenu.c)
 add_library(core ${core_SRCS})
 add_executable(exe main.c)
-target_link_libraries(exe core)
+target_link_libraries(exe core util)

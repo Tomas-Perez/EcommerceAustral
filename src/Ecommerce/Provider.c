@@ -1,7 +1,8 @@
 #include "Provider.h"
 #include <stdlib.h>
+#include <string.h>
 #include "ProductBook.h"
-#include "structs/StaticList.h"
+#include "../structs/StaticList.h"
 
 Provider *createProvider(char *name,
                          int password,
@@ -11,7 +12,7 @@ Provider *createProvider(char *name,
 
     Provider *newProvider = malloc(sizeof(Provider));
 
-    newProviderw->name = malloc( sizeof(char) * (strlen(name) + 1));
+    newProvider->name = malloc( sizeof(char) * (strlen(name) + 1));
     strcpy(newProvider->name, name);
 
     newProvider->password = password;

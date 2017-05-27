@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "CUTest/CuTest.h"
-#include "../src/Invoice.h"
+#include "../src/Ecommerce/Invoice.h"
 
 void TestCompare(CuTest* tc){
     Cart* cart = createCart(5, 2);

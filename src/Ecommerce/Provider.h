@@ -1,8 +1,8 @@
 #ifndef ECOMMERCEAUSTRAL_PROVIDER_H
 #define ECOMMERCEAUSTRAL_PROVIDER_H
 
-#include "structs/StaticList.h
-#include "ProductBook.h""
+#include "../structs/StaticList.h"
+#include "ProductBook.h"
 
 typedef struct Provider{
     int userID;

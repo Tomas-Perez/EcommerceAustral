@@ -2,7 +2,7 @@
 #define ECOMMERCEAUSTRAL_INVOICE_H
 
 #include <sys/types.h>
-#include "Student.h"
+#include "../College/Student.h"
 #include "ProductBook.h"
 #include "Cart.h"
 

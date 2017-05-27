@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "CUTest/CuTest.h"
-#include "../src/ProductBook.h"
-#include "../src/Cart.h"
+#include "../src/Ecommerce/ProductBook.h"
+#include "../src/Ecommerce/Cart.h"
 
 void TestCartAddBook(CuTest *tc){
     BookInformation* information = createBookInformation("Math", 51566, "Euler");

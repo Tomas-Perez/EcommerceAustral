@@ -1,6 +1,6 @@
 
 #include "CUTest/CuTest.h"
-#include "../src/UserDatabase.h"
+#include "../src/Ecommerce/UserDatabase.h"
 
 void TestCreateDatabase(CuTest* tc){
     Admin* admin = createAdmin("admin", 1234, 456946);
