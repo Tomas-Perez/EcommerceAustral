@@ -11,13 +11,19 @@ typedef struct Provider{
     int phoneNumber;
     int RIF;
     ProductBook** books;
+
+    int amountOfBooks;
+    int maxCapacityOfBooks;
+
     //StaticList* books;
+
 }Provider;
 
 Provider* createProvider(char *name,
                          int password,
                          int phoneNumber,
                          int RIF, int initialCapacity);
+
 void addBook(Provider* provider, ProductBook* productBook, int quantity);
 void removeBook(Provider* provider, ProductBook* productBook, int quantity);
 void destroyProvider(Provider* provider);
