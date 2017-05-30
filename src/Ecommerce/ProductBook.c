@@ -49,6 +49,5 @@ int productBookIsEqual(ProductBook* productBook1, ProductBook* productBook2){
 
 void destroyProductBook(ProductBook* book){
     destroyBookInformation(book->bookInfo);
-    free(book->bookInfo);
     free(book);
 }

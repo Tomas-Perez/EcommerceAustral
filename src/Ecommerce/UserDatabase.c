@@ -344,6 +344,5 @@ void destroyUserDatabase(UserDatabase* userDatabase){
     free(userDatabase->students);
     free(userDatabase->supportStaff);
     free(userDatabase->userLogs);
-    free(userDatabase->admin);
     free(userDatabase);
 }
