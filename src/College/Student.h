@@ -21,12 +21,12 @@ typedef struct Student{
 
 }Student;
 
-Student* createStudent(char* name, int userID, int password, int phoneNumber, char* career,int initialCapacity);
+Student* createStudent(char* name, int password, int phoneNumber, char* career,int initialCapacity);
 
-void addBook(Student* student, ProductBook* book);
+void studentAddBook(Student* student, ProductBook* book);
 void addPayment(Student* student, Payment* payment);
 
-void removeBook(Student* student, int bookISBN);
+void studentRemoveBook(Student* student, int bookISBN);
 void removePayment(Student* student, int paymentID);
 
 void destroyStudent(Student* student);

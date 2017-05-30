@@ -1,13 +1,12 @@
 #include "Student.h"
 #include <stdlib.h>
 
-Student* createStudent(char* name, int userID, int password, int phoneNumber, char* career,int initialCapacity){
+Student* createStudent(char* name, int password, int phoneNumber, char* career,int initialCapacity){
     Student* result = malloc(sizeof(Student));
 
     result->name = malloc(sizeof(char)*(strlen(name)+1));
     strcpy(result->name, name);
 
-    result->userID = userID;
     result->password = password;
     result->phoneNumber = phoneNumber;
 
@@ -20,7 +19,7 @@ Student* createStudent(char* name, int userID, int password, int phoneNumber, ch
     return result;
 }
 
-void addBook(Student* student, ProductBook* book){
+void studentAddBook(Student* student, ProductBook* book){
     if (student->amountOfBooks == student->maxCapacityOfBooks){
         student->books = realloc(student->books, sizeof(ProductBook*)*student->maxCapacityOfBooks*2);
         student->maxCapacityOfBooks = student->maxCapacityOfBooks*2;
@@ -41,10 +40,9 @@ void addPayment(Student* student, Payment* payment){
     student->amountOfPayments++;
 };
 
-void removeBook(Student* student, int bookISBN){
+void studentRemoveBook(Student* student, int bookISBN){
     for (int i = 0; i < student->amountOfBooks; i++) {
         if(student->books[i]->bookInfo->ISBN == bookISBN){
-            destroyProductBook(student->books[i]);
             for (;i < student->amountOfBooks ; i++) {
                 student->books[i] = student->books[i+1];
             }
@@ -57,7 +55,6 @@ void removeBook(Student* student, int bookISBN){
 void removePayment(Student* student, int paymentID){
     for (int i = 0; i < student->amountOfPayments; i++) {
         if(student->purchaseHistory[i]->paymentMethod->paymentID == paymentID){
-            destroyPayment(student->purchaseHistory[i]);
             for (;i < student->amountOfPayments ; i++) {
                 student->purchaseHistory[i] = student->purchaseHistory[i+1];
             }

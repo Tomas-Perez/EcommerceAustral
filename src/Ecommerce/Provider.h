@@ -1,7 +1,7 @@
 #ifndef ECOMMERCEAUSTRAL_PROVIDER_H
 #define ECOMMERCEAUSTRAL_PROVIDER_H
 
-#include "../structs/StaticList.h"
+//#include "../structs/StaticList.h"
 #include "ProductBook.h"
 
 typedef struct Provider{
@@ -11,7 +11,7 @@ typedef struct Provider{
     int phoneNumber;
     int RIF;
 
-    StaticList* books;
+    //StaticList* books;
 }Provider;
 
 Provider* createProvider(char *name,
