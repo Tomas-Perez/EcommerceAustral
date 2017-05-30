@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ProductBook.h"
-#include "../structs/StaticList.h"
+//#include "../structs/StaticList.h"
 
 Provider *createProvider(char *name,
                          int password,
@@ -11,7 +11,7 @@ Provider *createProvider(char *name,
                          int RIF) {
 
     Provider *newProvider = malloc(sizeof(Provider));
-
+    /*
     newProvider->name = malloc( sizeof(char) * (strlen(name) + 1));
     strcpy(newProvider->name, name);
 
@@ -21,11 +21,12 @@ Provider *createProvider(char *name,
 
     newProvider->books = createStaticList(5);
     addNext(newProvider->books, productBook);
+    */
     return newProvider;
 }
 
 void addBook(Provider *provider, ProductBook *productBook, int quantity) {
-
+    /*
     // If book exists in provider add stocks
     for (int i = 0; i < provider->books->size-1; i++) {
         goTo(provider->books, i);
@@ -40,9 +41,11 @@ void addBook(Provider *provider, ProductBook *productBook, int quantity) {
 
     // If book does not exist in provider add new book
     addNext(provider->books, productBook);
+     */
 }
 
 void removeBook(Provider *provider, ProductBook *productBook, int quantity) {
+    /*
     for (int i = 0; i < provider->books->size-1; i++) {
         goTo(provider->books, i);
         if (provider->books->array[i]->bookInfo->ISBN == productBook->bookInfo->ISBN) {
@@ -50,9 +53,11 @@ void removeBook(Provider *provider, ProductBook *productBook, int quantity) {
             return;
         }
     }
+     */
 }
 
 void destroyProvider(Provider *provider) {
+    /*
     free(provider->RIF);
     free(provider->phoneNumber);
     free(provider->name);
@@ -65,4 +70,5 @@ void destroyProvider(Provider *provider) {
 
     freeStaticList(provider->books);
     free(provider);
+    */
 }

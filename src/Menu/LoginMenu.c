@@ -29,21 +29,26 @@ UserLog* loginMenu(UserDatabase* userDatabase){
 }
 
 void registerMenu(UserDatabase* userDatabase){
-    char *username;
-    int password;
-    registerUser: {
-        printf("Please enter your username:\n");
-        username = scanChar();
-        printf("Please enter your password:\n");
-        password = scanInt();
-        printf("Please confirm your password:\n");
-        int confirmedPassword = scanInt();
-        if(confirmedPassword != password) {
-            printf("Your password didn't match, please try again.\n");
-            goto registerUser;
-        }
+    registerUser:
+    printf("Please enter your username:\n");
+    char * username = scanChar();
+    printf("Please enter your password:\n");
+    int password = scanInt();
+    printf("Please confirm your password:\n");
+    int confirmedPassword = scanInt();
+    if(confirmedPassword != password) {
+        printf("Your password didn't match, please try again.\n");
+        goto registerUser;
     }
-    Student* student = createStudent(password);
+    printf("Please enter your phone number:\n");
+    int phoneNumber = scanInt();
+    while(phoneNumber <= 0){
+        printf("Please enter a valid number.\n");
+        phoneNumber = scanInt();
+    }
+    printf("Please enter your career.\n");
+    char* career = scanChar();
+    Student* student = createStudent(username, password, phoneNumber, career, 5);
     if(uDatabaseAddStudent(userDatabase, student, username) != 1){
         printf("That username is taken, please try again.\n");
         destroyStudent(student);
