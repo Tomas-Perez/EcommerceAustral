@@ -1,44 +1,74 @@
+#include <stdlib.h>
 #include <stdio.h>
-#include <sys/types.h>
-#include <time.h>
-#include <malloc.h>
-#include <mem.h>
-#include "Cart.h"
-#include "Student.h"
-#include "Invoice.h"
-#include "Bank.c"
+#include "Ecommerce/UserLog.h"
+#include "Ecommerce/UserDatabase.h"
+#include "Bank/Bank.h"
+#include "College/College.h"
+#include "Util/ScanUtil.h"
+
+void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDatabase, College* college, int userID);
+void providerMenu(UserDatabase* database, College* college, int userID);
+void supportStaffMenu(UserDatabase* database, SupportDatabase* supportDatabase, int userID);
+void adminMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDatabase, College* college, int userID);
+void registerMenu(UserDatabase* userDatabase);
+
+
+UserLog* loginMenu(UserDatabase* userDatabase);
+
+UserDatabase* userDatabaseSetup(){
+
+}
+
+Bank* bankSetup(){
+
+}
+
+College* collegeSetup(){
+
+}
+
+SupportDatabase* supportDatabaseSetup(){
+
+}
 
 int main() {
-    /*
-    Cart* cart = createCart(5, 2);
-    Student student = {5};
-    Invoice* invoice1 = createInvoice(cart, &student);
-    for (int i = 0; i < 1000000000; i++);
-    Invoice* invoice2 = createInvoice(cart, &student);
-    printf("%f", difftime(invoice1->unixTime, invoice2->unixTime));
-    printf("%s", invoice1->date);
-    printf("%s", invoice2->date);
-     */
-    /*
-    time_t t = time(NULL);
-    struct unixTime *unixTime = localtime(&t);
-    char* timeVar = asctime(unixTime);
-    char* savedTime = malloc(sizeof(char)*strlen(timeVar));
-    strcpy(savedTime, asctime(unixTime));
-
-
-    for (int i = 0; i < 1000000000; i++);
-    time_t t1 = mktime(unixTime);
-    time_t t2 = time(NULL);
-    printf("%s\n", savedTime);
-    struct unixTime *tm2 = localtime(&t2);
-    char* timeVar2 = asctime(tm2);
-
-    printf("%s\n", timeVar2);
-    printf("%f", difftime(t1, t2));
-     */
-
-
-
-    return 0;
+    UserDatabase* userDatabase = userDatabaseSetup();
+    Bank* bank = bankSetup();
+    College* college = collegeSetup();
+    SupportDatabase* supportDatabase = supportDatabaseSetup();
+    while(1) {
+        printf("1. Log in\n");
+        printf("2. Register\n");
+        printf("0. Exit\n");
+        int choice = scanInt();
+        switch (choice){
+            case 1: {
+                UserLog *userLog = loginMenu(userDatabase);
+                switch (userLog->userType) {
+                    case STUDENT:
+                        studentMenu(userDatabase, bank, supportDatabase, college, userLog->userID);
+                        break;
+                    case PROVIDER:
+                        providerMenu(userDatabase, college, userLog->userID);
+                        break;
+                    case ADMIN:
+                        adminMenu(userDatabase, bank, supportDatabase, college, userLog->userID);
+                        break;
+                    case SUPPORT_STAFF:
+                        supportStaffMenu(userDatabase, supportDatabase, userLog->userID);
+                        break;
+                    case UNKNOWN:
+                        exit(1); //Something went terribly wrong.
+                }
+            }
+                break;
+            case 2:
+                registerMenu(userDatabase);
+                break;
+            case 0:
+                exit(0);
+            default:
+                printf("Please enter one of the options\n");
+        }
+    }
 }

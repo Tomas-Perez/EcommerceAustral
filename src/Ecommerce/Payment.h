@@ -11,5 +11,6 @@ typedef struct Payment{
 
 
 Payment* createPayment(PaymentMethod* paymentMethod, Invoice* invoice);
+void destroyPayment(Payment* payment);
 
 #endif //ECOMMERCEAUSTRAL_PAYMENT_H
