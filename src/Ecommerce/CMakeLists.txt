@@ -1,0 +1,2 @@
+set(ECOMMERCE_SRC Admin.c Cart.c Invoice.c Payment.c PaymentMethod.c ProductBook.c Provider.c SupportDatabase.c SupportMessage.c SupportStaff.c UserDatabase.c UserLog.c)
+add_library(ecommerce ${ECOMMERCE_SRC})
