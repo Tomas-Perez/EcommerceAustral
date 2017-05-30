@@ -9,6 +9,7 @@ CuSuite* CreateProductGetSuite();
 CuSuite* GetCartTestSuite();
 CuSuite* GetUDatabaseTestSuite();
 CuSuite* GetCollegeTestSuite();
+CuSuite* GetSupportTestSuite();
 
 
 void RunAllTests(void) {
@@ -19,7 +20,7 @@ void RunAllTests(void) {
     CuSuiteAddSuite(suite, GetCartTestSuite());
     CuSuiteAddSuite(suite, GetUDatabaseTestSuite());
     CuSuiteAddSuite(suite, GetCollegeTestSuite());
-
+    CuSuiteAddSuite(suite, GetSupportTestSuite());
 
 
     //Leave this one last
