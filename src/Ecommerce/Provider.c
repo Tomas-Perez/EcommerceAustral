@@ -7,11 +7,9 @@
 Provider *createProvider(char *name,
                          int password,
                          int phoneNumber,
-                         ProductBook *productBook,
-                         int RIF) {
+                         int RIF, int initialCapacity) {
 
     Provider *newProvider = malloc(sizeof(Provider));
-    /*
     newProvider->name = malloc( sizeof(char) * (strlen(name) + 1));
     strcpy(newProvider->name, name);
 
@@ -19,9 +17,7 @@ Provider *createProvider(char *name,
     newProvider->phoneNumber = phoneNumber;
     newProvider->RIF = RIF;
 
-    newProvider->books = createStaticList(5);
-    addNext(newProvider->books, productBook);
-    */
+    newProvider->books = malloc(sizeof(ProductBook*)*initialCapacity);
     return newProvider;
 }
 
