@@ -40,6 +40,8 @@ void registerMenu(UserDatabase* userDatabase){
         printf("Your password didn't match, please try again.\n");
         goto registerUser;
     }
+    printf("Please enter your full name:\n");
+    char* name = scanChar();
     printf("Please enter your phone number:\n");
     int phoneNumber = scanInt();
     while(phoneNumber <= 0){
@@ -48,7 +50,7 @@ void registerMenu(UserDatabase* userDatabase){
     }
     printf("Please enter your career.\n");
     char* career = scanChar();
-    Student* student = createStudent(username, password, phoneNumber, career, 5);
+    Student* student = createStudent(name, password, phoneNumber, career, 5);
     if(uDatabaseAddStudent(userDatabase, student, username) != 1){
         printf("That username is taken, please try again.\n");
         destroyStudent(student);

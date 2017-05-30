@@ -13,7 +13,7 @@ void TestAdd(CuTest* tc){
     Admin* admin = createAdmin("admin", 1234, 456946);
     UserDatabase* database = createUserDatabase(1, admin);
 
-    Student* one = createStudent(1234);
+    Student* one = createStudent("student", 1234, 34423, "it", 4);
     int addResult = uDatabaseAddStudent(database, one, "one");
     Student* resultOne = uDatabaseGetStudent(database, 1);
 
@@ -28,7 +28,8 @@ void TestAdd(CuTest* tc){
     CuAssertIntEquals(tc, 1234, resultOne->password);
     CuAssertIntEquals(tc, 1, addResult);
 
-    Provider* three = createProvider(689);
+
+    Provider* three = createProvider("provider", 689, 2342, 3435, 4);
     addResult = uDatabaseAddProvider(database, three, "three");
     Provider* resultThree = uDatabaseGetProvider(database, 3);
     resultOne = uDatabaseGetStudent(database, 1);
@@ -38,13 +39,13 @@ void TestAdd(CuTest* tc){
     CuAssertIntEquals(tc, 689, resultThree->password);
     CuAssertIntEquals(tc, 1, addResult);
 
-    Provider* three2 = createProvider(596);
+    Provider* three2 = createProvider("provider", 596, 2342, 3435, 4);
     addResult = uDatabaseAddProvider(database, three2, "three");
     Provider* resultThree2 = uDatabaseGetProvider(database, 4);
 
     CuAssertIntEquals(tc, 0, addResult);
 
-    Student* three3 = createStudent(265);
+    Student* three3 = createStudent("student", 265, 34423, "it", 4);
     addResult = uDatabaseAddStudent(database, three3, "three");
     Provider* resultThree3 = uDatabaseGetProvider(database, 4);
 
@@ -73,15 +74,15 @@ void TestRemove(CuTest* tc){
     Admin* admin = createAdmin("admin", 1234, 456946);
     UserDatabase* database = createUserDatabase(1, admin);
 
-    Student* student1 = createStudent(123);
-    Student* student2 = createStudent(123);
-    Student* student3 = createStudent(123);
-    Student* student4 = createStudent(123);
+    Student* student1 = createStudent("student", 1234, 34423, "it", 4);
+    Student* student2 = createStudent("student", 1234, 34423, "it", 4);
+    Student* student3 = createStudent("student", 1234, 34423, "it", 4);
+    Student* student4 = createStudent("student", 1234, 34423, "it", 4);
 
-    Provider* provider5 = createProvider(2665);
-    Provider* provider6 = createProvider(2665);
-    Provider* provider7 = createProvider(2665);
-    Provider* provider8 = createProvider(2665);
+    Provider* provider5 = createProvider("provider", 689, 2342, 3435, 4);
+    Provider* provider6 = createProvider("provider", 689, 2342, 3435, 4);
+    Provider* provider7 = createProvider("provider", 689, 2342, 3435, 4);
+    Provider* provider8 = createProvider("provider", 689, 2342, 3435, 4);
 
     SupportStaff* supportStaff9 = createSupportStaff("supportStaff9", 659, 2202163);
     SupportStaff* supportStaff10 = createSupportStaff("supportStaff10", 659, 69950);
@@ -120,7 +121,7 @@ void TestRemove(CuTest* tc){
 
     Provider* resultSix = uDatabaseGetProvider(database, 6);
 
-    CuAssertIntEquals(tc, 2665, resultSix->password);
+    CuAssertIntEquals(tc, 689, resultSix->password);
     CuAssertIntEquals(tc, 13, database->userLogAmount);
     CuAssertIntEquals(tc, 4, database->providerAmount);
 
@@ -136,7 +137,7 @@ void TestRemove(CuTest* tc){
 
     Student* result3 = uDatabaseGetStudent(database, 3);
 
-    CuAssertIntEquals(tc, 123, result3->password);
+    CuAssertIntEquals(tc, 1234, result3->password);
     CuAssertIntEquals(tc, 12, database->userLogAmount);
     CuAssertIntEquals(tc, 4, database->studentAmount);
 
@@ -171,11 +172,11 @@ void TestAddRemove(CuTest* tc){
     Admin* admin = createAdmin("admin", 1234, 456946);
     UserDatabase* database = createUserDatabase(1, admin);
 
-    Student* student1 = createStudent(123);
-    Student* student2 = createStudent(123);
+    Student* student1 = createStudent("student", 1234, 34423, "it", 4);
+    Student* student2 = createStudent("student", 1234, 34423, "it", 4);
 
-    Provider* provider3 = createProvider(2665);
-    Provider* provider4 = createProvider(2665);
+    Provider* provider3 = createProvider("provider", 689, 2342, 3435, 4);
+    Provider* provider4 = createProvider("provider", 689, 2342, 3435, 4);
 
     SupportStaff* supportStaff5 = createSupportStaff("supportStaff5", 659, 56956);
     SupportStaff* supportStaff6 = createSupportStaff("supportStaff6", 659, 956526);
@@ -209,14 +210,14 @@ void TestAddRemove(CuTest* tc){
 
     CuAssertIntEquals(tc, 1, database->userLogAmount);
 
-    Student* student7 = createStudent(123);
-    Student* student8 = createStudent(123);
+    Student* student7 = createStudent("student", 1234, 34423, "it", 4);
+    Student* student8 = createStudent("student", 1234, 34423, "it", 4);
     uDatabaseAddStudent(database, student7, "student7");
     uDatabaseAddStudent(database, student8, "student8");
     CuAssertIntEquals(tc, 2, database->studentAmount);
 
-    Provider* provider9 = createProvider(2665);
-    Provider* provider10 = createProvider(2665);
+    Provider* provider9 = createProvider("provider", 689, 2342, 3435, 4);
+    Provider* provider10 = createProvider("provider", 689, 2342, 3435, 4);
     uDatabaseAddProvider(database, provider9, "provider9");
     uDatabaseAddProvider(database, provider10, "provider10");
     CuAssertIntEquals(tc, 2, database->providerAmount);
@@ -235,11 +236,11 @@ void TestAddRemove(CuTest* tc){
 void TestLogin(CuTest* tc){
     Admin* admin = createAdmin("admin", 1234, 456946);
     UserDatabase* database = createUserDatabase(1, admin);
-    Student* student1 = createStudent(123);
-    Student* student2 = createStudent(123);
+    Student* student1 = createStudent("student1", 123, 34423, "it", 4);
+    Student* student2 = createStudent("student2", 123, 34423, "it", 4);
 
-    Provider* provider3 = createProvider(2665);
-    Provider* provider4 = createProvider(2665);
+    Provider* provider3 = createProvider("provider3", 689, 2342, 3435, 4);
+    Provider* provider4 = createProvider("provider4", 2665, 2342, 3435, 4);
 
     SupportStaff* supportStaff5 = createSupportStaff("supportStaff5", 659, 6596);
     SupportStaff* supportStaff6 = createSupportStaff("supportStaff6", 659, 6599);
