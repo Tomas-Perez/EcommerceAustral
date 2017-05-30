@@ -23,7 +23,7 @@ struct bank{
     int accountAmount;
 };
 
-Bank* newBank(int id, char* name, char* office, int capacity);
+Bank* createBank(int id, char* name, char* office, int capacity);
 
 Transaction* withdraw_Money(Bank* bank, int accountId, double amount);
 Transaction* deposit_Money(Bank* bank, int accountId, double amount);

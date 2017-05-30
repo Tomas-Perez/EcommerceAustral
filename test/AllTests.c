@@ -8,6 +8,8 @@
 CuSuite* CreateProductGetSuite();
 CuSuite* GetCartTestSuite();
 CuSuite* GetUDatabaseTestSuite();
+CuSuite* GetCollegeTestSuite();
+
 
 void RunAllTests(void) {
     CuString *output = CuStringNew();
@@ -16,6 +18,7 @@ void RunAllTests(void) {
     CuSuiteAddSuite(suite, CreateProductGetSuite());
     CuSuiteAddSuite(suite, GetCartTestSuite());
     CuSuiteAddSuite(suite, GetUDatabaseTestSuite());
+    CuSuiteAddSuite(suite, GetCollegeTestSuite());
 
 
 

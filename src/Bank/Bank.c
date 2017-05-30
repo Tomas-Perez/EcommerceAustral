@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "Bank.h"
 
-Bank* newBank(int id, char* name, char* office, int capacity){
+Bank* createBank(int id, char* name, char* office, int capacity){
     Bank* result= malloc(sizeof(Bank));
 
     result->id=id;
@@ -33,7 +33,7 @@ static void growAccounts(Bank* bank){
     bank->accountCapacity=capacity;
 }
 
-static int containsTransaction(Bank* bank, int transactionNumber){
+/*static int containsTransaction(Bank* bank, int transactionNumber){
     for(int i=0; i<bank->transactionAmount; i++){
         if(bank->transactions[i]->transactionNumber == transactionNumber){
             return 1;
@@ -52,15 +52,15 @@ static int containsAccount(Bank* bank, int id){
             return 0;
         }
     }
-}
+}*/
 
 int addTransaction(Bank* bank, Transaction* transaction){
     if(bank->transactionAmount==bank->transactionCapacity){
         growTransactions(bank);
     }
-    if(containsTransaction(bank, transaction->transactionNumber)==1){
+    /*if(containsTransaction(bank, transaction->transactionNumber)==1){
         return 0;
-    }
+    }*/
     bank->transactions[bank->transactionAmount]=transaction;
     bank->transactionAmount++;
     return 1;
@@ -69,9 +69,9 @@ int addAccount(Bank* bank, BankAccount* account){
     if(bank->accountCapacity==bank->accountAmount){
         growAccounts(bank);
     }
-    if(containsAccount(bank, account->bankAccountID)){
+    /*if(containsAccount(bank, account->bankAccountID)){
         return 0;
-    }
+    }*/
     bank->bankAccounts[bank->accountAmount]=account;
     bank->accountAmount++;
     return 1;
@@ -109,7 +109,7 @@ void removeAccount(Bank* bank, int id){
 }
 
 Transaction* withdraw_Money(Bank* bank, int accountId, double amount){
-    Transaction* result= createTransaction(accountId, NULL, 2, amount, bank->transactionNumberGenerator);
+    Transaction* result= createTransaction(accountId, accountId, 2, amount, bank->transactionNumberGenerator);
     bank->transactionNumberGenerator++;
 
     for(int i=0; i<bank->accountAmount;i++){
@@ -125,7 +125,7 @@ Transaction* withdraw_Money(Bank* bank, int accountId, double amount){
 
 
 Transaction* deposit_Money(Bank* bank, int accountId, double amount){
-    Transaction* result= createTransaction(accountId, NULL, 1, amount, bank->transactionNumberGenerator);
+    Transaction* result= createTransaction(accountId, accountId, 1, amount, bank->transactionNumberGenerator);
     bank->transactionNumberGenerator++;
 
     for(int i=0; i<bank->accountAmount;i++){

@@ -3,7 +3,8 @@
 #include "OperationCertificate.h"
 #include <stdlib.h>
 #include <time.h>
-#include <mem.h>
+#include <string.h>
+//#include <mem.h>
 
 OperationCertificate* createOperationCertificate(int accountID, int operationType, double amount){
     OperationCertificate* result = malloc(sizeof(OperationCertificate));
