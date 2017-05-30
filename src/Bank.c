@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "Bank.h"
 
-Bank* newBank(int id, char* name, char* office, int capacity){
+Bank* createBank(int id, char* name, char* office, int capacity){
     Bank* result= malloc(sizeof(Bank));
 
     result->id=id;
