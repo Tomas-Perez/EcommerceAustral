@@ -57,7 +57,7 @@ int isEmpty(StaticStack* stack){
   return 0;
 }
 
-static void grow(Stack* stack){
+static void grow(StaticStack* stack){
   stack->capacity = stack->capacity*2;
   stack->array = realloc(stack->array, sizeof(int)*stack->capacity*2);
 }
@@ -84,7 +84,7 @@ void push(StaticStack* stack, int toPush){
 */
 
 int pop(StaticStack* stack){
-  if(isEmpty()) exit(2);
+  if(isEmpty(stack)) exit(2);
   else{
     int result = stack->array[stack->top-1];
     stack->top--;

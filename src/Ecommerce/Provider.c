@@ -21,6 +21,7 @@ Provider *createProvider(char *name,
 
     newProvider->books = createStaticList(5);
     addNext(newProvider->books, productBook);
+    return newProvider;
 }
 
 void addBook(Provider *provider, ProductBook *productBook, int quantity) {
