@@ -44,7 +44,7 @@ static int containsTransaction(Bank* bank, int transactionNumber){
     }
 }
 static int containsAccount(Bank* bank, int id){
-    for(int i=0; i < bank->bankAccounts; i++){
+    for(int i=0; i < bank->accountAmount; i++){
         if(bank->bankAccounts[i]->bankAccountID == id){
             return 1;
         }
