@@ -19,14 +19,19 @@ void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDat
     switch (option) {
         case 1:
             campusOption(database, college, userID);
+            break;
         case 2:
             eCommerceOption(database, bank);
+            break;
         case 3:
             bankOption(database, bank, userID);
+            break;
         case 4:
             editInformationOption(database, student);
+            break;
         default:
             printf("Invalid option");
+            break;
     }
 }
 
@@ -53,15 +58,15 @@ void campusOption(UserDatabase* database, College* college, int userID) {
             for (i = 0; i < subjects->amountOfSubjects; i++) {
                 printf("%s+%s", subjects->subjects[i]->name, "\n");
             }
-
+            break;
         case 2:
             printf("Enter a Subject Id: \n");
             int subjectID = scanInt();
             enrollStudentInSubject(college, subjectID, userID);
-
+            break;
         default:
             printf("Invalid option");
-
+            break;
     }
 
 }
@@ -86,22 +91,26 @@ void eCommerceOption(UserDatabase* database, Bank* bank) {
                 case 1:
                     // No tengo forma de obtener el cart de cada user
                     //cartAddBook();
+                	break;
                 case 2:
+                	break;
                     //cartRemoveBook();
                 case 3:
                     //cartRemoveAllBooks();
+                	break;
                 default:
                     printf("Invalid option");
             }
+            break;
         case 2:
-
+        	break;
         case 3:
-
+        	break;
         case 4:
-
+        	break;
         default:
             printf("Invalid option");
-
+            break;
     }
 }
 
@@ -118,22 +127,27 @@ void bankOption(UserDatabase* database, Bank* bank, int userID) {
     switch (option) {
 
         case 1:
-            //addAccount(bank, createBankAccount(userID, 0.0, 0.0, userID));
-            //printf("Successfully created bank account!");
+            addAccount(bank, createBankAccount(userID, 0.0, 0.0, userID));
+            printf("Successfully created bank account!");
+        	break;
         case 2:
             printf("Enter amount: \n");
             double amount1;
             scanf("%lf", &amount1);
-            //Transaction* transaction1 = deposit_Money(bank, userID, amount1);
+            Transaction* transaction1 = deposit_Money(bank, userID, amount1);
+            break;
         case 3:
             printf("Enter amount: \n");
             double amount2;
             scanf("%lf", &amount2);
-            //Transaction* transaction2 = withdraw_Money(bank, userID, amount2);
+            Transaction* transaction2 = withdraw_Money(bank, userID, amount2);
+            break;
         case 4:
-            // transactionHistiy(bank, bankAccuntID)
-        default:
+           // transactionHistiy(bank, bankAccuntID);
+        	break;
+		default:
             printf("Invalid option");
+            break;
     }
 }
 
@@ -152,15 +166,19 @@ void editInformationOption(UserDatabase* database, Student* student) {
             printf("Enter a new password: \n");
             int newPassword = scanInt();
             student->password = newPassword;
+            break;
         case 2:
             printf("Enter a new name: \n");
             char *newName = scanChar();
             student->name = newName;
+            break;
         case 3:
             printf("Enter a new phone number: \n");
             int newPhoneNumber = scanInt();
             student->phoneNumber = newPhoneNumber;
+            break;
         default:
             printf("Invalid option");
+            break;
     }
 }
