@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../Ecommerce/UserDatabase.h"
 #include "../Util/ScanUtil.h"
 
@@ -30,8 +31,9 @@ return NULL;
 
 void registerMenu(UserDatabase* userDatabase){
     registerUser:
-    printf("Please enter your username:\n");
+    printf("Please enter a username, or 0 to return to maim menu:\n");
     char * username = scanChar();
+    if(strncmp(username, "0", 1)==0) return;
     Student* testStudent = createStudent("juan", 123, 321, "123", 5);
     if(uDatabaseAddStudent(userDatabase, testStudent, username) != 1){
             printf("That username is taken, please try again.\n");
