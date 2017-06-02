@@ -20,25 +20,26 @@ UserLog* loginMenu(UserDatabase* userDatabase){
             case UNKNOWN:
                 if(userLog->userID == -1){
                     printf("The username does not exist.\n");
-                    printf("Press 0 to exit, any other number to try again.\n");
+                    printf("Press 0 to return to main menu, any other number to try again.\n");
                     choice = scanInt() == 0 ? 0 : 1;
                 }
         }
     } while (choice);
-    exit(0);
+return NULL;
 }
 
 void registerMenu(UserDatabase* userDatabase){
     registerUser:
     printf("Please enter your username:\n");
     char * username = scanChar();
+    enterPassword:
     printf("Please enter your password:\n");
     int password = scanInt();
     printf("Please confirm your password:\n");
     int confirmedPassword = scanInt();
     if(confirmedPassword != password) {
         printf("Your password didn't match, please try again.\n");
-        goto registerUser;
+        goto enterPassword;
     }
     printf("Please enter your full name:\n");
     char* name = scanChar();
