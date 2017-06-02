@@ -78,9 +78,9 @@ void eCommerceOption(UserDatabase* database, Bank* bank) {
 
     switch (option) {
         case 1:
-            printf("1. Add book");
-            printf("2. Remove book");
-            printf("3. Remove all books.");
+            printf("1. Add book \n");
+            printf("2. Remove book \n");
+            printf("3. Remove all books \n");
             int option2 = scanInt();
             switch (option2) {
                 case 1:
