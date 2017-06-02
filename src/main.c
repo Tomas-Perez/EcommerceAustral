@@ -6,7 +6,7 @@
 #include "College/College.h"
 #include "Util/ScanUtil.h"
 #include "Ecommerce/SupportDatabase.h"
-
+#include "Menu/InputTool.h"
 
 
 void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDatabase, College* college, int userID);
@@ -19,19 +19,61 @@ void registerMenu(UserDatabase* userDatabase);
 UserLog* loginMenu(UserDatabase* userDatabase);
 
 UserDatabase* userDatabaseSetup(){
+	printf("\nYou are about to create a user database. \n");
+	Admin* admin = createAdmin("pepe", 123, 232323);
+	int initialCapacity = -1;
+	while (initialCapacity<1){ //you don't want to put a negative initial capacity in a bank
+		initialCapacity =getOption("Enter initial capacity for the database: ");
+	}
 
+	UserDatabase* database = createUserDatabase(initialCapacity, admin);
+	return database;
 }
 
 Bank* bankSetup(){
-
+	printf("\nYou are about to create a bank. \n");
+	int id=getOption("Enter bank id: ");
+	char name[20];
+	int rc = -1;
+	while (rc!=0){
+	rc = getLine ("Enter bank name: ", name, sizeof(name));
+	}
+	rc =-1;
+	char office[20];
+	while (rc!=0){
+	rc = getLine ("Enter bank office name: ", office, sizeof(office));
+	}
+	int capacity = 0;
+	while (capacity<1){
+			capacity=getOption("Enter bank initial number of account capacity: ");
+	}
+	Bank* bank = createBank( id, name, office, capacity);
+	return bank;
 }
 
 College* collegeSetup(){
-
+	printf("\nYou are about to create a college. \n");
+		char name[20];
+		int rc = -1;
+		while (rc!=0){
+		rc = getLine ("Enter college name: ", name, sizeof(name));
+		}
+		int capacity = 0;
+		while (capacity<1){
+				capacity=getOption("Enter college initial number of student capacity: ");
+		}
+	College* college = createCollege(name, capacity);
+	return college;
 }
 
 SupportDatabase* supportDatabaseSetup(){
-
+	printf("\nYou are about to create a support database. \n");
+	int capacity = 0;
+	while (capacity<1){
+			capacity=getOption("Enter support database initial capacity: ");
+	}
+	SupportDatabase* database = newSupportDatabase(capacity);
+	return database;
 }
 
 int main() {
@@ -47,6 +89,7 @@ int main() {
         switch (choice){
             case 1: {
                 UserLog *userLog = loginMenu(userDatabase);
+                if(userLog==NULL) continue;
                 switch (userLog->userType) {
                     case STUDENT:
                         studentMenu(userDatabase, bank, supportDatabase, college, userLog->userID);

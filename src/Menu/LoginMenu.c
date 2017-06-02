@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../Ecommerce/UserDatabase.h"
 #include "../Util/ScanUtil.h"
 
@@ -20,25 +21,34 @@ UserLog* loginMenu(UserDatabase* userDatabase){
             case UNKNOWN:
                 if(userLog->userID == -1){
                     printf("The username does not exist.\n");
-                    printf("Press 0 to exit, any other number to try again.\n");
+                    printf("Press 0 to return to main menu, any other number to try again.\n");
                     choice = scanInt() == 0 ? 0 : 1;
                 }
         }
     } while (choice);
-    exit(0);
+return NULL;
 }
 
 void registerMenu(UserDatabase* userDatabase){
     registerUser:
-    printf("Please enter your username:\n");
+    printf("Please enter a username, or 0 to return to maim menu:\n");
     char * username = scanChar();
-    printf("Please enter your password:\n");
+    if(strncmp(username, "0", 1)==0) return;
+    Student* testStudent = createStudent("juan", 123, 321, "123", 5);
+    if(uDatabaseAddStudent(userDatabase, testStudent, username) != 1){
+            printf("That username is taken, please try again.\n");
+            destroyStudent(testStudent);
+            goto registerUser;
+        }else uDatabaseRemoveStudent(userDatabase, testStudent->userID);
+    destroyStudent(testStudent);
+    enterPassword:
+    printf("Please enter a numerical password:\n");
     int password = scanInt();
     printf("Please confirm your password:\n");
     int confirmedPassword = scanInt();
     if(confirmedPassword != password) {
         printf("Your password didn't match, please try again.\n");
-        goto registerUser;
+        goto enterPassword;
     }
     printf("Please enter your full name:\n");
     char* name = scanChar();

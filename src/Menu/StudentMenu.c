@@ -154,7 +154,7 @@ void editInformationOption(UserDatabase* database, Student* student) {
             student->password = newPassword;
         case 2:
             printf("Enter a new name: \n");
-            char* newName = scanChar();
+            char *newName = scanChar();
             student->name = newName;
         case 3:
             printf("Enter a new phone number: \n");
