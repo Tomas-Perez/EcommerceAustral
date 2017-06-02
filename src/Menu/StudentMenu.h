@@ -15,6 +15,6 @@ void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDat
 void campusOption(UserDatabase* database, College* college, int userID);
 void eCommerceOption(UserDatabase* database, Bank* bank);
 void bankOption(UserDatabase* database, Bank* bank, int userID);
-void editInformationOption(UserDatabase* database);
+void editInformationOption(UserDatabase* database, Student* student);
 
 #endif //ECOMMERCEAUSTRAL_STUDENTMENU_H

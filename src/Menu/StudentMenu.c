@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDatabase, College* college, int userID){
+    Student* student = uDatabaseGetStudent(database, userID);
     printf("Enter an option: \n");
     printf("1. Campus \n");
     printf("2. E-Commerce \n");
@@ -23,12 +24,13 @@ void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDat
         case 3:
             bankOption(database, bank, userID);
         case 4:
-            editInformationOption(database);
+            editInformationOption(database, student);
         default:
             printf("Invalid option");
     }
 }
 
+// Ok
 void campusOption(UserDatabase* database, College* college, int userID) {
     printf("Enter an option: \n");
     printf("1. Show books and subjects \n");
@@ -63,6 +65,8 @@ void campusOption(UserDatabase* database, College* college, int userID) {
     }
 
 }
+
+// terminar
 void eCommerceOption(UserDatabase* database, Bank* bank) {
     printf("Enter an option: \n");
     printf("1. Add or remove books to cart \n");
@@ -100,6 +104,8 @@ void eCommerceOption(UserDatabase* database, Bank* bank) {
 
     }
 }
+
+// terminar
 void bankOption(UserDatabase* database, Bank* bank, int userID) {
     printf("Enter an option: \n");
     printf("1. Create account \n");
@@ -110,19 +116,19 @@ void bankOption(UserDatabase* database, Bank* bank, int userID) {
     int option = scanInt();
 
     switch (option) {
+
         case 1:
-            printf("Enter a Bank Account ID: \n");
-            int bankAccountID = userID;
-            //BankAccount* bankAccount = createBankAccount(bankAccountID, 0, 0, userID);
-            //addAccount(bank, bankAccount);
-            printf("Successfully created bank account!");
+            //addAccount(bank, createBankAccount(userID, 0.0, 0.0, userID));
+            //printf("Successfully created bank account!");
         case 2:
             printf("Enter amount: \n");
-            double amount1 = scanInt();
-            //Transaction* transaction1 = deposit_Money(bank, userID, amount1); // UserId =? bankAccountID
+            double amount1;
+            scanf("%lf", &amount1);
+            //Transaction* transaction1 = deposit_Money(bank, userID, amount1);
         case 3:
             printf("Enter amount: \n");
-            double amount2 = scanInt();
+            double amount2;
+            scanf("%lf", &amount2);
             //Transaction* transaction2 = withdraw_Money(bank, userID, amount2);
         case 4:
             // transactionHistiy(bank, bankAccuntID)
@@ -131,7 +137,9 @@ void bankOption(UserDatabase* database, Bank* bank, int userID) {
     }
 }
 
-void editInformationOption(UserDatabase* database) {
+
+// Ok
+void editInformationOption(UserDatabase* database, Student* student) {
     printf("Enter an option: \n");
     printf("1. Change password \n");
     printf("2. Change name \n");
@@ -141,11 +149,17 @@ void editInformationOption(UserDatabase* database) {
 
     switch (option) {
         case 1:
-
+            printf("Enter a new password: \n");
+            int newPassword = scanInt();
+            student->password = newPassword;
         case 2:
-
+            printf("Enter a new name: \n");
+            char* newName = scanChar();
+            student->name = newName;
         case 3:
-
+            printf("Enter a new phone number: \n");
+            int newPhoneNumber = scanInt();
+            student->phoneNumber = newPhoneNumber;
         default:
             printf("Invalid option");
     }
