@@ -52,11 +52,28 @@ Bank* bankSetup(){
 }
 
 College* collegeSetup(){
-
+	printf("\nYou are about to create a college. \n");
+		char name[20];
+		int rc = -1;
+		while (rc!=0){
+		rc = getLine ("Enter college name: ", name, sizeof(name));
+		}
+		int capacity = 0;
+		while (capacity<1){
+				capacity=getOption("Enter college initial number of student capacity: ");
+		}
+	College* college = createCollege(name, capacity);
+	return college;
 }
 
 SupportDatabase* supportDatabaseSetup(){
-
+	printf("\nYou are about to create a support database. \n");
+	int capacity = 0;
+	while (capacity<1){
+			capacity=getOption("Enter support database initial capacity: ");
+	}
+	SupportDatabase* database = newSupportDatabase(capacity);
+	return database;
 }
 
 int main() {

@@ -32,8 +32,15 @@ void registerMenu(UserDatabase* userDatabase){
     registerUser:
     printf("Please enter your username:\n");
     char * username = scanChar();
+    Student* testStudent = createStudent("juan", 123, 321, "123", 5);
+    if(uDatabaseAddStudent(userDatabase, testStudent, username) != 1){
+            printf("That username is taken, please try again.\n");
+            destroyStudent(testStudent);
+            goto registerUser;
+        }else uDatabaseRemoveStudent(userDatabase, testStudent->userID);
+    destroyStudent(testStudent);
     enterPassword:
-    printf("Please enter your password:\n");
+    printf("Please enter a numerical password:\n");
     int password = scanInt();
     printf("Please confirm your password:\n");
     int confirmedPassword = scanInt();
