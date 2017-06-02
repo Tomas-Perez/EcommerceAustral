@@ -3,7 +3,12 @@
  *
  *  Created on: 29 may. 2017
  *      Author: Ignacio Gilardoni
-
+ *	reads user console input,
+ *	then allocates that input into a char array (buff)
+ *	returns 0 if everything went ok,
+ *	returns 1 if there was no input,
+ *	returns 2 if input was longer than the buffer size
+ *  Created on: 29 may. 2017
  */
 #include "InputTool.h"
 #define OK       0
@@ -29,6 +34,18 @@ void trim(char *str) {
         *endp = '\0';
     }
 }
+/*
+ * function: getLine
+ * description: gets a string from console input
+ * parameters:
+ * prmpt is the text to be displayed when prompting for user input
+ * buff is the pointer in which input will be stored
+ * sz is the maximum amount of characters to read
+ * returns:
+ * 0 if everything went ok
+ * 1 ifthere was no input
+ * 2 if text entered is longer than  maximum characters allowed
+ */
 int getLine (char *prmpt, char *buff, size_t sz) {
     int ch, extra;
     // Get line with buffer overrun protection.
@@ -58,7 +75,12 @@ int getLine (char *prmpt, char *buff, size_t sz) {
     trim(buff);
     return OK;
 }
-
+/*
+ * function: getOption
+ * description: get an integer from console input
+ * parameters: prmpt is the text to be displayed when prompting for user input
+ * returns: the integer entered by the user
+ */
 int getOption(char *prmpt){
 	    // Get line with buffer overrun protection.
 	    char line[9];
@@ -72,7 +94,7 @@ int getOption(char *prmpt){
 	            else {
 	                printf("Please enter an integer\n");
 	            }
-	        }//else printf("Please enter something\n");
+	        }
 	    }
 	    fflush(stdin);
 	   return i;
