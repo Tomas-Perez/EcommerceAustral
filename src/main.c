@@ -19,14 +19,9 @@ void registerMenu(UserDatabase* userDatabase);
 UserLog* loginMenu(UserDatabase* userDatabase);
 
 UserDatabase* userDatabaseSetup(){
-	printf("\nYou are about to create a user database. \n");
 	Admin* admin = createAdmin("pepe", 123, 232323);
-	int initialCapacity = -1;
-	while (initialCapacity<1){ //you don't want to put a negative initial capacity in a bank
-		initialCapacity =getOption("Enter initial capacity for the database: ");
-	}
 
-	UserDatabase* database = createUserDatabase(initialCapacity, admin);
+	UserDatabase* database = createUserDatabase(10, admin);
 	return database;
 }
 
@@ -43,11 +38,7 @@ Bank* bankSetup(){
 	while (rc!=0){
 	rc = getLine ("Enter bank office name: ", office, sizeof(office));
 	}
-	int capacity = 0;
-	while (capacity<1){
-			capacity=getOption("Enter bank initial number of account capacity: ");
-	}
-	Bank* bank = createBank( id, name, office, capacity);
+	Bank* bank = createBank( id, name, office, 10);
 	return bank;
 }
 
@@ -58,21 +49,13 @@ College* collegeSetup(){
 		while (rc!=0){
 		rc = getLine ("Enter college name: ", name, sizeof(name));
 		}
-		int capacity = 0;
-		while (capacity<1){
-				capacity=getOption("Enter college initial number of student capacity: ");
-		}
-	College* college = createCollege(name, capacity);
+
+	College* college = createCollege(name, 10);
 	return college;
 }
 
 SupportDatabase* supportDatabaseSetup(){
-	printf("\nYou are about to create a support database. \n");
-	int capacity = 0;
-	while (capacity<1){
-			capacity=getOption("Enter support database initial capacity: ");
-	}
-	SupportDatabase* database = newSupportDatabase(capacity);
+	SupportDatabase* database = newSupportDatabase(10);
 	return database;
 }
 
