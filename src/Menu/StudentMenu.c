@@ -135,12 +135,14 @@ void bankOption(UserDatabase* database, Bank* bank, int userID) {
             double amount1;
             scanf("%lf", &amount1);
             Transaction* transaction1 = deposit_Money(bank, userID, amount1);
+            //printf("transaction amount is %f, it should be %f, date is %s", transaction1->amount, amount1, transaction1->date); //testing transaction
             break;
         case 3:
             printf("Enter amount: \n");
             double amount2;
             scanf("%lf", &amount2);
             Transaction* transaction2 = withdraw_Money(bank, userID, amount2);
+            //printf("transaction amount is %f, it should be %f, date is %s", transaction2->amount, amount2, transaction2->date); //testing transaction
             break;
         case 4:
            // transactionHistiy(bank, bankAccuntID);

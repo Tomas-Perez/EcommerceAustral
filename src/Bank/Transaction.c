@@ -23,7 +23,7 @@ Transaction* createTransaction(int toAccountID, int fromAccountID, int operation
 
     result->date=malloc(sizeof(char*));
     strcpy(result->date, ctime(&calendarTime));
-
+    return result;
 }
 void freeTransaction(Transaction* transaction){
     free(transaction->date);
