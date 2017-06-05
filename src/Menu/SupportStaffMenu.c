@@ -15,18 +15,21 @@ void supportStaffMenu(UserDatabase* database, SupportDatabase* supportDatabase, 
 			printf("%s\n", "0. return to main menu\n");
 			while (rc<0 || rc>1){
 				        rc = getOption ("enter option: ");
+				        if (rc<0 || rc>1)printf("invalid option. m\n");
 				        }
 			if (rc==1){
 				printMessages(supportDatabase);
 				int selectedMessage = 0;
 				while (selectedMessage<1 || selectedMessage>supportDatabase->messageAmount){
-					        rc = getOption ("enter option: ");
+					        selectedMessage = getOption ("enter option: ");
+					        if (selectedMessage<1 || selectedMessage>supportDatabase->messageAmount) printf("invalid option. m\n");
+
 					        }
 				char answer[140];
 					int result = -1;
 					while (result!=0){
 						result = getLine ("Enter answer: ", answer, sizeof(answer));
-					if(rc==2) printf("140 characters is the maximum\n");
+					if(result==2) printf("140 characters is the maximum\n");
 					}
 					supportDatabase->messages[selectedMessage-1]->answer=answer;
 					pauseProgram("Answer submitted successfully, press enter key to continue.");

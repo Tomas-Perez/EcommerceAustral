@@ -24,26 +24,31 @@ void providerMenu(UserDatabase* database, College* college, int userID){
 				printf("%s\n", "0. return to main menu");
 				while (rc<0 || rc>2){
 					        rc = getOption ("enter option: ");
+					        if (rc<0 || rc>2)printf("invalid option. m\n");
 					        }
 
 					printSubjects(college);
 					int selectedSubject = 0;
 					while (selectedSubject<1 || selectedSubject>college->amountOfSubjects){
 						        rc = getOption ("enter option: ");
+						        if (selectedSubject<1 || selectedSubject>college->amountOfSubjects) printf("invalid option. m\n");
 						        }
 					printBookInformation(college, selectedSubject-1);
 					int selectedBook = 0;
 					while (selectedBook<1 || selectedBook>college->subjects[selectedSubject-1]->amountOfBooks){
 						        rc = getOption ("enter option: ");
+						        if (selectedBook<1 || selectedBook>college->subjects[selectedSubject-1]->amountOfBooks) printf("invalid option. m\n");
 						        }
 					int quantity = 0;
 					while (quantity<1){
 						        rc = getOption ("enter quantity: ");
+						        if (quantity<1) printf("positive values please. m\n");
 						        }
 					if (rc==1){
 					int price = 0;
 					while (price<1){
 						        rc = getOption ("enter price: $");
+						       if (price<1) printf("positive values please. m\n");
 						        }
 					addBook(provider, college->subjects[selectedSubject-1]->books[selectedBook-1], quantity, price);
 						pauseProgram("books added successfully, press enter key to continue.");
