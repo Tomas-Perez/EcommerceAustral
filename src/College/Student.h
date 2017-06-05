@@ -26,8 +26,8 @@ Student* createStudent(char* name, int password, int phoneNumber, char* career,i
 void studentAddBook(Student* student, ProductBook* book);
 void addPayment(Student* student, Payment* payment);
 
-void studentRemoveBook(Student* student, int bookISBN);
-void removePayment(Student* student, int paymentID);
+int studentRemoveBook(Student* student, int bookISBN);
+int removePayment(Student* student, int paymentID);
 
 void destroyStudent(Student* student);
 
