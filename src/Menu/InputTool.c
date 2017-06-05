@@ -76,6 +76,21 @@ int getLine (char *prmpt, char *buff, size_t sz) {
     return OK;
 }
 /*
+ * function: pauseProgram
+ * description: "pauses" the program execution until user presses enter
+ * parameters: prmpt is the text to be displayed
+ * returns: void
+ */
+void pauseProgram (char *prmpt) {
+	char* buff=malloc(sizeof(char)*10);
+    // Get line with buffer overrun protection.
+    if (prmpt != NULL) {
+        printf ("%s", prmpt);
+        fflush (stdout);
+    }fgets (buff, 2, stdin);
+    free(buff);
+}
+/*
  * function: getOption
  * description: get an integer from console input
  * parameters: prmpt is the text to be displayed when prompting for user input
