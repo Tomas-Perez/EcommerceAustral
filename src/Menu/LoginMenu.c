@@ -67,7 +67,7 @@ printf("%d. %s.\n", i+1, college->availableCareers[i]);
     int selectedCareer = scanInt();
         while(selectedCareer <1 || selectedCareer>college->amountOfCareers){
             printf("Please enter a valid career.\n");
-            phoneNumber = scanInt();
+            selectedCareer = scanInt();
         }
     Student* student = createStudent(name, password, phoneNumber, college->availableCareers[selectedCareer-1], 5);
     if(uDatabaseAddStudent(userDatabase, student, username) != 1){

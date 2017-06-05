@@ -60,14 +60,22 @@ void campusOption(UserDatabase* database, College* college, int userID) {
                 printf("%s+%s", subjects->subjects[i]->name, "\n");
             }
             break;
-        case 2:
-        	printf("Available subjects are: \n");
+        case 2: ;
         	ArrayOfSubjects* availableSubjects= getCareerSubjects(college, student->career);
+        	if(availableSubjects->amountOfSubjects==0){
+        		printf("your career has no available subjects\n");
+				break;
+        	}
+        	printf("Available subjects are: \n");
+
         	for(int i=0; i< availableSubjects->amountOfSubjects; i++) printf ("%d. %s.\n", i+1, availableSubjects->subjects[i]->name);
         	int selectedSubject = -1;
         	while (selectedSubject<1 || selectedSubject>availableSubjects->amountOfSubjects){
         	printf("Enter your option: \n");
-            if(selectedSubject<1 || selectedSubject>availableSubjects->amountOfSubjects) printf("invalid option.");
+        	selectedSubject=scanInt();
+            if(selectedSubject<1 || selectedSubject>availableSubjects->amountOfSubjects)
+            	printf("invalid option.");
+
             }
             enrollStudentInSubject(college, availableSubjects->subjects[selectedSubject-1]->subjectID, userID);
             break;
