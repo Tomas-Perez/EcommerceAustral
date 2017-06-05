@@ -3,6 +3,7 @@
 #include <string.h>
 #include "../Ecommerce/UserDatabase.h"
 #include "../Util/ScanUtil.h"
+#include "../College/College.h"
 
 UserLog* loginMenu(UserDatabase* userDatabase){
     int choice = 1;
@@ -29,7 +30,7 @@ UserLog* loginMenu(UserDatabase* userDatabase){
 return NULL;
 }
 
-void registerMenu(UserDatabase* userDatabase){
+void registerMenu(UserDatabase* userDatabase, College* college){
     registerUser:
     printf("Please enter a username, or 0 to return to maim menu:\n");
     char * username = scanChar();
@@ -58,9 +59,17 @@ void registerMenu(UserDatabase* userDatabase){
         printf("Please enter a valid number.\n");
         phoneNumber = scanInt();
     }
+    printf("available careers are: \n");
+    for(int i=0; i< college->amountOfCareers; i++){
+printf("%d. %s.\n", i+1, college->availableCareers[i]);
+    }
     printf("Please enter your career.\n");
-    char* career = scanChar();
-    Student* student = createStudent(name, password, phoneNumber, career, 5);
+    int selectedCareer = scanInt();
+        while(selectedCareer <1 || selectedCareer>college->amountOfCareers){
+            printf("Please enter a valid career.\n");
+            phoneNumber = scanInt();
+        }
+    Student* student = createStudent(name, password, phoneNumber, college->availableCareers[selectedCareer-1], 5);
     if(uDatabaseAddStudent(userDatabase, student, username) != 1){
         printf("That username is taken, please try again.\n");
         destroyStudent(student);

@@ -13,7 +13,7 @@ void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDat
 void providerMenu(UserDatabase* database, College* college, int userID);
 void supportStaffMenu(UserDatabase* database, SupportDatabase* supportDatabase, int userID);
 void adminMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDatabase, College* college, int userID);
-void registerMenu(UserDatabase* userDatabase);
+void registerMenu(UserDatabase* userDatabase, College* college);
 
 
 UserLog* loginMenu(UserDatabase* userDatabase);
@@ -49,8 +49,14 @@ College* collegeSetup(){
 		while (rc!=0){
 		rc = getLine ("Enter college name: ", name, sizeof(name));
 		}
+		char* careerName=malloc(sizeof(char)*21);
+		rc = -1;
+		while (rc!=0){
+		rc = getLine ("Enter a career name: ", careerName, 20);
+		}
+		College* college = createCollege(name, 10);
+		addNewCareer(college, careerName);
 
-	College* college = createCollege(name, 10);
 	return college;
 }
 
@@ -92,7 +98,7 @@ int main() {
             }
                 break;
             case 2:
-                registerMenu(userDatabase);
+                registerMenu(userDatabase, college);
                 break;
             case 0:
                 exit(0);

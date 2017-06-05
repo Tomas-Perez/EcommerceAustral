@@ -37,6 +37,7 @@ void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDat
 
 // Ok
 void campusOption(UserDatabase* database, College* college, int userID) {
+	Student* student =uDatabaseGetStudent(database, userID);
     printf("Enter an option: \n");
     printf("1. Show books and subjects \n");
     printf("2. Subscribe to subjects \n");
@@ -60,9 +61,15 @@ void campusOption(UserDatabase* database, College* college, int userID) {
             }
             break;
         case 2:
-            printf("Enter a Subject Id: \n");
-            int subjectID = scanInt();
-            enrollStudentInSubject(college, subjectID, userID);
+        	printf("Available subjects are: \n");
+        	ArrayOfSubjects* availableSubjects= getCareerSubjects(college, student->career);
+        	for(int i=0; i< availableSubjects->amountOfSubjects; i++) printf ("%d. %s.\n", i+1, availableSubjects->subjects[i]->name);
+        	int selectedSubject = -1;
+        	while (selectedSubject<1 || selectedSubject>availableSubjects->amountOfSubjects){
+        	printf("Enter your option: \n");
+            if(selectedSubject<1 || selectedSubject>availableSubjects->amountOfSubjects) printf("invalid option.");
+            }
+            enrollStudentInSubject(college, availableSubjects->subjects[selectedSubject-1]->subjectID, userID);
             break;
         default:
             printf("Invalid option");
