@@ -72,7 +72,7 @@ static void growSupportStaff(UserDatabase *database) {
 /*
  * Function: createUserDatabase
  * Description: allocates all memory necessary for the userDatabase, initializes all arrays with the given
- * initial capacity.
+ * initial capacity, adds admin to the database.
  * Returns: UserDatabase pointer.
  */
 
