@@ -30,7 +30,6 @@ void destroyBookInformation(BookInformation* bookInformation){
 /*
     Function: bookInformationIsEqual
     Description: determines whether the 2 book infos are equal or not.
-
     Returns: 1 if TRUE, 0 if FALSE.
 */
 

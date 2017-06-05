@@ -17,16 +17,16 @@ Provider *createProvider(char *name,
     newProvider->phoneNumber = phoneNumber;
     newProvider->RIF = RIF;
 
-    newProvider->maxCapacityOfBooks=5;
+    newProvider->maxCapacityOfBooks = initialCapacity;
 
     newProvider->books = malloc(sizeof(ProductBook*)*initialCapacity);
     return newProvider;
 }
 
-void addBook(Provider *provider, ProductBook *productBook, int quantity) {
+void addBook(Provider *provider, BookInformation *bookInfo, int quantity, int price) {
     // If ProductBook exists, add stock
     for (int i = 0; i < provider->amountOfBooks; i++) {
-        if(provider->books[i]->bookInfo->ISBN == productBook->bookInfo->ISBN){
+        if(provider->books[i]->bookInfo->ISBN == bookInfo->ISBN){
             provider->books[i]->stock += quantity;
             return;
         }
@@ -39,31 +39,26 @@ void addBook(Provider *provider, ProductBook *productBook, int quantity) {
     }
 
     // Add new ProductBook
-    provider->books[provider->amountOfBooks] = productBook;
+    provider->books[provider->amountOfBooks] = createProductBook(bookInfo, quantity, price);
     provider->amountOfBooks++;
 }
 
-void removeBook(Provider *provider, ProductBook *productBook, int quantity) {
+void removeBook(Provider *provider, int ISBN, int quantity) {
     for (int i = 0; i < provider->amountOfBooks; i++) {
-        if(provider->books[i]->bookInfo->ISBN == productBook->bookInfo->ISBN){
+        if(provider->books[i]->bookInfo->ISBN == ISBN){
             provider->books[i]->stock -= quantity;
         }
     }
 }
 
 void destroyProvider(Provider *provider) {
-    free(provider->RIF);
-    free(provider->phoneNumber);
     free(provider->name);
-    free(provider->userID);
 
     for (int i = 0; i < provider->amountOfBooks; i++) {
         destroyProductBook(provider->books[i]);
     }
 
     free(provider->books);
-    free(provider->amountOfBooks);
-    free(provider->maxCapacityOfBooks);
 
     free(provider);
 }

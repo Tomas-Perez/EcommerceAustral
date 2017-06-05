@@ -24,8 +24,8 @@ Provider* createProvider(char *name,
                          int phoneNumber,
                          int RIF, int initialCapacity);
 
-void addBook(Provider* provider, ProductBook* productBook, int quantity);
-void removeBook(Provider* provider, ProductBook* productBook, int quantity);
+void addBook(Provider* provider, BookInformation* bookInfo, int quantity, int price);
+void removeBook(Provider* provider, int ISBN, int quantity);
 void destroyProvider(Provider* provider);
 
 
