@@ -7,13 +7,16 @@
  * Description: allocates memory for a Subject and all its components.
  * Returns: Subject pointer
  */
-Subject* createSubject(char* name,int subjectID, int maxCapacityOfStudents){
+Subject* createSubject(char* name,int subjectID, char* career, int maxCapacityOfStudents){
     Subject* newSubject = malloc(sizeof(Subject));
 
     newSubject->name = malloc(sizeof(char)*(strlen(name)+1));
     strcpy(newSubject->name, name);
 
     newSubject->subjectID = subjectID;
+
+    newSubject->career = malloc(sizeof(char)*(strlen(career)+1));
+    strcpy(newSubject->career, career);
 
     newSubject->amountOfStudents = 0;
     newSubject->amountOfBooks = 0;

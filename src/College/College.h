@@ -6,6 +6,10 @@
 typedef struct college{
     char* name;
 
+    char** availableCareers;
+    int amountOfCareers;
+    int maxCapacityOfCareers;
+
     Subject** subjects;
     int amountOfSubjects;
     int maxCapacityOfSubjects;
@@ -18,6 +22,10 @@ void destroyCollege(College* college);
 
 void addNewSubject(College* college, Subject* newSubject);
 int removeSubject(College* college, int subjectID);
+
+void addNewCareer(College* college, char* careerName);
+int removeCarrer(College* college, char* careerName);
+ArrayOfSubjects* getCareerSubjects(College* college, char* careerName);
 
 int enrollStudentInSubject(College* college, int subjectID, int studentID);
 int withdrawStudentFromSubject(College* college, int subjectID, int studentID);

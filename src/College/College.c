@@ -13,6 +13,10 @@ College* createCollege(char* name, int initialCapacity){
     newCollege->name = malloc( sizeof(char) * (strlen(name) + 1));
     strcpy(newCollege->name, name);
 
+    newCollege->amountOfCareers = 0;
+    newCollege->maxCapacityOfCareers = initialCapacity;
+    newCollege->availableCareers = malloc(sizeof(char*)*initialCapacity);
+
     newCollege->amountOfSubjects = 0;
     newCollege->maxCapacityOfSubjects = initialCapacity;
     newCollege->subjects = malloc(sizeof(Subject*) * initialCapacity);
@@ -69,6 +73,68 @@ int removeSubject(College* college, int subjectID){
     }
     return 0;
 }
+
+/*
+ * Function: addNewCareer
+ * Description: adds a career to a college.
+ * Returns: --
+ */
+void addNewCareer(College* college, char* careerName){
+    if(college->amountOfCareers == college->maxCapacityOfCareers){
+        college->availableCareers = realloc(college->availableCareers, sizeof(char*)*college->maxCapacityOfCareers*2);
+        college->maxCapacityOfCareers = college->maxCapacityOfCareers*2;
+    }
+
+    college->availableCareers[college->amountOfCareers] = careerName;
+    college->amountOfCareers++;
+};
+
+/*
+ * Function: removeCareer
+ * Description: removes a career from the college.
+ * Returns: 1 if career was removed, 0 if career was not found.
+ */
+int removeCarrer(College* college, char* careerName){
+    for (int i = 0; i < college->amountOfCareers ; ++i) {
+        if (strcmp(college->availableCareers[i], careerName) == 0){
+            free(college->availableCareers[i]);
+            for (;i < college->amountOfCareers - 1; i++){
+                college->availableCareers[i] = college->availableCareers[i+1];
+            }
+            college->amountOfCareers--;
+            return 1;
+        }
+    }
+    return 0;
+};
+
+/*
+ * Function: getCareerSubjects
+ * Description: gives an array of the subjects of a career.
+ * Returns: ArrayOfSubject pointer.
+ */
+ArrayOfSubjects* getCareerSubjects(College* college, char* careerName){
+    int amountOfSubjects = 0;
+    int maxCapacityOfSubjects = 10;
+    Subject** subjects = malloc(sizeof(Subject*)* 10);
+
+    for (int i = 0; i < college->amountOfSubjects; ++i) {
+        if(strcmp(college->subjects[i]->career,careerName) == 0){
+            if(amountOfSubjects == maxCapacityOfSubjects){
+                subjects = realloc(subjects, sizeof(Subject*)* maxCapacityOfSubjects*2);
+                maxCapacityOfSubjects = maxCapacityOfSubjects*2;
+            }
+            subjects[amountOfSubjects] = college->subjects[i];
+            amountOfSubjects++;
+        }
+    }
+
+    ArrayOfSubjects* array = malloc(sizeof(ArrayOfSubjects));
+    array->subjects = subjects;
+    array->amountOfSubjects = amountOfSubjects;
+
+    return array;
+};
 
 /*
  * Function: enrollStudentInSubject
