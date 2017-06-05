@@ -24,7 +24,7 @@ void addNewSubject(College* college, Subject* newSubject);
 int removeSubject(College* college, int subjectID);
 
 void addNewCareer(College* college, char* careerName);
-int removeCarrer(College* college, char* careerName);
+int removeCareer(College *college, char *careerName);
 ArrayOfSubjects* getCareerSubjects(College* college, char* careerName);
 
 int enrollStudentInSubject(College* college, int subjectID, int studentID);

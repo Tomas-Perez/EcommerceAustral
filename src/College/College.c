@@ -33,6 +33,9 @@ void destroyCollege(College* college){
     for (int i = 0; i < college->amountOfSubjects; ++i) {
         destroySubject(college->subjects[i]);
     }
+    for(int i = 0; i < college->amountOfCareers; i++){
+        free(college->availableCareers[i]);
+    }
     free(college->subjects);
     free(college->name);
     free(college);
@@ -85,7 +88,8 @@ void addNewCareer(College* college, char* careerName){
         college->maxCapacityOfCareers = college->maxCapacityOfCareers*2;
     }
 
-    college->availableCareers[college->amountOfCareers] = careerName;
+    college->availableCareers[college->amountOfCareers] = malloc(sizeof(char)*(strlen(careerName)+1));
+    strcpy(college->availableCareers[college->amountOfCareers], careerName);
     college->amountOfCareers++;
 };
 
@@ -94,7 +98,7 @@ void addNewCareer(College* college, char* careerName){
  * Description: removes a career from the college.
  * Returns: 1 if career was removed, 0 if career was not found.
  */
-int removeCarrer(College* college, char* careerName){
+int removeCareer(College *college, char *careerName){
     for (int i = 0; i < college->amountOfCareers ; ++i) {
         if (strcmp(college->availableCareers[i], careerName) == 0){
             free(college->availableCareers[i]);
