@@ -23,7 +23,7 @@ void providerMenu(UserDatabase* database, College* college, int userID){
 		printf("%s\n", "would you like to:\n");
 				printf("%s\n", "1. addd books. ");
 				printf("%s\n", "2. remove books. ");
-				printf("%s\n", "0. return to main menu");
+				printf("%s\n", "0. return to main menu.");
 				while (rc<0 || rc>2){
 					        rc = getOption ("enter option: ");
 					        if (rc<0 || rc>2)printf("invalid option. m\n");
