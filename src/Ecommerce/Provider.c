@@ -23,7 +23,11 @@ Provider *createProvider(char *name,
     newProvider->books = malloc(sizeof(ProductBook*)*initialCapacity);
     return newProvider;
 }
-
+/*
+ * Function: addBook
+ * Description: adds a specified amount of ProductBook with their information and price to the provider's stock
+ * Returns: -
+ */
 void addBook(Provider *provider, BookInformation *bookInfo, int quantity, int price) {
     // If ProductBook exists, add stock
     for (int i = 0; i < provider->amountOfBooks; i++) {
@@ -44,6 +48,11 @@ void addBook(Provider *provider, BookInformation *bookInfo, int quantity, int pr
     provider->amountOfBooks++;
 }
 
+/*
+ * Function: removeBook
+ * Description: Removes the specified amount of ProductBooks with matching ISBN from the provider's stock
+ * Returns: -
+ */
 void removeBook(Provider *provider, int ISBN, int quantity) {
     for (int i = 0; i < provider->amountOfBooks; i++) {
         if(provider->books[i]->bookInfo->ISBN == ISBN){
@@ -52,6 +61,11 @@ void removeBook(Provider *provider, int ISBN, int quantity) {
     }
 }
 
+/*
+ * Function: destroyProvider
+ * Description: frees all memory of the specified provider.
+ * Returns: -
+ */
 void destroyProvider(Provider *provider) {
     free(provider->name);
 
