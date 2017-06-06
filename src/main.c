@@ -140,7 +140,7 @@ int main() {
     Bank *bank;
     College *college;
     SupportDatabase *supportDatabase;
-    int option = getOption("Would you like to set the initial parameters (1) or use a predetermined ones (0)?");
+    int option = getOption("Would you like to set the initial parameters (1) or use a predetermined ones (0)? ");
     while(option != 1 && option != 0){
         option = getOption("Please select one of the options.");
     }
