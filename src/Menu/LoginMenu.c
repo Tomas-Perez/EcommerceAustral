@@ -63,13 +63,12 @@ void registerMenu(UserDatabase* userDatabase, College* college){
         printf("Your password didn't match, please try again.\n");
         goto enterPassword;
     }
+    Student* student = createStudent(name, password, phoneNumber, college->availableCareers[selectedCareer-1], 5);
     registerUser:
     printf("Please enter your username.\n");
     char* username = scanChar();
-    Student* student = createStudent(name, password, phoneNumber, college->availableCareers[selectedCareer-1], 5);
     if(uDatabaseAddStudent(userDatabase, student, username) != 1){
         printf("That username is taken, please try again.\n");
-        destroyStudent(student);
         goto registerUser;
     }
 }
