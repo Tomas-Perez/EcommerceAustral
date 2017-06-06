@@ -19,7 +19,7 @@ void registerMenu(UserDatabase* userDatabase, College* college);
 UserLog* loginMenu(UserDatabase* userDatabase);
 
 UserDatabase* userDatabaseSetup(){
-	Admin* admin = createAdmin("pepe", 123, 232323);
+	Admin* admin = createAdmin("pepe",123, 232323);
 
 	UserDatabase* database = createUserDatabase(10, admin);
 	return database;

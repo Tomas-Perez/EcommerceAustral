@@ -317,6 +317,8 @@ UserLog* login(UserDatabase* database, char* username, int password){
         {
             return userLog;
         }
+        default:
+            exit(1); //Exception
     }
 }
 

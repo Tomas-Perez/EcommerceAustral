@@ -23,7 +23,7 @@ typedef struct arrayOfSubjects{
     int amountOfSubjects;
 }ArrayOfSubjects;
 
-Subject* createSubject(char* name,int subjectID, char* career,int maxCapacityOfStudents);
+Subject* createSubject(char* name, char* career, int maxCapacityOfStudents);
 void destroySubject(Subject* subject);
 
 int studentIsEnrolled(Subject* subject, int studentID);

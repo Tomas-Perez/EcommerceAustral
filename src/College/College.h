@@ -14,7 +14,7 @@ typedef struct college{
     int amountOfSubjects;
     int maxCapacityOfSubjects;
 
-
+    int subjectIDGen;
 }College;
 
 College* createCollege(char* name, int initialCapacity);

@@ -21,6 +21,8 @@ College* createCollege(char* name, int initialCapacity){
     newCollege->maxCapacityOfSubjects = initialCapacity;
     newCollege->subjects = malloc(sizeof(Subject*) * initialCapacity);
 
+    newCollege->subjectIDGen = 0;
+
     return newCollege;
 }
 
@@ -53,6 +55,7 @@ void addNewSubject(College* college, Subject* newSubject){
         college->maxCapacityOfSubjects = college->maxCapacityOfSubjects*2;
     }
 
+    newSubject->subjectID = college->subjectIDGen++;
     college->subjects[college->amountOfSubjects] = newSubject;
     college->amountOfSubjects++;
 }

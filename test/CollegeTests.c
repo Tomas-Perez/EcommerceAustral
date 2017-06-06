@@ -6,7 +6,7 @@
 
 void TestCollegeEnrollmentOfStudentInCollege(CuTest* tc){
     College* college = createCollege("Austral", 10);
-    Subject* algebra = createSubject("Algebra II",1, 10);
+    Subject* algebra = createSubject("Algebra II", "ingenieria", 10);
 
     addNewSubject(college, algebra);
 
@@ -19,10 +19,10 @@ void TestCollegeEnrollmentOfStudentInCollege(CuTest* tc){
 void TestCollegeGetSubjectsOfStudent(CuTest* tc){
     College* college = createCollege("Austral", 10);
 
-    Subject* algebra = createSubject("Algebra II",1, 10);
+    Subject* algebra = createSubject("Algebra II", "ingenieria", 10);
     addNewSubject(college, algebra);
 
-    Subject* analisis = createSubject("Analisis III", 2, 10);
+    Subject* analisis = createSubject("Analisis III", "ingenieria", 10);
     addNewSubject(college, analisis);
 
     // student id 202 enrolls in 2 subjects.
@@ -36,11 +36,11 @@ void TestCollegeGetBooksOfStudent(CuTest* tc){
 
     College* college = createCollege("Austral", 10);
 
-    Subject* algebra = createSubject("Algebra II",1, 10);
+    Subject* algebra = createSubject("Algebra II", "ingenieria", 10);
     addNewSubject(college, algebra);
     addNewBook(algebra, createBookInformation("Subespacios", 3003, "Sears"));
 
-    Subject* analisis = createSubject("Analisis III", 2, 10);
+    Subject* analisis = createSubject("Analisis III", "ingenieria", 10);
     addNewSubject(college, analisis);
     addNewBook(analisis, createBookInformation("Derivadas", 101, "Chang"));
 
