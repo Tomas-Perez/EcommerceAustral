@@ -21,6 +21,12 @@ Student* createStudent(char* name, int password, int phoneNumber, char* career,i
     result->maxCapacityOfPayments = initialCapacity;
     result->maxCapacityOfBooks = initialCapacity;
 
+    result->amountOfBooks = 0;
+    result->amountOfPayments = 0;
+
+    result->purchaseHistory = malloc(sizeof(Payment*)*result->maxCapacityOfPayments);
+    result->books = malloc(sizeof(ProductBook*)*result->maxCapacityOfBooks);
+
     return result;
 }
 
@@ -97,6 +103,14 @@ int removePayment(Student* student, int paymentID){
  * Returns: --
  */
 void destroyStudent(Student* student){
+    for(int i = 0; i < student->amountOfPayments; i++){
+        destroyPayment(student->purchaseHistory[i]);
+    }
+    for(int i = 0; i < student->amountOfBooks; i++){
+        destroyProductBook(student->books[i]);
+    }
+    free(student->books);
+    free(student->purchaseHistory);
     free(student->career);
     free(student->name);
     free(student);

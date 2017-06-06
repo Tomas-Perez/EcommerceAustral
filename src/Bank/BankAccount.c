@@ -1,18 +1,15 @@
-
-
 #include "BankAccount.h"
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
-BankAccount* createBankAccount(int bankAccountID,double balance, double maintenance,int userID){
+BankAccount* createBankAccount(int bankAccountID,double balance, double maintenance){
 
     BankAccount* result = malloc(sizeof(BankAccount));
 
     result->bankAccountID = bankAccountID;
     result->balance = balance;
     result->maintenance = maintenance;
-    result->userID = userID;
 
     time_t t = time(NULL);
     result->timeStamp = t;

@@ -1,5 +1,3 @@
-
-
 #include "OperationCertificate.h"
 #include <stdlib.h>
 #include <time.h>
@@ -13,15 +11,12 @@ OperationCertificate* createOperationCertificate(int accountID, int operationTyp
     result->operationType=operationType;
     result->amount=amount;
 
-    time_t currentTime = time(NULL);
-    result->timeStamp=currentTime;
-
-
-    time_t calendarTime;
-    time(&calendarTime);
-
-    result->date= malloc(sizeof(char*));
-    strcpy(result->date,ctime(&calendarTime));
+    time_t t = time(NULL);
+    result->timeStamp = t;
+    struct tm* tm1 = localtime(&t);
+    char* tempDate = asctime(tm1);
+    result->date = malloc(sizeof(char*)*strlen(tempDate)+1);
+    strcpy(result->date, tempDate);
 
     return result;
 }

@@ -36,26 +36,6 @@ return NULL;
 }
 
 void registerMenu(UserDatabase* userDatabase, College* college){
-    registerUser:
-    printf("Please enter a username, or 0 to return to maim menu:\n");
-    char * username = scanChar();
-    if(strncmp(username, "0", 1)==0) return;
-    Student* testStudent = createStudent("juan", 123, 321, "123", 5);
-    if(uDatabaseAddStudent(userDatabase, testStudent, username) != 1){
-            printf("That username is taken, please try again.\n");
-            destroyStudent(testStudent);
-            goto registerUser;
-        }else uDatabaseRemoveStudent(userDatabase, testStudent->userID);
-    destroyStudent(testStudent);
-    enterPassword:
-    printf("Please enter a numerical password:\n");
-    int password = scanInt();
-    printf("Please confirm your password:\n");
-    int confirmedPassword = scanInt();
-    if(confirmedPassword != password) {
-        printf("Your password didn't match, please try again.\n");
-        goto enterPassword;
-    }
     printf("Please enter your full name:\n");
     char* name = scanChar();
     printf("Please enter your phone number:\n");
@@ -66,14 +46,26 @@ void registerMenu(UserDatabase* userDatabase, College* college){
     }
     printf("available careers are: \n");
     for(int i=0; i< college->amountOfCareers; i++){
-printf("%d. %s.\n", i+1, college->availableCareers[i]);
+        printf("%d. %s.\n", i+1, college->availableCareers[i]);
     }
     printf("Please enter your career.\n");
     int selectedCareer = scanInt();
-        while(selectedCareer <1 || selectedCareer>college->amountOfCareers){
-            printf("Please enter a valid career.\n");
-            selectedCareer = scanInt();
-        }
+    while(selectedCareer <1 || selectedCareer>college->amountOfCareers){
+        printf("Please enter a valid career.\n");
+        selectedCareer = scanInt();
+    }
+    enterPassword:
+    printf("Please enter a numerical password:\n");
+    int password = scanInt();
+    printf("Please confirm your password:\n");
+    int confirmedPassword = scanInt();
+    if(confirmedPassword != password) {
+        printf("Your password didn't match, please try again.\n");
+        goto enterPassword;
+    }
+    registerUser:
+    printf("Please enter your username.\n");
+    char* username = scanChar();
     Student* student = createStudent(name, password, phoneNumber, college->availableCareers[selectedCareer-1], 5);
     if(uDatabaseAddStudent(userDatabase, student, username) != 1){
         printf("That username is taken, please try again.\n");

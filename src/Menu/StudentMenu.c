@@ -162,7 +162,7 @@ void bankOption(UserDatabase* database, Bank* bank, int userID) {
     switch (option) {
 
         case 1:
-            addAccount(bank, createBankAccount(userID, 0.0, 0.0, userID));
+            addAccount(bank, createBankAccount(userID, 0.0, 0.0));
             printf("Successfully created bank account!");
         	break;
         case 2:

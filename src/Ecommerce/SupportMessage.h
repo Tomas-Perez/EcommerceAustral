@@ -16,7 +16,7 @@ typedef struct SupportMessage{
 }SupportMessage;
 
 SupportMessage* newSupportMessage(char* question, int studentID);
-void addAnswer(SupportMessage* message, char* answer);
+void addAnswer(SupportMessage* message, char* answer, int supportID);
 void destroySupportMessage(SupportMessage* message);
 
 #endif //ECOMMERCEAUSTRAL_SUPPORTMESSAGE_H

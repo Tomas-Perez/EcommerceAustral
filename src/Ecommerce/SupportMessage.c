@@ -25,9 +25,11 @@ SupportMessage* newSupportMessage(char* question, int studentID){
     return message;
 }
 
-void addAnswer(SupportMessage* message, char* answer){
+void addAnswer(SupportMessage* message, char* answer, int supportID){
     message->answer = malloc(sizeof(char)*(strlen(answer)+1));
     strcpy(message->answer, answer);
+    message->isAnswered = 1;
+    message->supportStaffID = supportID;
 }
 
 void destroySupportMessage(SupportMessage* message){

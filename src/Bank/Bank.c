@@ -15,7 +15,6 @@ Bank* createBank(int id, char* name, char* office, int capacity){
 
     result->transactionAmount=0;
     result->accountAmount=0;
-    result->idGenerator=1;
     result->transactionNumberGenerator=1;
 
     result->transactions=malloc(sizeof(Transaction*)*result->transactionCapacity);
