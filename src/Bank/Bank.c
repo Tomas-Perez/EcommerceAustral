@@ -1,11 +1,13 @@
 #include <stdlib.h>
 #include "Bank.h"
+#include "string.h"
 
 Bank* createBank(int id, char* name, char* office, int capacity){
     Bank* result= malloc(sizeof(Bank));
 
     result->id=id;
-    result->name=name;
+    result->name= malloc(sizeof(char)*(strlen(name)+1));
+    strcpy(result->name, name);
     result->office=office;
 
     result->transactionCapacity=capacity*10;
