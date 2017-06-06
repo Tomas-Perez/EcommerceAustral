@@ -112,6 +112,7 @@ void addCareerMenu(){
 }
 
 void adminMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDatabase, College* college, int userID){
+	printf("\nWelcome!\n");
 	for(;;){
 	int rc=-1;
 			printf("%s\n", "would you like to:\n");

@@ -9,14 +9,21 @@ void printMessages(SupportDatabase* supportDatabase){
 }
 
 void supportStaffMenu(UserDatabase* database, SupportDatabase* supportDatabase, int userID){
+	printf("\nWelcome!\n");
+	while(1){
 	int rc=-1;
 	printf("%s\n", "would you like to:");
-			printf("%s\n", "1. answer consults");
+			printf("%s\n", "1. answer messages");
 			printf("%s\n", "0. return to main menu\n");
 			while (rc<0 || rc>1){
 				        rc = getOption ("enter option: ");
 				        if (rc<0 || rc>1)printf("invalid option. m\n");
 				        }
+			if(supportDatabase->messageAmount==0){
+				printf("There are no messages, you can't do anything, logging out...");
+				return;
+			}
+			if(rc==0) return;
 			if (rc==1){
 				printMessages(supportDatabase);
 				int selectedMessage = 0;
@@ -34,5 +41,6 @@ void supportStaffMenu(UserDatabase* database, SupportDatabase* supportDatabase, 
 					supportDatabase->messages[selectedMessage-1]->answer=answer;
 					pauseProgram("Answer submitted successfully, press enter key to continue.");
 			}
+	}
 }
 
