@@ -13,7 +13,7 @@ struct stuentMenu {
 
 void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDatabase, College* college, int userID);
 void campusOption(UserDatabase* database, College* college, int userID);
-void eCommerceOption(UserDatabase* database, Bank* bank);
+void eCommerceOption(UserDatabase* database, Bank* bank, College* college, int userID);
 void bankOption(UserDatabase* database, Bank* bank, int userID);
 void editInformationOption(UserDatabase* database, Student* student);
 

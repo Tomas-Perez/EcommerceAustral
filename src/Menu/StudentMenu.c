@@ -21,7 +21,7 @@ void studentMenu(UserDatabase* database, Bank* bank, SupportDatabase* supportDat
             campusOption(database, college, userID);
             break;
         case 2:
-            eCommerceOption(database, bank);
+            eCommerceOption(database, bank, college, userID);
             break;
         case 3:
             bankOption(database, bank, userID);
@@ -50,14 +50,14 @@ void campusOption(UserDatabase* database, College* college, int userID) {
             ArrayOfBooks* books = getBooksOfStudent(college, userID);
             int i;
             for (i = 0; i < books->amountOfBooks; i++) {
-                printf("%s+%s", books->books[i]->title, "\n");
+                printf("%s%s", books->books[i]->title, "\n");
             }
 
             printf("SUBJECTS: \n");
             ArrayOfSubjects* subjects = getSubjectsOfStudent(college, userID);
 
             for (i = 0; i < subjects->amountOfSubjects; i++) {
-                printf("%s+%s", subjects->subjects[i]->name, "\n");
+                printf("%s%s", subjects->subjects[i]->name, "\n");
             }
             break;
         case 2: ;
@@ -87,7 +87,11 @@ void campusOption(UserDatabase* database, College* college, int userID) {
 }
 
 // terminar
-void eCommerceOption(UserDatabase* database, Bank* bank) {
+void eCommerceOption(UserDatabase* database, Bank* bank, College* college, int userID) {
+    Cart* cart = createCart(10, userID);
+    ArrayOfBooks* array = getBooksOfStudent(college, userID);
+    Student* student = uDatabaseGetStudent(database, userID);
+
     printf("Enter an option: \n");
     printf("1. Add or remove books to cart \n");
     printf("2. Checkout bill \n");
@@ -98,30 +102,47 @@ void eCommerceOption(UserDatabase* database, Bank* bank) {
 
     switch (option) {
         case 1:
-            printf("1. Add book \n");
-            printf("2. Remove book \n");
-            printf("3. Remove all books \n");
+            printf("1. Show books: \n");
+            printf("2. Add book \n");
+            printf("3. Remove book \n");
+            printf("4. Remove all books \n");
             int option2 = scanInt();
             switch (option2) {
                 case 1:
-                    // No tengo forma de obtener el cart de cada user
-                    //cartAddBook();
+                    printf("Books: \n");
+                    int i;
+                    for (i = 0; i < array->amountOfBooks; i++) {
+                        printf(array->books[i]->title);
+                    }
                 	break;
                 case 2:
+
                 	break;
-                    //cartRemoveBook();
                 case 3:
-                    //cartRemoveAllBooks();
-                	break;
+                    printf("Enter the name of the book you want to remove: \n");
+                    char* nameBook2 = scanChar();
+                    int k;
+                    for (k = 0; k < cart->amountOfBooks; k++) {
+                        if (cart->pBooks[i]->bookInfo->title == nameBook2) {
+                            cart->pBooks[i] = NULL;
+                        }
+                    }
+                case 4:
+                    cartRemoveAllBooks(cart);
+                    break;
                 default:
-                    printf("Invalid option");
+                    printf("Invalid option\n");
             }
             break;
         case 2:
+            printf("Bill: \n");
+            //checkout bill
         	break;
         case 3:
+            // shopping history
         	break;
         case 4:
+            // Support query
         	break;
         default:
             printf("Invalid option");
@@ -129,7 +150,6 @@ void eCommerceOption(UserDatabase* database, Bank* bank) {
     }
 }
 
-// terminar
 void bankOption(UserDatabase* database, Bank* bank, int userID) {
     printf("Enter an option: \n");
     printf("1. Create account \n");
@@ -150,17 +170,17 @@ void bankOption(UserDatabase* database, Bank* bank, int userID) {
             double amount1;
             scanf("%lf", &amount1);
             Transaction* transaction1 = deposit_Money(bank, userID, amount1);
-            //printf("transaction amount is %f, it should be %f, date is %s", transaction1->amount, amount1, transaction1->date); //testing transaction
+            printf("transaction amount is %f, it should be %f, date is %s", transaction1->amount, amount1, transaction1->date);
             break;
         case 3:
             printf("Enter amount: \n");
             double amount2;
             scanf("%lf", &amount2);
             Transaction* transaction2 = withdraw_Money(bank, userID, amount2);
-            //printf("transaction amount is %f, it should be %f, date is %s", transaction2->amount, amount2, transaction2->date); //testing transaction
+            printf("transaction amount is %f, it should be %f, date is %s", transaction2->amount, amount2, transaction2->date); //testing transaction
             break;
         case 4:
-           // transactionHistiy(bank, bankAccuntID);
+
         	break;
 		default:
             printf("Invalid option");
