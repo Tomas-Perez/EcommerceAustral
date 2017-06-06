@@ -42,27 +42,6 @@ static void growAccounts(Bank* bank){
     bank->accountCapacity=capacity;
 }
 
-/*static int containsTransaction(Bank* bank, int transactionNumber){
-    for(int i=0; i<bank->transactionAmount; i++){
-        if(bank->transactions[i]->transactionNumber == transactionNumber){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-}
-static int containsAccount(Bank* bank, int id){
-    for(int i=0; i < bank->accountAmount; i++){
-        if(bank->bankAccounts[i]->bankAccountID == id){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-}*/
-
 /**
  * Adds transactions to bankAccounts transactions
  * @param bank
@@ -73,9 +52,6 @@ int addTransaction(Bank* bank, Transaction* transaction){
     if(bank->transactionAmount==bank->transactionCapacity){
         growTransactions(bank);
     }
-    /*if(containsTransaction(bank, transaction->transactionNumber)==1){
-        return 0;
-    }*/
     bank->transactions[bank->transactionAmount]=transaction;
     bank->transactionAmount++;
     return 1;
@@ -91,9 +67,6 @@ int addAccount(Bank* bank, BankAccount* account){
     if(bank->accountCapacity==bank->accountAmount){
         growAccounts(bank);
     }
-    /*if(containsAccount(bank, account->bankAccountID)){
-        return 0;
-    }*/
     bank->bankAccounts[bank->accountAmount]=account;
     bank->accountAmount++;
     return 1;

@@ -16,6 +16,7 @@ Provider *createProvider(char *name,
     newProvider->password = password;
     newProvider->phoneNumber = phoneNumber;
     newProvider->RIF = RIF;
+    newProvider->amountOfBooks = 0;
 
     newProvider->maxCapacityOfBooks = initialCapacity;
 

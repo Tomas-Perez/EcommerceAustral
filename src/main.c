@@ -20,26 +20,26 @@ UserLog* loginMenu(UserDatabase* userDatabase);
 
 UserDatabase* userDatabaseSetup(){
 	Admin* admin = createAdmin("pepe", 1234, 232323);
-
 	UserDatabase* database = createUserDatabase(10, admin);
 	return database;
 }
 
+
 Bank* bankSetup(){
-	printf("\nYou are about to create a bank. \n");
-	int id=getOption("Enter bank id: ");
-	char name[20];
-	int rc = -1;
-	while (rc!=0){
-	rc = getLine ("Enter bank name: ", name, sizeof(name));
-	}
-	rc =-1;
-	char office[20];
-	while (rc!=0){
-	rc = getLine ("Enter bank office name: ", office, sizeof(office));
-	}
-	Bank* bank = createBank( id, name, office, 10);
-	return bank;
+    printf("\nYou are about to create a bank. \n");
+    int id = getOption("Enter bank id: ");
+    char name[20];
+    int rc = -1;
+    while (rc != 0) {
+        rc = getLine("Enter bank name: ", name, sizeof(name));
+    }
+    rc = -1;
+    char office[20];
+    while (rc != 0) {
+        rc = getLine("Enter bank office name: ", office, sizeof(office));
+    }
+    Bank *bank = createBank(id, name, office, 10);
+    return bank;
 }
 
 College* collegeSetup(){
@@ -65,11 +65,79 @@ SupportDatabase* supportDatabaseSetup(){
 	return database;
 }
 
+void predeterminedSetup(UserDatabase** userDatabase, Bank** bank, College** college, SupportDatabase** supportDatabase){
+    UserDatabase* newDatabase = *userDatabase;
+    SupportDatabase* newSupportDatabase = *supportDatabase;
+    *bank = createBank(1, "Santander Rio", "Pilar", 20);
+    *college = createCollege("Austral", 10);
+    addNewCareer(*college, "Ingenieria");
+    addNewCareer(*college, "Comunicacion");
+    addNewCareer(*college, "Abogacia");
+    Student* jorge = createStudent("Jorge", 123, 345345, "Ingenieria", 10);
+    Student* maria = createStudent("Maria", 123, 345345, "Comunicacion", 10);
+    Student* augusto = createStudent("Augusto", 123, 345345, "Abogacia", 10);
+    SupportStaff* supportStaff1 = createSupportStaff("Miguel", 123, 3424);
+    SupportStaff* supportStaff2 = createSupportStaff("Ernesto", 123, 3424);
+    SupportStaff* supportStaff3 = createSupportStaff("Juan", 123, 3424);
+    Provider* provider1 = createProvider("Estrada", 123, 456, 4564564, 5);
+    Provider* provider2 = createProvider("FedEx", 123, 456, 345786, 5);
+    uDatabaseAddStudent(newDatabase, jorge, "jorge");
+    uDatabaseAddStudent(newDatabase, maria, "maria");
+    uDatabaseAddStudent(newDatabase, augusto, "augusto");
+    uDatabaseAddSupportStaff(newDatabase, supportStaff1, "miguel");
+    uDatabaseAddSupportStaff(newDatabase, supportStaff2, "ernesto");
+    uDatabaseAddSupportStaff(newDatabase, supportStaff3, "juan");
+    uDatabaseAddProvider(newDatabase, provider1, "estrada");
+    uDatabaseAddProvider(newDatabase, provider2, "fedex");
+    BankAccount* bankAccount = createBankAccount(jorge->userID, 5000, 0, jorge->userID);
+    BankAccount* adminBankAccount = createBankAccount(newDatabase->admin->userID, 5000, 0, newDatabase->admin->userID);
+    addAccount(*bank, bankAccount);
+    addAccount(*bank, adminBankAccount);
+    Subject* algebra = createSubject("Algebra 2", "Ingenieria", 5);
+    Subject* analisis = createSubject("Analisis 1", "Ingenieria", 5);
+    Subject* legal = createSubject("Legal", "Abogacia", 5);
+    Subject* tecnicas = createSubject("Tecnicas de comunicacion", "Comunicacion", 5);
+    addNewSubject(*college, algebra);
+    addNewSubject(*college, analisis);
+    addNewSubject(*college, legal);
+    addNewSubject(*college, tecnicas);
+    BookInformation* bookInformation1 = createBookInformation("Algebra For Dummies", 1234, "Gauss");
+    BookInformation* bookInformation2 = createBookInformation("Linear Algebra", 5678, "Gauss-Jordan");
+    BookInformation* bookInformation3 = createBookInformation("Constitution", 4535, "Congress");
+    BookInformation* bookInformation4 = createBookInformation("More Laws", 568, "Lawer N1");
+    BookInformation* bookInformation5 = createBookInformation("e to the Pi", 12346, "Euler");
+    addNewBook(algebra, bookInformation1);
+    addNewBook(algebra, bookInformation2);
+    addNewBook(legal, bookInformation3);
+    addNewBook(legal, bookInformation4);
+    addNewBook(analisis, bookInformation5);
+    addBook(provider1, bookInformation1, 5, 200);
+    addBook(provider1, bookInformation2, 3, 600);
+    addBook(provider2, bookInformation3, 10, 665);
+    addBook(provider2, bookInformation4, 8, 450);
+    addBook(provider1, bookInformation5, 8, 200);
+    SupportMessage* supportMessage = newSupportMessage("How do I buy books?", jorge->userID);
+    SupportMessage* supportMessage2 = newSupportMessage("How do I ask questions?", maria->userID);
+    addMessage(newSupportDatabase, supportMessage);
+    addMessage(newSupportDatabase, supportMessage2);
+}
+
 int main() {
-    UserDatabase* userDatabase = userDatabaseSetup();
-    Bank* bank = bankSetup();
-    College* college = collegeSetup();
-    SupportDatabase* supportDatabase = supportDatabaseSetup();
+    UserDatabase *userDatabase = userDatabaseSetup();
+    Bank *bank;
+    College *college;
+    SupportDatabase *supportDatabase = supportDatabaseSetup();
+    int option = getOption("Would you like to set the initial parameters (1) or use a predetermined ones (0)?");
+    while(option != 1 && option != 0){
+        option = getOption("Please select one of the options.");
+    }
+    if(option) {
+        bank = bankSetup();
+        college = collegeSetup();
+    }
+    else{
+        predeterminedSetup(&userDatabase, &bank, &college, &supportDatabase);
+    }
     while(1) {
         printf("1. Log in\n");
         printf("2. Register\n");

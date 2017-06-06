@@ -14,15 +14,12 @@ BankAccount* createBankAccount(int bankAccountID,double balance, double maintena
     result->maintenance = maintenance;
     result->userID = userID;
 
-    time_t currentTime = time(NULL);
-    result->timeStamp=currentTime;
-
-
-    time_t calendarTime;
-    time(&calendarTime);
-
-    result->openedDate= malloc(sizeof(char*));
-    strcpy(result->openedDate,ctime(&calendarTime));
+    time_t t = time(NULL);
+    result->timeStamp = t;
+    struct tm* tm1 = localtime(&t);
+    char* tempDate = asctime(tm1);
+    result->openedDate = malloc(sizeof(char*)*strlen(tempDate)+1);
+    strcpy(result->openedDate, tempDate);
 
     return result;
 }

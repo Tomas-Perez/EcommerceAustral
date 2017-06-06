@@ -17,7 +17,7 @@ void supportStaffMenu(UserDatabase* database, SupportDatabase* supportDatabase, 
 			printf("%s\n", "0. return to main menu\n");
 			while (rc<0 || rc>1){
 				        rc = getOption ("enter option: ");
-				        if (rc<0 || rc>1)printf("invalid option. m\n");
+				        if (rc<0 || rc>1)printf("invalid option.\n");
 				        }
 			if(supportDatabase->messageAmount==0){
 				printf("There are no messages, you can't do anything, logging out...");
@@ -27,11 +27,12 @@ void supportStaffMenu(UserDatabase* database, SupportDatabase* supportDatabase, 
 			if (rc==1){
 				printMessages(supportDatabase);
 				int selectedMessage = 0;
-				while (selectedMessage<1 || selectedMessage>supportDatabase->messageAmount){
-					        selectedMessage = getOption ("enter option: ");
-					        if (selectedMessage<1 || selectedMessage>supportDatabase->messageAmount) printf("invalid option. m\n");
-
-					        }
+				while (selectedMessage<1 || selectedMessage>supportDatabase->messageAmount) {
+					selectedMessage = getOption("enter option, 0 to exit: ");
+					if (selectedMessage < 1 || selectedMessage > supportDatabase->messageAmount)
+						printf("invalid option.\n");
+					else if(selectedMessage == 0) break;
+				}
 				char answer[140];
 					int result = -1;
 					while (result!=0){

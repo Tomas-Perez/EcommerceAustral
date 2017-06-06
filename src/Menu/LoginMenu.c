@@ -25,6 +25,11 @@ UserLog* loginMenu(UserDatabase* userDatabase){
                     printf("Press 0 to return to main menu, any other number to try again.\n");
                     choice = scanInt() == 0 ? 0 : 1;
                 }
+                else {
+                    printf("Wrong password.\n");
+                    printf("Press 0 to return to main menu, any other number to try again.\n");
+                    choice = scanInt() == 0 ? 0 : 1;
+                }
         }
     } while (choice);
 return NULL;

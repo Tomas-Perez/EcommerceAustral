@@ -22,7 +22,7 @@ Subject* createSubject(char* name, char* career, int maxCapacityOfStudents){
     newSubject->maxCapacityOfBooks = 10;
 
     newSubject->books = malloc(sizeof(BookInformation*)* 10);
-    newSubject->studentIDs = malloc(sizeof(int)*maxCapacityOfStudents);
+    newSubject->studentIDs = malloc(sizeof(int*)*maxCapacityOfStudents);
 
     return newSubject;
 }
