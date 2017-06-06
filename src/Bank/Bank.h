@@ -8,7 +8,6 @@ typedef struct bank Bank;
 
 struct bank{
     int id;
-    int idGenerator;
     int transactionNumberGenerator;
 
     char* name;
