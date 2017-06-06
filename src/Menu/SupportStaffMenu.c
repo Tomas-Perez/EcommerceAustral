@@ -39,7 +39,7 @@ void supportStaffMenu(UserDatabase* database, SupportDatabase* supportDatabase, 
 						result = getLine ("Enter answer: ", answer, sizeof(answer));
 					if(result==2) printf("140 characters is the maximum\n");
 					}
-					supportDatabase->messages[selectedMessage-1]->answer=answer;
+                    addAnswer(supportDatabase->messages[selectedMessage-1], answer);
 					pauseProgram("Answer submitted successfully, press enter key to continue.");
 			}
 	}

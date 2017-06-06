@@ -24,3 +24,15 @@ SupportMessage* newSupportMessage(char* question, int studentID){
 
     return message;
 }
+
+void addAnswer(SupportMessage* message, char* answer){
+    message->answer = malloc(sizeof(char)*(strlen(answer)+1));
+    strcpy(message->answer, answer);
+}
+
+void destroySupportMessage(SupportMessage* message){
+    free(message->answer);
+    free(message->date);
+    free(message->question);
+    free(message);
+}
