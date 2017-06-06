@@ -2,7 +2,6 @@
 #define ECOMMERCEAUSTRAL_STUDENT_H
 
 #include "../Ecommerce/Payment.h"
-#include "../Ecommerce/ProductBook.h"
 
 typedef struct Student{
     char* name;

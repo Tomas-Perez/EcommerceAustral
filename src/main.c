@@ -97,8 +97,8 @@ InitialSetup* predeterminedSetup(){
     uDatabaseAddSupportStaff(userDatabase, supportStaff3, "juan");
     uDatabaseAddProvider(userDatabase, provider1, "estrada");
     uDatabaseAddProvider(userDatabase, provider2, "fedex");
-    BankAccount* bankAccount = createBankAccount(jorge->userID, 5000, 0, jorge->userID);
-    BankAccount* adminBankAccount = createBankAccount(userDatabase->admin->userID, 5000, 0, userDatabase->admin->userID);
+    BankAccount* bankAccount = createBankAccount(jorge->userID, 5000, 0);
+    BankAccount* adminBankAccount = createBankAccount(userDatabase->admin->userID, 5000, 0);
     addAccount(bank, bankAccount);
     addAccount(bank, adminBankAccount);
     Subject* algebra = createSubject("Algebra 2", "Ingenieria", 5);
