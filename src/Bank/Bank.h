@@ -34,6 +34,8 @@ int addAccount(Bank* bank, BankAccount* account);
 void removeTransaction(Bank* bank, int transactionNumber);
 void removeAccount(Bank* bank, int id);
 
+Transaction** getTransaction(Bank* bank, BankAccount* bankAccount);
+
 void freeBank(Bank* bank1);
 
 #endif //SRC_BANK_H

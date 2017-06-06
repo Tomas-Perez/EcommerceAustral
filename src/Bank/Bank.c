@@ -188,6 +188,27 @@ Transaction* transfer_Money(Bank* bank, int senderAccountId, int receiverAccount
 }
 
 /**
+ * Make a list of transactions when receiving an account
+ * @param bank
+ * @param bankAccount
+ * @return List of transactions
+ */
+
+Transaction** getTransaction(Bank* bank, BankAccount* bankAccount){
+    Transaction** result= malloc(sizeof(Transaction*)*bank->transactionAmount);
+    int tAmount = 0;
+
+    for(int i=0; i<bank->transactionAmount; i++){
+        if( (bank->transactions[i]->toAccountID==bankAccount->bankAccountID) || (bank->transactions[i]->fromAccountID==bankAccount->bankAccountID) ){
+            result[tAmount]=bank->transactions[i];
+            tAmount++;
+        }
+    }
+
+    return result;
+}
+
+/**
  * Frees up memory of Bank.
  * @param bank
  */

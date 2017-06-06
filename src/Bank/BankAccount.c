@@ -47,6 +47,14 @@ OperationCertificate* depositMoney(BankAccount* bankAccount, double amount){
 }
 
 /**
+ * Charge the maintenance balance
+ * @param bankAccount
+ */
+void applyMaintenance(BankAccount *bankAccount){
+    bankAccount->balance-=bankAccount->maintenance;
+}
+
+/**
  * Frees up Bank memory space.
  * @param bankAccount
  */
