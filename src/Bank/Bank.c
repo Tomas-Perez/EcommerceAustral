@@ -22,11 +22,20 @@ Bank* createBank(int id, char* name, char* office, int capacity){
     return result;
 }
 
+/**
+ * Augments bankTransations capacity
+ * @param bank
+ */
 static void growTransactions(Bank* bank){
     int capacity= (bank->transactionCapacity)*2;
     bank->transactions=realloc(bank->transactions, sizeof(Transaction*)*capacity);
     bank->transactionCapacity=capacity;
 }
+
+/**
+ * Augments bankAccounts capacity.
+ * @param bank
+ */
 static void growAccounts(Bank* bank){
     int capacity= (bank->accountCapacity)*2;
     bank->bankAccounts=realloc(bank->bankAccounts, sizeof(BankAccount*)*capacity);
@@ -54,6 +63,12 @@ static int containsAccount(Bank* bank, int id){
     }
 }*/
 
+/**
+ * Adds transactions to bankAccounts transactions
+ * @param bank
+ * @param transaction
+ * @return 1 if transaction was added
+ */
 int addTransaction(Bank* bank, Transaction* transaction){
     if(bank->transactionAmount==bank->transactionCapacity){
         growTransactions(bank);
@@ -65,6 +80,13 @@ int addTransaction(Bank* bank, Transaction* transaction){
     bank->transactionAmount++;
     return 1;
 }
+
+/**
+ * add accounts to Bank
+ * @param bank
+ * @param account
+ * @return 1 if account was added
+ */
 int addAccount(Bank* bank, BankAccount* account){
     if(bank->accountCapacity==bank->accountAmount){
         growAccounts(bank);
@@ -77,6 +99,11 @@ int addAccount(Bank* bank, BankAccount* account){
     return 1;
 }
 
+/**
+ * removes transaction from Bank
+ * @param bank
+ * @param transactionNumber
+ */
 void removeTransaction(Bank* bank, int transactionNumber){
     for(int i = 0; i < bank->transactionAmount; i++){
         if(bank->transactions[i]->transactionNumber==transactionNumber){
@@ -92,6 +119,12 @@ void removeTransaction(Bank* bank, int transactionNumber){
         }
     }
 }
+
+/**
+ * removes account from Bank
+ * @param bank
+ * @param id
+ */
 void removeAccount(Bank* bank, int id){
     for(int i = 0; i < bank->accountAmount; i++){
         if(bank->bankAccounts[i]->bankAccountID==id){
@@ -108,6 +141,13 @@ void removeAccount(Bank* bank, int id){
     }
 }
 
+/**
+ * Withdraws money from account, creates transaction as a result of the operation.
+ * @param bank
+ * @param accountId
+ * @param amount
+ * @return transaction with operation data.
+ */
 Transaction* withdraw_Money(Bank* bank, int accountId, double amount){
     Transaction* result= createTransaction(accountId, accountId, 2, amount, bank->transactionNumberGenerator);
     bank->transactionNumberGenerator++;
@@ -123,7 +163,13 @@ Transaction* withdraw_Money(Bank* bank, int accountId, double amount){
     return result;
 }
 
-
+/**
+ * deposits money to account, creates a new Transaction containing all data of the operation.
+ * @param bank
+ * @param accountId
+ * @param amount
+ * @return transaction with operation data.
+ */
 Transaction* deposit_Money(Bank* bank, int accountId, double amount){
     Transaction* result= createTransaction(accountId, accountId, 1, amount, bank->transactionNumberGenerator);
     bank->transactionNumberGenerator++;
@@ -139,7 +185,14 @@ Transaction* deposit_Money(Bank* bank, int accountId, double amount){
     return result;
 }
 
-
+/**
+ * Makes withdraw of the sender account and deposit in the receiver account.
+ * @param bank
+ * @param senderAccountId
+ * @param receiverAccountId
+ * @param amount
+ * @return transaction with operation data.
+ */
 Transaction* transfer_Money(Bank* bank, int senderAccountId, int receiverAccountId, double amount){
     Transaction* result= createTransaction(receiverAccountId, senderAccountId, 3, amount, bank->transactionNumberGenerator);
     bank->transactionNumberGenerator++;
@@ -160,7 +213,10 @@ Transaction* transfer_Money(Bank* bank, int senderAccountId, int receiverAccount
     return result;
 }
 
-
+/**
+ * Frees up memory of Bank.
+ * @param bank
+ */
 void freeBank(Bank* bank){
     for(int i=0; i<bank->transactionAmount; i++){
         freeTransaction(bank->transactions[i]);

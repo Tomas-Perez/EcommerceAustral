@@ -26,6 +26,10 @@ OperationCertificate* createOperationCertificate(int accountID, int operationTyp
     return result;
 }
 
+/**
+ * frees up operation certficate memory space.
+ * @param operationCertificate
+ */
 void freeOperationCertificate(OperationCertificate* operationCertificate){
     free(operationCertificate->date);
     free(operationCertificate);

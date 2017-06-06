@@ -25,6 +25,11 @@ Transaction* createTransaction(int toAccountID, int fromAccountID, int operation
     strcpy(result->date, ctime(&calendarTime));
     return result;
 }
+
+/**
+ * frees up space memory.
+ * @param transaction
+ */
 void freeTransaction(Transaction* transaction){
     free(transaction->date);
     free(transaction);
