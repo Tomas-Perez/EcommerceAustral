@@ -16,7 +16,9 @@ void printBookInformation(College* college, int subjectPlaceInArray){
 	}
 }
 void providerMenu(UserDatabase* database, College* college, int userID){
+	printf("\nWelcome!\n");
 	Provider* provider = uDatabaseGetProvider(database, userID);
+	while(1){
 	int rc=-1;
 		printf("%s\n", "would you like to:\n");
 				printf("%s\n", "1. addd books. ");
@@ -26,7 +28,11 @@ void providerMenu(UserDatabase* database, College* college, int userID){
 					        rc = getOption ("enter option: ");
 					        if (rc<0 || rc>2)printf("invalid option. m\n");
 					        }
-
+				if(rc==0)return;
+				if(college->amountOfSubjects==0){
+					printf("There are no subjects, you can't do anything, logging out...");
+					return;
+				}
 					printSubjects(college);
 					int selectedSubject = 0;
 					while (selectedSubject<1 || selectedSubject>college->amountOfSubjects){
@@ -56,5 +62,6 @@ void providerMenu(UserDatabase* database, College* college, int userID){
 				if(rc==2){
 					removeBook(provider, college->subjects[selectedSubject-1]->books[selectedBook-1]->ISBN, quantity);
 				}
+	}
 }
 

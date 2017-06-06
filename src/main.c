@@ -19,7 +19,7 @@ void registerMenu(UserDatabase* userDatabase, College* college);
 UserLog* loginMenu(UserDatabase* userDatabase);
 
 UserDatabase* userDatabaseSetup(){
-	Admin* admin = createAdmin("pepe",123, 232323);
+	Admin* admin = createAdmin("pepe", 1234, 232323);
 
 	UserDatabase* database = createUserDatabase(10, admin);
 	return database;
@@ -49,10 +49,10 @@ College* collegeSetup(){
 		while (rc!=0){
 		rc = getLine ("Enter college name: ", name, sizeof(name));
 		}
-		char* careerName=malloc(sizeof(char)*21);
+		char careerName[20];
 		rc = -1;
 		while (rc!=0){
-		rc = getLine ("Enter a career name: ", careerName, 20);
+		rc = getLine ("Enter a career name: ", careerName, sizeof(careerName));
 		}
 		College* college = createCollege(name, 10);
 		addNewCareer(college, careerName);
